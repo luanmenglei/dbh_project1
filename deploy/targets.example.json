@@ -1,0 +1,18 @@
+{
+  "file": {
+    "binary": "build/filmbench",
+    "client_prefix": []
+  },
+  "postgres": {
+    "binary": "build/filmbench",
+    "dsn_env": "POSTGRES_DSN",
+    "container": "filmbench-postgres",
+    "client_prefix": []
+  },
+  "opengauss": {
+    "binary": "build/filmbench",
+    "dsn_env": "OPENGAUSS_DSN",
+    "container": "filmbench-opengauss",
+    "client_prefix": []
+  }
+}
