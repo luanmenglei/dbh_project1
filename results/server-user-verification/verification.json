@@ -1,0 +1,27 @@
+{
+  "kind": "correctness only; not formal performance results",
+  "started": "2026-10-12T14:19:10.261677+00:00",
+  "backends": {
+    "file": "passed",
+    "postgres": "passed",
+    "opengauss": "passed"
+  },
+  "postgres_version": "PostgreSQL 14.24 (Ubuntu 14.24-0ubuntu0.22.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0, 64-bit",
+  "opengauss_version": "openGauss 6.0.1 (openGauss 6.0.1 build e27495c8) compiled at 2025-03-26 10:53:40 commit 0 last mr  release",
+  "completed": "2026-10-12T14:19:32.416363+00:00",
+  "coverage": [
+    "independent Python result fingerprints",
+    "NULL and empty substring",
+    "apostrophe, tab, newline, backslash and Unicode",
+    "multiple credit roles",
+    "all-NULL aggregation",
+    "sequential/indexed/SQL point parity",
+    "durable update",
+    "stale index rejection",
+    "read-only execution plans",
+    "concurrent read and mixed write",
+    "restore after updates",
+    "s1/s2 course data",
+    "schema scope guard"
+  ]
+}

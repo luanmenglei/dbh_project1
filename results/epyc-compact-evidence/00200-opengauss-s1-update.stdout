@@ -1,0 +1,1 @@
+{"backend":"opengauss","op":"update","requests":1,"setup_s":0.02756912,"elapsed_s":0.03862169,"mean_ms":38.62169,"rows":0,"checksum":"0","affected":1287,"p50_ms":38.8417650718,"p95_ms":38.8417650718}

@@ -1,0 +1,222 @@
+{
+  "complete": true,
+  "expected": 6,
+  "observed": 6,
+  "cpu_method": "interior sample deltas after process start + warmup + 1s; approximate CPU/op uses full trial QPS",
+  "trials": [
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0,
+      "log": "00011-postgres-s10-concurrent_read",
+      "qps": 218123.598893,
+      "p95_ms": 0.199053973961,
+      "p99_ms": 0.233406439054,
+      "read_p95_ms": 0.199053973961,
+      "write_p95_ms": 0,
+      "client_cores": 4.53531343909449,
+      "db_cores": 7.997154633513893,
+      "client_cpu_us_per_op": 20.79240147380512,
+      "db_cpu_us_per_op": 36.66340860915685,
+      "sample_window_s": 19.041682820767164,
+      "db_memory_mib_max": 289.78125
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0,
+      "log": "00018-opengauss-s10-concurrent_read",
+      "qps": 86197.272623,
+      "p95_ms": 0.459162329028,
+      "p99_ms": 0.517395605243,
+      "read_p95_ms": 0.459162329028,
+      "write_p95_ms": 0,
+      "client_cores": 3.2889735779594638,
+      "db_cores": 7.999064620150662,
+      "client_cpu_us_per_op": 38.15635318700174,
+      "db_cpu_us_per_op": 92.79950950578305,
+      "sample_window_s": 19.075860146898776,
+      "db_memory_mib_max": 857.32421875
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1,
+      "log": "00025-opengauss-s10-concurrent_read",
+      "qps": 84506.9953058,
+      "p95_ms": 0.468391491842,
+      "p99_ms": 0.527795256908,
+      "read_p95_ms": 0.468391491842,
+      "write_p95_ms": 0,
+      "client_cores": 3.2086640877823043,
+      "db_cores": 7.998809771361512,
+      "client_cpu_us_per_op": 37.96921279914543,
+      "db_cpu_us_per_op": 94.65263487852972,
+      "sample_window_s": 19.076474920846522,
+      "db_memory_mib_max": 860.60546875
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1,
+      "log": "00032-postgres-s10-concurrent_read",
+      "qps": 218234.36752,
+      "p95_ms": 0.209207727146,
+      "p99_ms": 0.240478887564,
+      "read_p95_ms": 0.209207727146,
+      "write_p95_ms": 0,
+      "client_cores": 4.567426777940854,
+      "db_cores": 7.995162831071125,
+      "client_cpu_us_per_op": 20.928998625857012,
+      "db_cpu_us_per_op": 36.63567256581808,
+      "sample_window_s": 19.04135615704581,
+      "db_memory_mib_max": 290.22265625
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2,
+      "log": "00039-postgres-s10-concurrent_read",
+      "qps": 220830.936812,
+      "p95_ms": 0.183823005322,
+      "p99_ms": 0.215546930486,
+      "read_p95_ms": 0.183823005322,
+      "write_p95_ms": 0,
+      "client_cores": 4.6526105744660065,
+      "db_cores": 7.998485550294825,
+      "client_cpu_us_per_op": 21.068653883522277,
+      "db_cpu_us_per_op": 36.21995027401516,
+      "sample_window_s": 19.04092306504026,
+      "db_memory_mib_max": 289.94140625
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2,
+      "log": "00046-opengauss-s10-concurrent_read",
+      "qps": 85122.008729,
+      "p95_ms": 0.463753952318,
+      "p99_ms": 0.533073209477,
+      "read_p95_ms": 0.463753952318,
+      "write_p95_ms": 0,
+      "client_cores": 3.2655924273481998,
+      "db_cores": 7.9989313480671935,
+      "client_cpu_us_per_op": 38.36366735358366,
+      "db_cpu_us_per_op": 93.97019017176999,
+      "sample_window_s": 19.074640018865466,
+      "db_memory_mib_max": 857.16015625
+    }
+  ],
+  "groups": [
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "n": 3,
+      "metrics": {
+        "qps": {
+          "median": 85122.008729,
+          "min": 84506.9953058,
+          "max": 86197.272623
+        },
+        "p95_ms": {
+          "median": 0.463753952318,
+          "min": 0.459162329028,
+          "max": 0.468391491842
+        },
+        "p99_ms": {
+          "median": 0.527795256908,
+          "min": 0.517395605243,
+          "max": 0.533073209477
+        },
+        "client_cores": {
+          "median": 3.2655924273481998,
+          "min": 3.2086640877823043,
+          "max": 3.2889735779594638
+        },
+        "db_cores": {
+          "median": 7.9989313480671935,
+          "min": 7.998809771361512,
+          "max": 7.999064620150662
+        },
+        "client_cpu_us_per_op": {
+          "median": 38.15635318700174,
+          "min": 37.96921279914543,
+          "max": 38.36366735358366
+        },
+        "db_cpu_us_per_op": {
+          "median": 93.97019017176999,
+          "min": 92.79950950578305,
+          "max": 94.65263487852972
+        },
+        "db_memory_mib_max": {
+          "median": 857.32421875,
+          "min": 857.16015625,
+          "max": 860.60546875
+        }
+      }
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "n": 3,
+      "metrics": {
+        "qps": {
+          "median": 218234.36752,
+          "min": 218123.598893,
+          "max": 220830.936812
+        },
+        "p95_ms": {
+          "median": 0.199053973961,
+          "min": 0.183823005322,
+          "max": 0.209207727146
+        },
+        "p99_ms": {
+          "median": 0.233406439054,
+          "min": 0.215546930486,
+          "max": 0.240478887564
+        },
+        "client_cores": {
+          "median": 4.567426777940854,
+          "min": 4.53531343909449,
+          "max": 4.6526105744660065
+        },
+        "db_cores": {
+          "median": 7.997154633513893,
+          "min": 7.995162831071125,
+          "max": 7.998485550294825
+        },
+        "client_cpu_us_per_op": {
+          "median": 20.928998625857012,
+          "min": 20.79240147380512,
+          "max": 21.068653883522277
+        },
+        "db_cpu_us_per_op": {
+          "median": 36.63567256581808,
+          "min": 36.21995027401516,
+          "max": 36.66340860915685
+        },
+        "db_memory_mib_max": {
+          "median": 289.94140625,
+          "min": 289.78125,
+          "max": 290.22265625
+        }
+      }
+    }
+  ]
+}

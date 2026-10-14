@@ -1,0 +1,49 @@
+{
+  "plan": [
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    }
+  ],
+  "warmup": 10,
+  "duration": 120,
+  "layouts": {
+    "db8_client2": [
+      "8-15",
+      "24,25"
+    ],
+    "db8_client4": [
+      "8-15",
+      "24-27"
+    ],
+    "db12_client4": [
+      "8-15,20-23",
+      "24-27"
+    ]
+  },
+  "purpose": "single long-window confirmation per condition; separate from main three-repeat matrix"
+}

@@ -1,0 +1,5 @@
+NOTICE:  drop cascades to 4 other objects
+DETAIL:  drop cascades to table countries
+drop cascades to table movies
+drop cascades to table people
+drop cascades to table credits

@@ -1,0 +1,482 @@
+{
+  "plan": [
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "mixed",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 1,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "mixed",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 4,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 16,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "mixed",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 1,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "mixed",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 4,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 16,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 0
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 1,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 16,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "mixed",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 4,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "mixed",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 1,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 16,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "mixed",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 4,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "mixed",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db12_client4",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "mixed",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 1,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 16,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "mixed",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 4,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "mixed",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 8,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 1,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 16,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "mixed",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client2",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 4,
+      "repeat": 2
+    }
+  ],
+  "warmup": 5,
+  "duration": 20,
+  "layouts": {
+    "db8_client2": [
+      "8-15",
+      "24,25"
+    ],
+    "db8_client4": [
+      "8-15",
+      "24-27"
+    ],
+    "db12_client4": [
+      "8-15,20-23",
+      "24-27"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.

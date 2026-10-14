@@ -1,0 +1,85 @@
+{
+  "seed_base": 20261013,
+  "requests": 10000,
+  "repeats": 3,
+  "joins": [
+    {
+      "label": "absent",
+      "id": 164900,
+      "expected_rows": 0
+    },
+    {
+      "label": "low",
+      "id": 1,
+      "expected_rows": 1
+    },
+    {
+      "label": "medium",
+      "id": 1438,
+      "expected_rows": 22
+    },
+    {
+      "label": "high",
+      "id": 151852,
+      "expected_rows": 54
+    }
+  ],
+  "streams": [
+    {
+      "distribution": "uniform",
+      "repeat": 0,
+      "file": "uniform-0.txt",
+      "sha256": "4b673e0dd91a060be11527bb7aafe4520e77c8a540bac4b820d9eb8f96fc0fac",
+      "count": 10000,
+      "distinct": 9474
+    },
+    {
+      "distribution": "hot90",
+      "repeat": 0,
+      "file": "hot90-0.txt",
+      "sha256": "b1820bc64e7bd83e30d7a157c2c6634f4079a3205a48a3488733f1561f7ed38b",
+      "count": 10000,
+      "distinct": 1869
+    },
+    {
+      "distribution": "uniform",
+      "repeat": 1,
+      "file": "uniform-1.txt",
+      "sha256": "f942cac85bf73dd0b43851579d019c661449bce631943efddf8e9bc1078a7865",
+      "count": 10000,
+      "distinct": 9463
+    },
+    {
+      "distribution": "hot90",
+      "repeat": 1,
+      "file": "hot90-1.txt",
+      "sha256": "8e5a8e1e4561860b5a25b1ea1c70b7d45e75a2e0806d0f33e24c5f59424acdb2",
+      "count": 10000,
+      "distinct": 1913
+    },
+    {
+      "distribution": "uniform",
+      "repeat": 2,
+      "file": "uniform-2.txt",
+      "sha256": "e8dabd6fc58d522baf57a1db6ddd3c9c7190e61144919d1ec1fa1afdd4c32fb8",
+      "count": 10000,
+      "distinct": 9460
+    },
+    {
+      "distribution": "hot90",
+      "repeat": 2,
+      "file": "hot90-2.txt",
+      "sha256": "324a2c7d32e2f84bd84e846789adbc6ec0062f11572077cfe6d0d7ff979908ba",
+      "count": 10000,
+      "distinct": 1887
+    }
+  ],
+  "data_files": {
+    "credits.tsv": "913fb79b73451ce27a69d17a5ab9421ed8021dd95a67d65022510fc9fa650668",
+    "movies.tsv": "695c96904678c2811ba9a8ff9991871268543988e83ba31b92314a7fa4ba1177",
+    "people.tsv": "8639a75cf027f4a9391fe4aebf0a33d2a5c651ba75f3797f9af9f69225772701",
+    "countries.tsv": "f22c10c1b425d2a0936b06d09a9efa235a6eda14ca577c5b258dddb388665ee4"
+  },
+  "hot_definition": "90% from the first 1% of sorted movie IDs; remaining 10% uniform over all IDs",
+  "medium_definition": "Median of the distinct positive credit counts; not the median person"
+}

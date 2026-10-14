@@ -1,0 +1,114 @@
+[
+  {
+    "backend": "postgres",
+    "clients": 8,
+    "from_layout": "db8_client2",
+    "to_layout": "db8_client4",
+    "paired_ratios": [
+      1.5621845208322318,
+      1.6882932294759982,
+      1.7028143882584212
+    ],
+    "median": 1.6882932294759982,
+    "minimum": 1.5621845208322318,
+    "maximum": 1.7028143882584212
+  },
+  {
+    "backend": "postgres",
+    "clients": 8,
+    "from_layout": "db8_client4",
+    "to_layout": "db12_client4",
+    "paired_ratios": [
+      0.9380590988199335,
+      0.8878544791303787,
+      0.8705084293880325
+    ],
+    "median": 0.8878544791303787,
+    "minimum": 0.8705084293880325,
+    "maximum": 0.9380590988199335
+  },
+  {
+    "backend": "postgres",
+    "clients": 32,
+    "from_layout": "db8_client2",
+    "to_layout": "db8_client4",
+    "paired_ratios": [
+      1.987844168669071,
+      2.092870477809267,
+      2.021646732021982
+    ],
+    "median": 2.021646732021982,
+    "minimum": 1.987844168669071,
+    "maximum": 2.092870477809267
+  },
+  {
+    "backend": "postgres",
+    "clients": 32,
+    "from_layout": "db8_client4",
+    "to_layout": "db12_client4",
+    "paired_ratios": [
+      1.0477169584835317,
+      1.0132661201192976,
+      1.0318240265598475
+    ],
+    "median": 1.0318240265598475,
+    "minimum": 1.0132661201192976,
+    "maximum": 1.0477169584835317
+  },
+  {
+    "backend": "opengauss",
+    "clients": 8,
+    "from_layout": "db8_client2",
+    "to_layout": "db8_client4",
+    "paired_ratios": [
+      1.0013550296405445,
+      1.0092677272899342,
+      1.0140778485001656
+    ],
+    "median": 1.0092677272899342,
+    "minimum": 1.0013550296405445,
+    "maximum": 1.0140778485001656
+  },
+  {
+    "backend": "opengauss",
+    "clients": 8,
+    "from_layout": "db8_client4",
+    "to_layout": "db12_client4",
+    "paired_ratios": [
+      0.9927518511479001,
+      0.9780127676565638,
+      0.9842108427914212
+    ],
+    "median": 0.9842108427914212,
+    "minimum": 0.9780127676565638,
+    "maximum": 0.9927518511479001
+  },
+  {
+    "backend": "opengauss",
+    "clients": 32,
+    "from_layout": "db8_client2",
+    "to_layout": "db8_client4",
+    "paired_ratios": [
+      1.0350461033449858,
+      1.0175207040056584,
+      1.0189602353919274
+    ],
+    "median": 1.0189602353919274,
+    "minimum": 1.0175207040056584,
+    "maximum": 1.0350461033449858
+  },
+  {
+    "backend": "opengauss",
+    "clients": 32,
+    "from_layout": "db8_client4",
+    "to_layout": "db12_client4",
+    "paired_ratios": [
+      1.4503226861413199,
+      1.4514583918584427,
+      1.4318943952818877
+    ],
+    "median": 1.4503226861413199,
+    "minimum": 1.4318943952818877,
+    "maximum": 1.4514583918584427
+  }
+]

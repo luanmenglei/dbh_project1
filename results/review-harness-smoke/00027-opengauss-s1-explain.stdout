@@ -1,0 +1,1 @@
+{"query":"aggregate","plan":["HashAggregate  (cost=288.09..380.13 rows=9204 width=35) (actual time=6.776..7.252 rows=1511 loops=1)","  Group By Key: country, year_released","  (Buffers: shared hit=81)","  ->  Seq Scan on movies  (cost=0.00..173.04 rows=9204 width=11) (actual time=0.010..1.922 rows=9204 loops=1)","        (Buffers: shared hit=81)","Total runtime: 7.563 ms"]}

@@ -1,0 +1,1 @@
+{"query":"search_rows","plan":["Seq Scan on movies  (cost=0.00..219.06 rows=3068 width=24) (actual time=0.038..1.248 rows=88 loops=1)","  Filter: (strpos((title)::text, 'Love'::text) > 0)","  Rows Removed by Filter: 9116","  Buffers: shared hit=81","Planning:","  Buffers: shared hit=113","Planning Time: 0.310 ms","Execution Time: 1.277 ms"]}

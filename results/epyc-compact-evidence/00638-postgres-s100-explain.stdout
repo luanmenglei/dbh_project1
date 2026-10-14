@@ -1,0 +1,1 @@
+{"query":"point","plan":["Index Scan using movies_pkey on movies  (cost=0.42..8.44 rows=1 width=35) (actual time=0.021..0.022 rows=1 loops=1)","  Index Cond: (movieid = '1'::bigint)","  Buffers: shared hit=4","Planning:","  Buffers: shared hit=130","Planning Time: 0.540 ms","Execution Time: 0.089 ms"]}

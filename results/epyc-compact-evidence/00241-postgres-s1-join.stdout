@@ -1,0 +1,1 @@
+{"backend":"postgres","op":"join","requests":1,"setup_s":0.017723593,"elapsed_s":0.001444391,"mean_ms":1.444391,"rows":54,"checksum":"16695065490967928608","affected":0,"p50_ms":1.42758790999,"p95_ms":1.42758790999}

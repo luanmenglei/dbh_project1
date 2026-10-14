@@ -1,0 +1,10 @@
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+NOTICE:  schema "filmbench_s100" does not exist, skipping
+WARNING:  It is invalid to set pg_temp or pg_catalog behind other schemas in search path explicitly. The priority order is pg_temp, pg_catalog and other schemas.
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "countries_pkey" for table "countries"
+NOTICE:  CREATE TABLE / UNIQUE will create implicit index "countries_country_name_key" for table "countries"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "movies_pkey" for table "movies"
+NOTICE:  CREATE TABLE / UNIQUE will create implicit index "movies_title_country_year_released_replica_key" for table "movies"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "people_pkey" for table "people"
+NOTICE:  CREATE TABLE / UNIQUE will create implicit index "people_surname_first_name_replica_key" for table "people"
+NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index "credits_pkey" for table "credits"

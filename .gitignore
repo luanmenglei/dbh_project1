@@ -2,7 +2,7 @@ build/
 runtime/
 packages/
 data/generated/
-results/
+results/*.tar.gz
 deploy/.env
 deploy/state/
 __pycache__/
@@ -10,7 +10,9 @@ __pycache__/
 .DS_Store
 .venv/
 tmp/
-output/
+output/*
+!output/submission/
+!output/submission-manifest.json
 .env
 .env.*
 !.env.example
