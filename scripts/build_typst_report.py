@@ -59,7 +59,7 @@ def main():
            ('join', '人物连接', ''), ('aggregate', '国家 / 年份聚合', '')]
     data = {'source_hash': source_hash, 'measured_count': original['measured_count'],
             'summary_count': original['summary_rows_verified'], 'serial': [], 'search': [],
-            'point': [], 'cpu': [], 'interventions': [], 'compact': [],
+            'point': [], 'cpu': [], 'interventions': [], 'compact': [], 'mixed_metrics': [],
             'joins': [[j['label'], str(j['id']), str(j['expected_rows'])] for j in coverage['joins']],
             'coverage_cases': coverage['cases'], 'coverage_requests': f'{coverage["requests"]:,}',
             'coverage_repeats': coverage['repeats'], 'performance_eligible': coverage['performance_eligible'],
@@ -81,7 +81,8 @@ def main():
     for label, b, idx in [('文件扫描', 'file', 0), ('文件偏移索引', 'file', 1),
                           ('PostgreSQL', 'postgres', 0), ('openGauss', 'opengauss', 0)]:
         m = g(b, 100, 'point', indexed=idx)
-        data['point'].append([label, f'{m["mean_ms"]["median"] * 1000:.2f}',
+        v = m['mean_ms']
+        data['point'].append([label, f'{v["median"] * 1000:.2f}\n[{v["min"] * 1000:.2f}, {v["max"] * 1000:.2f}]',
                               f'{m["setup_plus_elapsed_s"]["median"]:.3f}'])
     for b in backends[1:]:
         m = sg(scaling, 'db8_client2', b)
@@ -91,6 +92,17 @@ def main():
         data['interventions'].append([label] + [f'{q(scaling, layout, b) / 1e4:.2f}' for b in backends[1:]])
     for op, label in [('concurrent_read', '只读'), ('mixed', '90% 读 + 10% 同步写')]:
         data['compact'].append([label] + [f'{g(b, 10, op, clients=8)["throughput_ops_s"]["median"] / 1e4:.2f}' for b in backends[1:]])
+    for op, metric, label, factor, digits in [
+        ('concurrent_read', 'throughput_ops_s', '只读吞吐 / 万次·s⁻¹', .0001, 2),
+        ('mixed', 'throughput_ops_s', '混合吞吐 / 万次·s⁻¹', .0001, 2),
+        ('concurrent_read', 'read_p95_ms', '只读负载：读 P95 / ms', 1, 3),
+        ('mixed', 'read_p95_ms', '混合负载：读 P95 / ms', 1, 3),
+        ('mixed', 'write_p95_ms', '混合负载：写 P95 / ms', 1, 3),
+    ]:
+        data['mixed_metrics'].append([label] + [
+            f'{g(b, 10, op, clients=8)[metric]["median"] * factor:.{digits}f}'
+            for b in backends[1:]])
+    data['point_batch_ms'] = f'{g("file", 100, "point", indexed=1)["elapsed_s"]["median"] * 1000:.2f}'
     REPORT.mkdir(exist_ok=True)
     (REPORT / 'data.json').write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 

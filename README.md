@@ -51,6 +51,52 @@ c++ -O3 -std=c++17 filmbench.cpp -I"$(pg_config --includedir)" \
 
 默认 DDL 已内置，`--ddl sql/schema.sql` 可显式覆盖。数据仍需四个 COPY-text TSV；其来源、转义规则和生成脚本均保留在项目中。
 
+### 从提交文件开始复现
+
+仅有 `report.pdf` 与 `filmbench.cpp` 时，先获取配套课程数据和转换脚本。以下固定版本中的 `src/filmbench.cpp` 与当前提交源码 SHA-256 相同；该版本用于复现程序，最新报告以提交 PDF 为准。
+
+```bash
+git clone https://github.com/luanmenglei/dbh_project1.git
+cd dbh_project1
+git checkout 668d1c787030c21b61bc062c55fca962ef4571d7
+python3 scripts/prepare.py --scales 1
+c++ -O3 -std=c++17 src/filmbench.cpp -I"$(pg_config --includedir)" \
+  -L"$(pg_config --libdir)" -Wl,-rpath,"$(pg_config --libdir)" -lpq -pthread -o filmbench
+./filmbench --backend file --op search_rows --data data/generated/s1 --keyword The
+```
+
+预期 `rows=1563`，表示匹配 1,563 部电影。若使用 `--op search_count`，程序返回一条计数结果的摘要，此时 `rows=1` 不表示只匹配一部电影。若编译单独下载的提交文件，将编译命令的 `src/filmbench.cpp` 替换为该文件的路径即可。
+
+准备一个专用实验数据库后，将真实连接参数放入 `FILMBENCH_DSN`（不要提交密码）。默认 schema 为 `filmbench_s1`，第一次导入不加 `--reset`，遇到已有 schema 时程序拒绝覆盖：
+
+```bash
+./filmbench --backend postgres --op load --data data/generated/s1
+./filmbench --backend postgres --op search_rows --data data/generated/s1 --keyword The
+```
+
+openGauss 需用其配套 libpq 重新编译，在相应连接环境下将后端改为 `opengauss`。上述小规模查询用于核对功能，不应拿本机测量与报告中的服务器数字拼成新的比较。
+
+### 性能实验与提交源码的对应关系
+
+- 原主实验实际源码为 `experiments/baseline-20261012/src/filmbench.cpp`，同时保存在 `results/epyc-compact-evidence/source-snapshot/`。对应结果来自该快照，不能标为当前版本重新测得。
+- 历史点查在准备阶段扫描 TSV 收集候选 ID，在执行阶段随机选 ID 并转成字符串；当前版本先生成完整请求序列，再开始查询计时。两版 `elapsed_s` 的边界存在差异，不能只按字段同名直接合并。
+- 原始并发记录已分别保存 `read_p95_ms` 和 `write_p95_ms`。报告取“各轮 P95 的中位数”，不是把三轮请求合并后重新计算 P95。
+- 120 秒 CPU 干预确认每个条件只有一轮；原三轮矩阵与单轮确认分别解释。文件索引构建耗时同样只有一次测量。
+
+### 尚待服务器完成的补测
+
+长批次点查可使用现有补测器：均匀、热点两种分布，每轮共享同一请求文件，轮间使用不同种子；三种后端核对内容摘要。以下为待执行命令，不代表已经取得性能结果。服务启动参数需恢复正式实验的 CPU 与内存配置，不能直接复用先前正确性检查的两核配置。
+
+```bash
+python3 scripts/run_coverage.py --config deploy/state/targets.json --manage-user-services \
+  --out results/new-point-performance --scale 100 --requests 100000 --repeats 5
+python3 scripts/analyze_coverage.py results/new-point-performance
+```
+
+运行前需确认服务器满足负载和磁盘阈值；运行期间也应观察共享负载，异常轮次不用于排名。报告保留原 100 次点查的结果及其短窗口局限；此前 `performance_eligible=false` 的正确性记录不改标为性能记录。
+
+索引作用的单独验证应在专用实验 schema 中进行：保持数据库、数据、人物编号和结果列不变，仅改变 `credits_person_idx` 是否存在，检查实际执行计划，分别预热、交替测量至少五轮，并核对结果摘要。原始源码允许用 `--ddl` 传入只删除这一条 `CREATE INDEX` 的建表文件，可通过重新导入建立两种状态；导入和索引建立不计入查询时间。当前正式记录尚未包含此对照，不据此给出索引加速倍数。
+
 ```bash
 ./build/filmbench --backend file --op search_count --data data/generated/s1 --keyword The
 ./build/filmbench --backend file --op build_index --data data/generated/s1
