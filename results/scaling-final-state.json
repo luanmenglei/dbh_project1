@@ -1,0 +1,8 @@
+{
+  "time": "2026-10-12T18:34:14.916263+00:00",
+  "filmbench-postgres.service": "MainPID=0\nLoadState=not-found\nActiveState=inactive\n",
+  "filmbench-opengauss.service": "MainPID=0\nLoadState=not-found\nActiveState=inactive\n",
+  "private_ports_listening": false,
+  "memory": "               total        used        free      shared  buff/cache   available\nMem:           251Gi        19Gi        18Gi       478Mi       213Gi       229Gi\nSwap:           67Gi       8.9Gi        59Gi\n",
+  "disk": "Filesystem      Size  Used Avail Use% Mounted on\n/dev/nvme1n1p1  6.9T  6.5T  125G  99% /data1\n"
+}

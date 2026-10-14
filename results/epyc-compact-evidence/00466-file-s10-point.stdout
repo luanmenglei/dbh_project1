@@ -1,0 +1,1 @@
+{"backend":"file","op":"point","requests":100,"setup_s":0.077394769,"elapsed_s":0.000373436,"mean_ms":0.00373436,"rows":100,"checksum":"11123022402535332527","affected":0,"p50_ms":0.00330038689457,"p95_ms":0.00371895856193}

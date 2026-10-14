@@ -1,0 +1,3905 @@
+{
+  "record_count": 873,
+  "measured_count": 318,
+  "group_count": 108,
+  "parity_groups": 27,
+  "summary_rows_verified": 555,
+  "source_hashes_verified": {
+    "src/filmbench.cpp": "e721b74e7b56a72e8b0c00c8bf3ce6e23cd66f22695ca7a5451617b71b1b9489",
+    "scripts/run_suite.py": "7af123aa6e2409098d6c1b8ddcb53162e5a7c42d87558fe95f369ae17f9b65a4",
+    "scripts/prepare.py": "c3a6fa73654451e16fe832f06db890eb570f3242fe77c14f084dc8633ef09e3a",
+    "scripts/summarize.py": "36af5d8fd6e02b97d10fd96e12b136cd130da622d2890a35a16f9047931cc99e",
+    "sql/schema.sql": "a80ad23584f5f9a5cfafa7747e578c828c019c8d14d5cf132bbc83907e1c9bb7"
+  },
+  "checks": "complete matrix, repeats, measured validity, cross-backend digests, affected counts, CSV statistics, source hashes",
+  "groups": [
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.011453046,
+          "min": 0.010893819,
+          "max": 0.013692521
+        },
+        "setup_s": {
+          "median": 6.092e-06,
+          "min": 5.912e-06,
+          "max": 9.258e-06
+        },
+        "mean_ms": {
+          "median": 11.453046,
+          "min": 10.893819,
+          "max": 13.692521
+        },
+        "p95_ms": {
+          "median": 11.5369591712,
+          "min": 10.9770207907,
+          "max": 13.7999045897
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.011459137999999999,
+          "min": 0.010899731000000001,
+          "max": 0.013701778999999999
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "build_index",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 1,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.014631356,
+          "min": 0.014631356,
+          "max": 0.014631356
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.025745211,
+          "min": 0.023854406,
+          "max": 0.026678156
+        },
+        "setup_s": {
+          "median": 6.022e-06,
+          "min": 5.961e-06,
+          "max": 6.242e-06
+        },
+        "mean_ms": {
+          "median": 25.745211,
+          "min": 23.854406,
+          "max": 26.678156
+        },
+        "p95_ms": {
+          "median": 25.8298944845,
+          "min": 23.853474195,
+          "max": 26.8786917785
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.025751172,
+          "min": 0.023860428000000003,
+          "max": 0.026684398
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.25383734,
+          "min": 0.251152815,
+          "max": 0.255029047
+        },
+        "setup_s": {
+          "median": 0.007363132,
+          "min": 0.00734552,
+          "max": 0.007930957
+        },
+        "mean_ms": {
+          "median": 2.5383734,
+          "min": 2.51152815,
+          "max": 2.55029047
+        },
+        "p95_ms": {
+          "median": 4.61875544454,
+          "min": 4.57302519261,
+          "max": 4.66494299899
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.261200472,
+          "min": 0.25849833499999997,
+          "max": 0.262960004
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "point",
+      "keyword": "",
+      "indexed": 1,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.000453647,
+          "min": 0.000432849,
+          "max": 0.000476341
+        },
+        "setup_s": {
+          "median": 0.01015941,
+          "min": 0.01015899,
+          "max": 0.011542105
+        },
+        "mean_ms": {
+          "median": 0.00453647,
+          "min": 0.00432849,
+          "max": 0.00476341
+        },
+        "p95_ms": {
+          "median": 0.00462904670378,
+          "min": 0.00444842289603,
+          "max": 0.00516448088265
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.010635751,
+          "min": 0.010612637,
+          "max": 0.011974954000000001
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.007301546,
+          "min": 0.007110094,
+          "max": 0.008923003
+        },
+        "setup_s": {
+          "median": 1.0099e-05,
+          "min": 5.901e-06,
+          "max": 1.0801e-05
+        },
+        "mean_ms": {
+          "median": 7.301546,
+          "min": 7.110094,
+          "max": 8.923003
+        },
+        "p95_ms": {
+          "median": 7.29975294003,
+          "min": 7.15591896876,
+          "max": 8.99615668982
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.007312347,
+          "min": 0.007115995,
+          "max": 0.008933102
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.010437536,
+          "min": 0.007108722,
+          "max": 0.010784101
+        },
+        "setup_s": {
+          "median": 1.053e-05,
+          "min": 5.891e-06,
+          "max": 1.8405e-05
+        },
+        "mean_ms": {
+          "median": 10.437536,
+          "min": 7.108722,
+          "max": 10.784101
+        },
+        "p95_ms": {
+          "median": 10.4442586345,
+          "min": 7.15591896876,
+          "max": 10.8683374166
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.010455941000000002,
+          "min": 0.007114613,
+          "max": 0.010794631
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.007231354,
+          "min": 0.005135782,
+          "max": 0.009709149
+        },
+        "setup_s": {
+          "median": 6.051e-06,
+          "min": 4.218e-06,
+          "max": 1.0239e-05
+        },
+        "mean_ms": {
+          "median": 7.231354,
+          "min": 5.135782,
+          "max": 9.709149
+        },
+        "p95_ms": {
+          "median": 7.22747815845,
+          "min": 5.15299925046,
+          "max": 9.74154859645
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.007237405,
+          "min": 0.0051400000000000005,
+          "max": 0.009719388
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.009514481,
+          "min": 0.007152014,
+          "max": 0.010054382
+        },
+        "setup_s": {
+          "median": 9.328e-06,
+          "min": 6.051e-06,
+          "max": 1.0139e-05
+        },
+        "mean_ms": {
+          "median": 9.514481,
+          "min": 7.152014,
+          "max": 10.054382
+        },
+        "p95_ms": {
+          "median": 9.54960160421,
+          "min": 7.15591896876,
+          "max": 10.1370945331
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.009523809,
+          "min": 0.007158065,
+          "max": 0.010064521
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.007507015,
+          "min": 0.007416384,
+          "max": 0.009716954
+        },
+        "setup_s": {
+          "median": 6.041e-06,
+          "min": 5.831e-06,
+          "max": 1.018e-05
+        },
+        "mean_ms": {
+          "median": 7.507015,
+          "min": 7.416384,
+          "max": 9.716954
+        },
+        "p95_ms": {
+          "median": 7.52094275387,
+          "min": 7.44647797412,
+          "max": 9.74154859645
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.007512846,
+          "min": 0.007422425,
+          "max": 0.009727134
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.007787385,
+          "min": 0.007478772,
+          "max": 0.007919014
+        },
+        "setup_s": {
+          "median": 6.051e-06,
+          "min": 5.992e-06,
+          "max": 6.232e-06
+        },
+        "mean_ms": {
+          "median": 7.787385,
+          "min": 7.478772,
+          "max": 7.919014
+        },
+        "p95_ms": {
+          "median": 7.82632318865,
+          "min": 7.52094275387,
+          "max": 7.90458642054
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.007793377,
+          "min": 0.007484823,
+          "max": 0.007925246
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 1,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.028935635,
+          "min": 0.027505921,
+          "max": 0.029862226
+        },
+        "setup_s": {
+          "median": 6.312e-06,
+          "min": 6.021e-06,
+          "max": 1.0129e-05
+        },
+        "mean_ms": {
+          "median": 28.935635,
+          "min": 27.505921,
+          "max": 29.862226
+        },
+        "p95_ms": {
+          "median": 29.1057716308,
+          "min": 27.6931430181,
+          "max": 29.987705617
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.028945764000000002,
+          "min": 0.027511941999999998,
+          "max": 0.029868538
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.079930508,
+          "min": 0.077320098,
+          "max": 0.089766413
+        },
+        "setup_s": {
+          "median": 7.394e-06,
+          "min": 6.181e-06,
+          "max": 9.447e-06
+        },
+        "mean_ms": {
+          "median": 79.930508,
+          "min": 77.320098,
+          "max": 89.766413
+        },
+        "p95_ms": {
+          "median": 80.3080800649,
+          "min": 77.94623131,
+          "max": 90.493154739
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.07993668899999999,
+          "min": 0.077327492,
+          "max": 0.08977586
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "build_index",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 1,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.102220087,
+          "min": 0.102220087,
+          "max": 0.102220087
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.184020027,
+          "min": 0.182151697,
+          "max": 0.186101583
+        },
+        "setup_s": {
+          "median": 6.372e-06,
+          "min": 6.172e-06,
+          "max": 7.734e-06
+        },
+        "mean_ms": {
+          "median": 184.020027,
+          "min": 182.151697,
+          "max": 186.101583
+        },
+        "p95_ms": {
+          "median": 185.248474816,
+          "min": 183.414331501,
+          "max": 187.100959564
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.184027761,
+          "min": 0.182158069,
+          "max": 0.18610775499999999
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 2.773059768,
+          "min": 2.773004882,
+          "max": 2.793334319
+        },
+        "setup_s": {
+          "median": 0.059393545,
+          "min": 0.058489373,
+          "max": 0.059505754
+        },
+        "mean_ms": {
+          "median": 27.73059768,
+          "min": 27.73004882,
+          "max": 27.93334319
+        },
+        "p95_ms": {
+          "median": 49.3187349218,
+          "min": 48.8304306157,
+          "max": 49.3187349218
+        },
+        "setup_plus_elapsed_s": {
+          "median": 2.832453313,
+          "min": 2.831494255,
+          "max": 2.852840073
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "point",
+      "keyword": "",
+      "indexed": 1,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.000378986,
+          "min": 0.000375741,
+          "max": 0.000384507
+        },
+        "setup_s": {
+          "median": 0.081379527,
+          "min": 0.078463259,
+          "max": 0.088768406
+        },
+        "mean_ms": {
+          "median": 0.00378986,
+          "min": 0.00375741,
+          "max": 0.00384507
+        },
+        "p95_ms": {
+          "median": 0.00371895856193,
+          "min": 0.00368213719002,
+          "max": 0.00394774945273
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.08175526799999999,
+          "min": 0.07884224499999999,
+          "max": 0.089152913
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.059745248,
+          "min": 0.058915552,
+          "max": 0.060246756
+        },
+        "setup_s": {
+          "median": 6.242e-06,
+          "min": 5.981e-06,
+          "max": 6.252e-06
+        },
+        "mean_ms": {
+          "median": 59.745248,
+          "min": 58.915552,
+          "max": 60.246756
+        },
+        "p95_ms": {
+          "median": 60.1782291345,
+          "min": 58.9924802808,
+          "max": 60.7800114258
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.05975149,
+          "min": 0.058921533000000005,
+          "max": 0.060253008
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.059479775,
+          "min": 0.057428359,
+          "max": 0.060369739
+        },
+        "setup_s": {
+          "median": 6.302e-06,
+          "min": 6.262e-06,
+          "max": 6.302e-06
+        },
+        "mean_ms": {
+          "median": 59.479775,
+          "min": 57.428359,
+          "max": 60.369739
+        },
+        "p95_ms": {
+          "median": 59.5824050836,
+          "min": 57.830095364,
+          "max": 60.7800114258
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.059486037,
+          "min": 0.057434661,
+          "max": 0.060376041
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.057685834,
+          "min": 0.050336768,
+          "max": 0.060770489
+        },
+        "setup_s": {
+          "median": 6.271e-06,
+          "min": 4.329e-06,
+          "max": 6.622e-06
+        },
+        "mean_ms": {
+          "median": 57.685834,
+          "min": 50.336768,
+          "max": 60.770489
+        },
+        "p95_ms": {
+          "median": 57.830095364,
+          "min": 50.8131419087,
+          "max": 60.7800114258
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.057692105,
+          "min": 0.050341096999999994,
+          "max": 0.060777110999999995
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.057483951,
+          "min": 0.056911833,
+          "max": 0.059878751
+        },
+        "setup_s": {
+          "median": 6.312e-06,
+          "min": 6.102e-06,
+          "max": 6.352e-06
+        },
+        "mean_ms": {
+          "median": 57.483951,
+          "min": 56.911833,
+          "max": 59.878751
+        },
+        "p95_ms": {
+          "median": 57.830095364,
+          "min": 57.2575201624,
+          "max": 60.1782291345
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.057490303,
+          "min": 0.056917935,
+          "max": 0.059885063
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.059944484,
+          "min": 0.057270609,
+          "max": 0.060766762
+        },
+        "setup_s": {
+          "median": 6.422e-06,
+          "min": 6.292e-06,
+          "max": 7.123e-06
+        },
+        "mean_ms": {
+          "median": 59.944484,
+          "min": 57.270609,
+          "max": 60.766762
+        },
+        "p95_ms": {
+          "median": 60.1782291345,
+          "min": 57.830095364,
+          "max": 60.7800114258
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.059951607,
+          "min": 0.057276901,
+          "max": 0.060773184
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.059793068,
+          "min": 0.05888279,
+          "max": 0.061183086
+        },
+        "setup_s": {
+          "median": 6.763e-06,
+          "min": 6.342e-06,
+          "max": 1.1501e-05
+        },
+        "mean_ms": {
+          "median": 59.793068,
+          "min": 58.88279,
+          "max": 61.183086
+        },
+        "p95_ms": {
+          "median": 60.1782291345,
+          "min": 58.9924802808,
+          "max": 61.3878115401
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.05979941,
+          "min": 0.058889553,
+          "max": 0.061194586999999995
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 10,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.184157177,
+          "min": 0.184003585,
+          "max": 0.186782934
+        },
+        "setup_s": {
+          "median": 6.221e-06,
+          "min": 6.152e-06,
+          "max": 6.272e-06
+        },
+        "mean_ms": {
+          "median": 184.157177,
+          "min": 184.003585,
+          "max": 186.782934
+        },
+        "p95_ms": {
+          "median": 185.248474816,
+          "min": 185.248474816,
+          "max": 187.100959564
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.184163398,
+          "min": 0.184009737,
+          "max": 0.186789206
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.722421067,
+          "min": 0.703166228,
+          "max": 0.726083308
+        },
+        "setup_s": {
+          "median": 6.793e-06,
+          "min": 6.432e-06,
+          "max": 8.046e-06
+        },
+        "mean_ms": {
+          "median": 722.421067,
+          "min": 703.166228,
+          "max": 726.083308
+        },
+        "p95_ms": {
+          "median": 724.073826806,
+          "min": 709.806711897,
+          "max": 731.314565074
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.7224274989999999,
+          "min": 0.703174274,
+          "max": 0.7260901009999999
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "build_index",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 1,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.945500934,
+          "min": 0.945500934,
+          "max": 0.945500934
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 1.814342484,
+          "min": 1.811704422,
+          "max": 1.816683197
+        },
+        "setup_s": {
+          "median": 6.803e-06,
+          "min": 6.502e-06,
+          "max": 6.853e-06
+        },
+        "mean_ms": {
+          "median": 1814.342484,
+          "min": 1811.704422,
+          "max": 1816.683197
+        },
+        "p95_ms": {
+          "median": 1826.71422635,
+          "min": 1826.71422635,
+          "max": 1826.71422635
+        },
+        "setup_plus_elapsed_s": {
+          "median": 1.814349337,
+          "min": 1.811710924,
+          "max": 1.81669
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 26.276574456,
+          "min": 26.264025413,
+          "max": 26.400609003
+        },
+        "setup_s": {
+          "median": 0.554182271,
+          "min": 0.551549532,
+          "max": 0.55764712
+        },
+        "mean_ms": {
+          "median": 262.76574456,
+          "min": 262.64025413,
+          "max": 264.00609003
+        },
+        "p95_ms": {
+          "median": 496.101620358,
+          "min": 496.101620358,
+          "max": 501.062636561
+        },
+        "setup_plus_elapsed_s": {
+          "median": 26.828123987999998,
+          "min": 26.821672532999997,
+          "max": 26.954791273999998
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "point",
+      "keyword": "",
+      "indexed": 1,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.000484408,
+          "min": 0.000466554,
+          "max": 0.000495271
+        },
+        "setup_s": {
+          "median": 0.740599947,
+          "min": 0.727592121,
+          "max": 0.74197215
+        },
+        "mean_ms": {
+          "median": 0.00484408,
+          "min": 0.00466554,
+          "max": 0.00495271
+        },
+        "p95_ms": {
+          "median": 0.00476931144796,
+          "min": 0.00453783619624,
+          "max": 0.0050627202065
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.7410665009999999,
+          "min": 0.728087392,
+          "max": 0.7424565580000001
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.532871686,
+          "min": 0.529127481,
+          "max": 0.536369332
+        },
+        "setup_s": {
+          "median": 6.663e-06,
+          "min": 4.489e-06,
+          "max": 1.1151e-05
+        },
+        "mean_ms": {
+          "median": 532.871686,
+          "min": 529.127481,
+          "max": 536.369332
+        },
+        "p95_ms": {
+          "median": 537.206966277,
+          "min": 531.888085423,
+          "max": 537.206966277
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.5328761750000001,
+          "min": 0.5291341439999999,
+          "max": 0.5363804830000001
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.527355115,
+          "min": 0.521319898,
+          "max": 0.528897833
+        },
+        "setup_s": {
+          "median": 6.271e-06,
+          "min": 6.262e-06,
+          "max": 6.422e-06
+        },
+        "mean_ms": {
+          "median": 527.355115,
+          "min": 521.319898,
+          "max": 528.897833
+        },
+        "p95_ms": {
+          "median": 531.888085423,
+          "min": 521.407788867,
+          "max": 531.888085423
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.5273613859999999,
+          "min": 0.52132632,
+          "max": 0.528904095
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.529225789,
+          "min": 0.515619304,
+          "max": 0.529854689
+        },
+        "setup_s": {
+          "median": 5.04e-06,
+          "min": 4.779e-06,
+          "max": 6.452e-06
+        },
+        "mean_ms": {
+          "median": 529.225789,
+          "min": 515.619304,
+          "max": 529.854689
+        },
+        "p95_ms": {
+          "median": 531.888085423,
+          "min": 516.245335512,
+          "max": 531.888085423
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.529230829,
+          "min": 0.515624083,
+          "max": 0.529861141
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.528567602,
+          "min": 0.515698894,
+          "max": 0.528769356
+        },
+        "setup_s": {
+          "median": 6.392e-06,
+          "min": 4.819e-06,
+          "max": 9.709e-06
+        },
+        "mean_ms": {
+          "median": 528.567602,
+          "min": 515.698894,
+          "max": 528.769356
+        },
+        "p95_ms": {
+          "median": 531.888085423,
+          "min": 516.245335512,
+          "max": 531.888085423
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.5285739939999999,
+          "min": 0.5157037130000001,
+          "max": 0.5287790649999999
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.524138086,
+          "min": 0.519536112,
+          "max": 0.527132515
+        },
+        "setup_s": {
+          "median": 6.342e-06,
+          "min": 6.332e-06,
+          "max": 6.523e-06
+        },
+        "mean_ms": {
+          "median": 524.138086,
+          "min": 519.536112,
+          "max": 527.132515
+        },
+        "p95_ms": {
+          "median": 526.621866756,
+          "min": 521.407788867,
+          "max": 531.888085423
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.524144418,
+          "min": 0.5195426350000001,
+          "max": 0.5271388570000001
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.55447351,
+          "min": 0.546247679,
+          "max": 0.564499155
+        },
+        "setup_s": {
+          "median": 6.482e-06,
+          "min": 4.459e-06,
+          "max": 8.917e-06
+        },
+        "mean_ms": {
+          "median": 554.47351,
+          "min": 546.247679,
+          "max": 564.499155
+        },
+        "p95_ms": {
+          "median": 559.019723308,
+          "min": 548.004826299,
+          "max": 564.609920541
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.554479992,
+          "min": 0.546252138,
+          "max": 0.5645080720000001
+        }
+      }
+    },
+    {
+      "backend": "file",
+      "scale": 100,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 1.827715354,
+          "min": 1.819715043,
+          "max": 1.836728578
+        },
+        "setup_s": {
+          "median": 6.853e-06,
+          "min": 6.312e-06,
+          "max": 7.314e-06
+        },
+        "mean_ms": {
+          "median": 1827.715354,
+          "min": 1819.715043,
+          "max": 1836.728578
+        },
+        "p95_ms": {
+          "median": 1844.98136861,
+          "min": 1826.71422635,
+          "max": 1844.98136861
+        },
+        "setup_plus_elapsed_s": {
+          "median": 1.827722668,
+          "min": 1.819721355,
+          "max": 1.836735431
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.007344759,
+          "min": 0.005509457,
+          "max": 0.007486697
+        },
+        "setup_s": {
+          "median": 0.02197907,
+          "min": 0.020311828,
+          "max": 0.025271626
+        },
+        "mean_ms": {
+          "median": 7.344759,
+          "min": 5.509457,
+          "max": 7.486697
+        },
+        "p95_ms": {
+          "median": 7.37275046943,
+          "min": 5.5247126658,
+          "max": 7.52094275387
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.029323829,
+          "min": 0.025821285,
+          "max": 0.032758323
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.001114076,
+          "min": 0.000826944,
+          "max": 0.00113157
+        },
+        "setup_s": {
+          "median": 0.02500892,
+          "min": 0.019897234,
+          "max": 0.028216164
+        },
+        "mean_ms": {
+          "median": 1.114076,
+          "min": 0.826944,
+          "max": 1.13157
+        },
+        "p95_ms": {
+          "median": 1.10216633842,
+          "min": 0.809626203653,
+          "max": 1.11318800181
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.026122996,
+          "min": 0.020724178,
+          "max": 0.029347733999999997
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.013174091,
+          "min": 0.010410124,
+          "max": 0.013631977
+        },
+        "setup_s": {
+          "median": 0.027232294,
+          "min": 0.027207567,
+          "max": 0.032633868
+        },
+        "mean_ms": {
+          "median": 0.13174091,
+          "min": 0.10410124,
+          "max": 0.13631977
+        },
+        "p95_ms": {
+          "median": 0.144772772433,
+          "min": 0.107410237739,
+          "max": 0.147682705158
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.040406385,
+          "min": 0.037617690999999995,
+          "max": 0.046265845
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.004721368,
+          "min": 0.004717149,
+          "max": 0.005019281
+        },
+        "setup_s": {
+          "median": 0.02506176,
+          "min": 0.021389836,
+          "max": 0.025619424
+        },
+        "mean_ms": {
+          "median": 4.721368,
+          "min": 4.717149,
+          "max": 5.019281
+        },
+        "p95_ms": {
+          "median": 4.71159242897,
+          "min": 4.71159242897,
+          "max": 5.00145030478
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.030081041,
+          "min": 0.026106985,
+          "max": 0.030340792
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.004714655,
+          "min": 0.003413766,
+          "max": 0.004718312
+        },
+        "setup_s": {
+          "median": 0.021509963,
+          "min": 0.02042416,
+          "max": 0.024310429
+        },
+        "mean_ms": {
+          "median": 4.714655,
+          "min": 3.413766,
+          "max": 4.718312
+        },
+        "p95_ms": {
+          "median": 4.71159242897,
+          "min": 3.42676051596,
+          "max": 4.71159242897
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.026224617999999998,
+          "min": 0.023837926,
+          "max": 0.029028741
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.004859549,
+          "min": 0.003510027,
+          "max": 0.005169575
+        },
+        "setup_s": {
+          "median": 0.025397143,
+          "min": 0.020401076,
+          "max": 0.029113249
+        },
+        "mean_ms": {
+          "median": 4.859549,
+          "min": 3.510027,
+          "max": 5.169575
+        },
+        "p95_ms": {
+          "median": 4.85435839117,
+          "min": 3.49563840233,
+          "max": 5.15299925046
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.030566718,
+          "min": 0.023911103,
+          "max": 0.033972798
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.004723502,
+          "min": 0.003454623,
+          "max": 0.00473298
+        },
+        "setup_s": {
+          "median": 0.024423512,
+          "min": 0.020231466,
+          "max": 0.027059086
+        },
+        "mean_ms": {
+          "median": 4.723502,
+          "min": 3.454623,
+          "max": 4.73298
+        },
+        "p95_ms": {
+          "median": 4.71159242897,
+          "min": 3.46102812112,
+          "max": 4.71159242897
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.029147014000000002,
+          "min": 0.023686089,
+          "max": 0.031792066
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.004711469,
+          "min": 0.003483276,
+          "max": 0.004717109
+        },
+        "setup_s": {
+          "median": 0.021327058,
+          "min": 0.020038952,
+          "max": 0.024507952
+        },
+        "mean_ms": {
+          "median": 4.711469,
+          "min": 3.483276,
+          "max": 4.717109
+        },
+        "p95_ms": {
+          "median": 4.71159242897,
+          "min": 3.49563840233,
+          "max": 4.71159242897
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.026044167,
+          "min": 0.023522228,
+          "max": 0.029219421
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.005532792,
+          "min": 0.004247582,
+          "max": 0.005992642
+        },
+        "setup_s": {
+          "median": 0.021445141,
+          "min": 0.020364838,
+          "max": 0.024820894
+        },
+        "mean_ms": {
+          "median": 5.532792,
+          "min": 4.247582,
+          "max": 5.992642
+        },
+        "p95_ms": {
+          "median": 5.5247126658,
+          "min": 4.26534316178,
+          "max": 5.98247215683
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.026977933000000003,
+          "min": 0.02461242,
+          "max": 0.030813536
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 1,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.037108528,
+          "min": 0.036700166,
+          "max": 0.03862169
+        },
+        "setup_s": {
+          "median": 0.026481685,
+          "min": 0.02448069,
+          "max": 0.02756912
+        },
+        "mean_ms": {
+          "median": 37.108528,
+          "min": 36.700166,
+          "max": 38.62169
+        },
+        "p95_ms": {
+          "median": 37.326172779,
+          "min": 36.9566067119,
+          "max": 38.8417650718
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.063590213,
+          "min": 0.061180856,
+          "max": 0.06619081
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.044411374,
+          "min": 0.036235525,
+          "max": 0.04540269
+        },
+        "setup_s": {
+          "median": 0.023110417,
+          "min": 0.017888054,
+          "max": 0.026910114
+        },
+        "mean_ms": {
+          "median": 44.411374,
+          "min": 36.235525,
+          "max": 45.40269
+        },
+        "p95_ms": {
+          "median": 44.6476073467,
+          "min": 36.2284155592,
+          "max": 45.5450242544
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.067521791,
+          "min": 0.054123579,
+          "max": 0.07231280400000001
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "concurrent_read",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 1,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000075745,
+          "min": 20.000067353,
+          "max": 20.000099757
+        },
+        "throughput_ops_s": {
+          "median": 8731.02059698,
+          "min": 8692.25664433,
+          "max": 9001.61590863
+        },
+        "p95_ms": {
+          "median": 0.123465298519,
+          "min": 0.121032544377,
+          "max": 0.124699951504
+        },
+        "p99_ms": {
+          "median": 0.132371511301,
+          "min": 0.129763269582,
+          "max": 0.144772772433
+        },
+        "read_p95_ms": {
+          "median": 0.123465298519,
+          "min": 0.121032544377,
+          "max": 0.124699951504
+        },
+        "write_p95_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "concurrent_read",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 4,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000204755,
+          "min": 20.000141369,
+          "max": 20.000243303
+        },
+        "throughput_ops_s": {
+          "median": 36360.6076678,
+          "min": 36321.8432609,
+          "max": 36364.0777137
+        },
+        "p95_ms": {
+          "median": 0.124699951504,
+          "min": 0.124699951504,
+          "max": 0.125946951019
+        },
+        "p99_ms": {
+          "median": 0.135032178678,
+          "min": 0.133695226414,
+          "max": 0.137746325469
+        },
+        "read_p95_ms": {
+          "median": 0.124699951504,
+          "min": 0.124699951504,
+          "max": 0.125946951019
+        },
+        "write_p95_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "concurrent_read",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 8,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000292665,
+          "min": 20.000287242,
+          "max": 20.000296969
+        },
+        "throughput_ops_s": {
+          "median": 73506.3085453,
+          "min": 72343.7413759,
+          "max": 73989.0873613
+        },
+        "p95_ms": {
+          "median": 0.125946951019,
+          "min": 0.124699951504,
+          "max": 0.131060902278
+        },
+        "p99_ms": {
+          "median": 0.168076694377,
+          "min": 0.152157638807,
+          "max": 0.193199826033
+        },
+        "read_p95_ms": {
+          "median": 0.125946951019,
+          "min": 0.124699951504,
+          "max": 0.131060902278
+        },
+        "write_p95_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.001119667,
+          "min": 0.000811625,
+          "max": 0.001132892
+        },
+        "setup_s": {
+          "median": 0.02351864,
+          "min": 0.017300292,
+          "max": 0.02401006
+        },
+        "mean_ms": {
+          "median": 1.119667,
+          "min": 0.811625,
+          "max": 1.132892
+        },
+        "p95_ms": {
+          "median": 1.10216633842,
+          "min": 0.793673368938,
+          "max": 1.12431988183
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.024651532,
+          "min": 0.018111916999999998,
+          "max": 0.025129727
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "mixed",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 1,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.00009965,
+          "min": 20.000049021,
+          "max": 20.00012998
+        },
+        "throughput_ops_s": {
+          "median": 6939.18299172,
+          "min": 6244.50941693,
+          "max": 8059.20984499
+        },
+        "p95_ms": {
+          "median": 0.26300821772,
+          "min": 0.228807410111,
+          "max": 0.279188522884
+        },
+        "p99_ms": {
+          "median": 0.320920007687,
+          "min": 0.270977629725,
+          "max": 0.324129207764
+        },
+        "read_p95_ms": {
+          "median": 0.207136363511,
+          "min": 0.193199826033,
+          "max": 0.24288367644
+        },
+        "write_p95_ms": {
+          "median": 0.350985486117,
+          "min": 0.290524696459,
+          "max": 0.350985486117
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "mixed",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 4,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000341833,
+          "min": 20.000309252,
+          "max": 20.001645669
+        },
+        "throughput_ops_s": {
+          "median": 27285.754834,
+          "min": 26757.2862628,
+          "max": 29166.1515023
+        },
+        "p95_ms": {
+          "median": 0.260404175961,
+          "min": 0.240478887564,
+          "max": 0.26300821772
+        },
+        "p99_ms": {
+          "median": 0.320920007687,
+          "min": 0.290524696459,
+          "max": 0.324129207764
+        },
+        "read_p95_ms": {
+          "median": 0.203054958838,
+          "min": 0.201044513701,
+          "max": 0.205085508426
+        },
+        "write_p95_ms": {
+          "median": 0.350985486117,
+          "min": 0.311481797734,
+          "max": 0.361620697332
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "mixed",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 8,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000321086,
+          "min": 20.000314933,
+          "max": 20.000364643
+        },
+        "throughput_ops_s": {
+          "median": 55003.0971753,
+          "min": 52896.7170539,
+          "max": 55231.5632959
+        },
+        "p95_ms": {
+          "median": 0.317742581868,
+          "min": 0.314596615711,
+          "max": 0.320920007687
+        },
+        "p99_ms": {
+          "median": 0.411558085699,
+          "min": 0.407483253167,
+          "max": 0.419830403221
+        },
+        "read_p95_ms": {
+          "median": 0.217702399791,
+          "min": 0.217702399791,
+          "max": 0.226541990209
+        },
+        "write_p95_ms": {
+          "median": 0.441245973123,
+          "min": 0.436877201112,
+          "max": 0.450115017183
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.013655491,
+          "min": 0.010503821,
+          "max": 0.018312506
+        },
+        "setup_s": {
+          "median": 0.07270269,
+          "min": 0.069602927,
+          "max": 0.081576427
+        },
+        "mean_ms": {
+          "median": 0.13655491,
+          "min": 0.10503821,
+          "max": 0.18312506
+        },
+        "p95_ms": {
+          "median": 0.14915953221,
+          "min": 0.115158313059,
+          "max": 0.205085508426
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.08791543299999999,
+          "min": 0.086358181,
+          "max": 0.092080248
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.030477839,
+          "min": 0.030269635,
+          "max": 0.030702172
+        },
+        "setup_s": {
+          "median": 0.019970892,
+          "min": 0.017736397,
+          "max": 0.024924689
+        },
+        "mean_ms": {
+          "median": 30.477839,
+          "min": 30.269635,
+          "max": 30.702172
+        },
+        "p95_ms": {
+          "median": 30.5904584999,
+          "min": 30.2875826732,
+          "max": 30.8963630849
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.050673064000000004,
+          "min": 0.048214236,
+          "max": 0.055194324
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.030954269,
+          "min": 0.030687916,
+          "max": 0.031349307
+        },
+        "setup_s": {
+          "median": 0.019933862,
+          "min": 0.017524867,
+          "max": 0.025258771
+        },
+        "mean_ms": {
+          "median": 30.954269,
+          "min": 30.687916,
+          "max": 31.349307
+        },
+        "p95_ms": {
+          "median": 31.2053267158,
+          "min": 30.8963630849,
+          "max": 31.5173799829
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.050888131,
+          "min": 0.048212782999999995,
+          "max": 0.056608078
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.031973817,
+          "min": 0.031542763,
+          "max": 0.041458281
+        },
+        "setup_s": {
+          "median": 0.020259708,
+          "min": 0.017565503,
+          "max": 0.030661907
+        },
+        "mean_ms": {
+          "median": 31.973817,
+          "min": 31.542763,
+          "max": 41.458281
+        },
+        "p95_ms": {
+          "median": 32.1508793206,
+          "min": 31.8325537828,
+          "max": 41.6436294717
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.052233525,
+          "min": 0.049108266,
+          "max": 0.072120188
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.030886251,
+          "min": 0.030757218,
+          "max": 0.03132533
+        },
+        "setup_s": {
+          "median": 0.020391207,
+          "min": 0.017792553,
+          "max": 0.024077937
+        },
+        "mean_ms": {
+          "median": 30.886251,
+          "min": 30.757218,
+          "max": 31.32533
+        },
+        "p95_ms": {
+          "median": 30.8963630849,
+          "min": 30.8963630849,
+          "max": 31.5173799829
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.051716537,
+          "min": 0.048678804,
+          "max": 0.054835155
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.031116696,
+          "min": 0.030917581,
+          "max": 0.031594851
+        },
+        "setup_s": {
+          "median": 0.020336563,
+          "min": 0.019990038,
+          "max": 0.023092695
+        },
+        "mean_ms": {
+          "median": 31.116696,
+          "min": 30.917581,
+          "max": 31.594851
+        },
+        "p95_ms": {
+          "median": 31.2053267158,
+          "min": 30.8963630849,
+          "max": 31.8325537828
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.051254144,
+          "min": 0.051106734,
+          "max": 0.054687546000000004
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.04108269,
+          "min": 0.039497533,
+          "max": 0.041143777
+        },
+        "setup_s": {
+          "median": 0.020481007,
+          "min": 0.019922069,
+          "max": 0.022637444
+        },
+        "mean_ms": {
+          "median": 41.08269,
+          "min": 39.497533,
+          "max": 41.143777
+        },
+        "p95_ms": {
+          "median": 41.2313163087,
+          "min": 39.6224845498,
+          "max": 41.2313163087
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.061563697,
+          "min": 0.059419602,
+          "max": 0.063781221
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 10,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.307321619,
+          "min": 0.30256809,
+          "max": 0.307597444
+        },
+        "setup_s": {
+          "median": 0.027404618,
+          "min": 0.023776416,
+          "max": 0.028026944
+        },
+        "mean_ms": {
+          "median": 307.321619,
+          "min": 302.56809,
+          "max": 307.597444
+        },
+        "p95_ms": {
+          "median": 307.712191997,
+          "min": 304.66553663,
+          "max": 307.712191997
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.335002062,
+          "min": 0.32634450600000003,
+          "max": 0.335348563
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.345668623,
+          "min": 0.345260301,
+          "max": 0.356473715
+        },
+        "setup_s": {
+          "median": 0.021125937,
+          "min": 0.020777203,
+          "max": 0.027111103
+        },
+        "mean_ms": {
+          "median": 345.668623,
+          "min": 345.260301,
+          "max": 356.473715
+        },
+        "p95_ms": {
+          "median": 346.737800019,
+          "min": 346.737800019,
+          "max": 357.244302097
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.36679456,
+          "min": 0.366037504,
+          "max": 0.38358481800000005
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.001074425,
+          "min": 0.001062011,
+          "max": 0.001088312
+        },
+        "setup_s": {
+          "median": 0.021798812,
+          "min": 0.021796946,
+          "max": 0.02233637
+        },
+        "mean_ms": {
+          "median": 1.074425,
+          "min": 1.062011,
+          "max": 1.088312
+        },
+        "p95_ms": {
+          "median": 1.05916018758,
+          "min": 1.04867345305,
+          "max": 1.08044930735
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.022873237,
+          "min": 0.022858957000000003,
+          "max": 0.023424682000000002
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.019442526,
+          "min": 0.013751685,
+          "max": 0.019570763
+        },
+        "setup_s": {
+          "median": 0.572732439,
+          "min": 0.568567405,
+          "max": 0.578810435
+        },
+        "mean_ms": {
+          "median": 0.19442526,
+          "min": 0.13751685,
+          "max": 0.19570763
+        },
+        "p95_ms": {
+          "median": 0.203054958838,
+          "min": 0.152157638807,
+          "max": 0.203054958838
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.5881381680000001,
+          "min": 0.586484124,
+          "max": 0.5982529609999999
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.301732829,
+          "min": 0.301257171,
+          "max": 0.310699569
+        },
+        "setup_s": {
+          "median": 0.024149125,
+          "min": 0.020414547,
+          "max": 0.026249752
+        },
+        "mean_ms": {
+          "median": 301.732829,
+          "min": 301.257171,
+          "max": 310.699569
+        },
+        "p95_ms": {
+          "median": 304.66553663,
+          "min": 301.649046169,
+          "max": 310.789313917
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.325406296,
+          "min": 0.322147376,
+          "max": 0.336949321
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.304411923,
+          "min": 0.30436609,
+          "max": 0.316482591
+        },
+        "setup_s": {
+          "median": 0.020624828,
+          "min": 0.017914341,
+          "max": 0.026260902
+        },
+        "mean_ms": {
+          "median": 304.411923,
+          "min": 304.36609,
+          "max": 316.482591
+        },
+        "p95_ms": {
+          "median": 304.66553663,
+          "min": 304.66553663,
+          "max": 317.036179126
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.32499091799999996,
+          "min": 0.322326264,
+          "max": 0.34274349299999995
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.322345586,
+          "min": 0.312233047,
+          "max": 0.324214321
+        },
+        "setup_s": {
+          "median": 0.024031821,
+          "min": 0.020389573,
+          "max": 0.025773528
+        },
+        "mean_ms": {
+          "median": 322.345586,
+          "min": 312.233047,
+          "max": 324.214321
+        },
+        "p95_ms": {
+          "median": 323.408606327,
+          "min": 313.897207056,
+          "max": 326.64269239
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.346377407,
+          "min": 0.33262262,
+          "max": 0.349987849
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.313702099,
+          "min": 0.306635581,
+          "max": 0.324003524
+        },
+        "setup_s": {
+          "median": 0.02411498,
+          "min": 0.020285503,
+          "max": 0.026941141
+        },
+        "mean_ms": {
+          "median": 313.702099,
+          "min": 306.635581,
+          "max": 324.003524
+        },
+        "p95_ms": {
+          "median": 313.897207056,
+          "min": 307.712191997,
+          "max": 326.64269239
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.333987602,
+          "min": 0.330750561,
+          "max": 0.350944665
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.310203542,
+          "min": 0.307941424,
+          "max": 0.311435994
+        },
+        "setup_s": {
+          "median": 0.02060472,
+          "min": 0.020228905,
+          "max": 0.020928654
+        },
+        "mean_ms": {
+          "median": 310.203542,
+          "min": 307.941424,
+          "max": 311.435994
+        },
+        "p95_ms": {
+          "median": 310.789313917,
+          "min": 310.789313917,
+          "max": 313.897207056
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.330432447,
+          "min": 0.32854614400000004,
+          "max": 0.332364648
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.402665584,
+          "min": 0.38846838,
+          "max": 0.411475952
+        },
+        "setup_s": {
+          "median": 0.023268477,
+          "min": 0.021338851,
+          "max": 0.025918632
+        },
+        "mean_ms": {
+          "median": 402.665584,
+          "min": 388.46838,
+          "max": 411.475952
+        },
+        "p95_ms": {
+          "median": 406.57733969,
+          "min": 390.712831954,
+          "max": 414.749544217
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.424004435,
+          "min": 0.411736857,
+          "max": 0.437394584
+        }
+      }
+    },
+    {
+      "backend": "opengauss",
+      "scale": 100,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 3.16242103,
+          "min": 3.132071149,
+          "max": 3.169664916
+        },
+        "setup_s": {
+          "median": 0.028159802,
+          "min": 0.024231301,
+          "max": 0.028552826
+        },
+        "mean_ms": {
+          "median": 3162.42103,
+          "min": 3132.071149,
+          "max": 3169.664916
+        },
+        "p95_ms": {
+          "median": 3189.09563325,
+          "min": 3157.52042896,
+          "max": 3189.09563325
+        },
+        "setup_plus_elapsed_s": {
+          "median": 3.190973856,
+          "min": 3.160230951,
+          "max": 3.193896217
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.005771774,
+          "min": 0.005599338,
+          "max": 0.006180867
+        },
+        "setup_s": {
+          "median": 0.015519386,
+          "min": 0.012384658,
+          "max": 0.016241791
+        },
+        "mean_ms": {
+          "median": 5.771774,
+          "min": 5.599338,
+          "max": 6.180867
+        },
+        "p95_ms": {
+          "median": 5.80652853567,
+          "min": 5.63575939038,
+          "max": 6.16374704565
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.02129116,
+          "min": 0.017983996,
+          "max": 0.022422657999999998
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.001444391,
+          "min": 0.001379128,
+          "max": 0.00397682
+        },
+        "setup_s": {
+          "median": 0.015048695,
+          "min": 0.012043543,
+          "max": 0.017723593
+        },
+        "mean_ms": {
+          "median": 1.444391,
+          "min": 1.379128,
+          "max": 3.97682
+        },
+        "p95_ms": {
+          "median": 1.42758790999,
+          "min": 1.37188392152,
+          "max": 3.97836257651
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.019025515,
+          "min": 0.013422671,
+          "max": 0.019167984
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.006612103,
+          "min": 0.006012449,
+          "max": 0.006798315
+        },
+        "setup_s": {
+          "median": 0.023571372,
+          "min": 0.017186939,
+          "max": 0.029339207
+        },
+        "mean_ms": {
+          "median": 0.06612103,
+          "min": 0.06012449,
+          "max": 0.06798315
+        },
+        "p95_ms": {
+          "median": 0.0871559073236,
+          "min": 0.0804870181536,
+          "max": 0.0934429293866
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.030369687,
+          "min": 0.023199387999999998,
+          "max": 0.03595131
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.002257859,
+          "min": 0.002200111,
+          "max": 0.002271636
+        },
+        "setup_s": {
+          "median": 0.015152081,
+          "min": 0.012303354,
+          "max": 0.015503656
+        },
+        "mean_ms": {
+          "median": 2.257859,
+          "min": 2.200111,
+          "max": 2.271636
+        },
+        "p95_ms": {
+          "median": 2.25624395321,
+          "min": 2.1898881523,
+          "max": 2.25624395321
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.017423717,
+          "min": 0.014561213,
+          "max": 0.017703767
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.002220438,
+          "min": 0.00221608,
+          "max": 0.00226865
+        },
+        "setup_s": {
+          "median": 0.01508268,
+          "min": 0.012222672,
+          "max": 0.015594688
+        },
+        "mean_ms": {
+          "median": 2.220438,
+          "min": 2.21608,
+          "max": 2.26865
+        },
+        "p95_ms": {
+          "median": 2.21178703383,
+          "min": 2.21178703383,
+          "max": 2.25624395321
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.01729876,
+          "min": 0.014491322000000001,
+          "max": 0.017815126
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.002357658,
+          "min": 0.002298636,
+          "max": 0.002392264
+        },
+        "setup_s": {
+          "median": 0.015594669,
+          "min": 0.015245548,
+          "max": 0.015950471
+        },
+        "mean_ms": {
+          "median": 2.357658,
+          "min": 2.298636,
+          "max": 2.392264
+        },
+        "p95_ms": {
+          "median": 2.34785650525,
+          "min": 2.27880639274,
+          "max": 2.3713350703
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.017952327,
+          "min": 0.017544184,
+          "max": 0.018342735
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.002182367,
+          "min": 0.00217327,
+          "max": 0.002243613
+        },
+        "setup_s": {
+          "median": 0.013000232,
+          "min": 0.012123604,
+          "max": 0.015140048
+        },
+        "mean_ms": {
+          "median": 2.182367,
+          "min": 2.17327,
+          "max": 2.243613
+        },
+        "p95_ms": {
+          "median": 2.16820609139,
+          "min": 2.16820609139,
+          "max": 2.23390490417
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.015243845,
+          "min": 0.014296874,
+          "max": 0.017322415
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.00218969,
+          "min": 0.002186134,
+          "max": 0.002206222
+        },
+        "setup_s": {
+          "median": 0.015020963,
+          "min": 0.012138103,
+          "max": 0.016387918
+        },
+        "mean_ms": {
+          "median": 2.18969,
+          "min": 2.186134,
+          "max": 2.206222
+        },
+        "p95_ms": {
+          "median": 2.1898881523,
+          "min": 2.16820609139,
+          "max": 2.1898881523
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.017227185,
+          "min": 0.014327793000000002,
+          "max": 0.018574052
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.00304629,
+          "min": 0.003022515,
+          "max": 0.003131962
+        },
+        "setup_s": {
+          "median": 0.015256088,
+          "min": 0.015152702,
+          "max": 0.016969106
+        },
+        "mean_ms": {
+          "median": 3.04629,
+          "min": 3.022515,
+          "max": 3.131962
+        },
+        "p95_ms": {
+          "median": 3.04107596506,
+          "min": 3.01096630204,
+          "max": 3.13322360787
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.018302378,
+          "min": 0.018175217,
+          "max": 0.020101068
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 1,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.018860653,
+          "min": 0.016810758,
+          "max": 0.020049661
+        },
+        "setup_s": {
+          "median": 0.015263663,
+          "min": 0.014978683,
+          "max": 0.015316853
+        },
+        "mean_ms": {
+          "median": 18.860653,
+          "min": 16.810758,
+          "max": 20.049661
+        },
+        "p95_ms": {
+          "median": 18.9740501803,
+          "min": 16.8385061326,
+          "max": 20.1413366049
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.034124316,
+          "min": 0.031789441,
+          "max": 0.035366514
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.025387403,
+          "min": 0.025087637,
+          "max": 0.025478296
+        },
+        "setup_s": {
+          "median": 0.011214766,
+          "min": 0.011190129,
+          "max": 0.011323801
+        },
+        "mean_ms": {
+          "median": 25.387403,
+          "min": 25.087637,
+          "max": 25.478296
+        },
+        "p95_ms": {
+          "median": 25.574152955,
+          "min": 25.0702411087,
+          "max": 25.574152955
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.036577531999999996,
+          "min": 0.036411438,
+          "max": 0.036693062
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "concurrent_read",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 1,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000045869,
+          "min": 20.000031723,
+          "max": 20.000049441
+        },
+        "throughput_ops_s": {
+          "median": 17240.2573812,
+          "min": 14753.6265985,
+          "max": 17681.7594478
+        },
+        "p95_ms": {
+          "median": 0.0693274508171,
+          "min": 0.0653095947146,
+          "max": 0.0728638475566
+        },
+        "p99_ms": {
+          "median": 0.0728638475566,
+          "min": 0.0707209325785,
+          "max": 0.0812918883351
+        },
+        "read_p95_ms": {
+          "median": 0.0693274508171,
+          "min": 0.0653095947146,
+          "max": 0.0728638475566
+        },
+        "write_p95_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "concurrent_read",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 4,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000208448,
+          "min": 20.000180838,
+          "max": 20.000228552
+        },
+        "throughput_ops_s": {
+          "median": 70368.916587,
+          "min": 65773.6483651,
+          "max": 72155.7975745
+        },
+        "p95_ms": {
+          "median": 0.0721424233234,
+          "min": 0.0640227376871,
+          "max": 0.078119906856
+        },
+        "p99_ms": {
+          "median": 0.0871559073236,
+          "min": 0.0750716950014,
+          "max": 0.0953211322673
+        },
+        "read_p95_ms": {
+          "median": 0.0721424233234,
+          "min": 0.0640227376871,
+          "max": 0.078119906856
+        },
+        "write_p95_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "concurrent_read",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 8,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000367469,
+          "min": 20.000353248,
+          "max": 20.000376618
+        },
+        "throughput_ops_s": {
+          "median": 94101.8279779,
+          "min": 90879.5802286,
+          "max": 96175.4013116
+        },
+        "p95_ms": {
+          "median": 0.106346770039,
+          "min": 0.104251318536,
+          "max": 0.110664875353
+        },
+        "p99_ms": {
+          "median": 0.124699951504,
+          "min": 0.121032544377,
+          "max": 0.129763269582
+        },
+        "read_p95_ms": {
+          "median": 0.106346770039,
+          "min": 0.104251318536,
+          "max": 0.110664875353
+        },
+        "write_p95_ms": {
+          "median": 0,
+          "min": 0,
+          "max": 0
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.001347477,
+          "min": 0.0009889,
+          "max": 0.001449089
+        },
+        "setup_s": {
+          "median": 0.011874864,
+          "min": 0.010981394,
+          "max": 0.014807689
+        },
+        "mean_ms": {
+          "median": 1.347477,
+          "min": 0.9889,
+          "max": 1.449089
+        },
+        "p95_ms": {
+          "median": 1.33153701833,
+          "min": 0.978116663147,
+          "max": 1.42758790999
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.013222341,
+          "min": 0.011970294,
+          "max": 0.016256778
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "mixed",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 1,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000038312,
+          "min": 20.000007248,
+          "max": 20.000054493
+        },
+        "throughput_ops_s": {
+          "median": 15087.5445323,
+          "min": 15002.1091245,
+          "max": 15476.6703529
+        },
+        "p95_ms": {
+          "median": 0.108484340117,
+          "min": 0.108484340117,
+          "max": 0.109569183518
+        },
+        "p99_ms": {
+          "median": 0.117472995151,
+          "min": 0.116309896189,
+          "max": 0.118647725103
+        },
+        "read_p95_ms": {
+          "median": 0.067288540744,
+          "min": 0.067288540744,
+          "max": 0.0693274508171
+        },
+        "write_p95_ms": {
+          "median": 0.119834202354,
+          "min": 0.119834202354,
+          "max": 0.121032544377
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "mixed",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 4,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.000186905,
+          "min": 20.000169908,
+          "max": 20.000254295
+        },
+        "throughput_ops_s": {
+          "median": 70029.2955587,
+          "min": 68739.8660273,
+          "max": 71064.6464308
+        },
+        "p95_ms": {
+          "median": 0.103219127264,
+          "min": 0.103219127264,
+          "max": 0.105293831722
+        },
+        "p99_ms": {
+          "median": 0.129763269582,
+          "min": 0.129763269582,
+          "max": 0.131060902278
+        },
+        "read_p95_ms": {
+          "median": 0.0653095947146,
+          "min": 0.0646629650639,
+          "max": 0.0666223175683
+        },
+        "write_p95_ms": {
+          "median": 0.139123788724,
+          "min": 0.139123788724,
+          "max": 0.140515026611
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "mixed",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 8,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 20.00031602,
+          "min": 20.000277964,
+          "max": 20.00042714
+        },
+        "throughput_ops_s": {
+          "median": 94282.5102421,
+          "min": 90495.4172894,
+          "max": 95347.3248438
+        },
+        "p95_ms": {
+          "median": 0.140515026611,
+          "min": 0.140515026611,
+          "max": 0.144772772433
+        },
+        "p99_ms": {
+          "median": 0.182002975566,
+          "min": 0.180200965907,
+          "max": 0.185661235375
+        },
+        "read_p95_ms": {
+          "median": 0.121032544377,
+          "min": 0.119834202354,
+          "max": 0.125946951019
+        },
+        "write_p95_ms": {
+          "median": 0.180200965907,
+          "min": 0.178416797928,
+          "max": 0.183823005322
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.006694788,
+          "min": 0.005409849,
+          "max": 0.009841488
+        },
+        "setup_s": {
+          "median": 0.065973537,
+          "min": 0.065003323,
+          "max": 0.085327188
+        },
+        "mean_ms": {
+          "median": 0.06694788,
+          "min": 0.05409849,
+          "max": 0.09841488
+        },
+        "p95_ms": {
+          "median": 0.0897968184714,
+          "min": 0.068641040413,
+          "max": 0.112889239348
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.072668325,
+          "min": 0.070413172,
+          "max": 0.095168676
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.016917118,
+          "min": 0.012981707,
+          "max": 0.017170366
+        },
+        "setup_s": {
+          "median": 0.012283095,
+          "min": 0.011881556,
+          "max": 0.015589728
+        },
+        "mean_ms": {
+          "median": 16.917118,
+          "min": 12.981707,
+          "max": 17.170366
+        },
+        "p95_ms": {
+          "median": 17.006891194,
+          "min": 13.0001343657,
+          "max": 17.1769601059
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.029200213,
+          "min": 0.024863263,
+          "max": 0.032760094000000003
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.017444144,
+          "min": 0.012669957,
+          "max": 0.017799156
+        },
+        "setup_s": {
+          "median": 0.013842233,
+          "min": 0.011032682,
+          "max": 0.015666102
+        },
+        "mean_ms": {
+          "median": 17.444144,
+          "min": 12.669957,
+          "max": 17.799156
+        },
+        "p95_ms": {
+          "median": 17.522217004,
+          "min": 12.7439803605,
+          "max": 17.8744135658
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.031286377000000004,
+          "min": 0.023702639,
+          "max": 0.033465258
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.018725166,
+          "min": 0.018173754,
+          "max": 0.019396967
+        },
+        "setup_s": {
+          "median": 0.016240639,
+          "min": 0.012197613,
+          "max": 0.016607913
+        },
+        "mean_ms": {
+          "median": 18.725166,
+          "min": 18.173754,
+          "max": 19.396967
+        },
+        "p95_ms": {
+          "median": 18.7861882973,
+          "min": 18.2336892785,
+          "max": 19.5489828748
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.035333079,
+          "min": 0.030371367,
+          "max": 0.035637606
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.017379832,
+          "min": 0.012477653,
+          "max": 0.017522071
+        },
+        "setup_s": {
+          "median": 0.012186001,
+          "min": 0.010781016,
+          "max": 0.015488336
+        },
+        "mean_ms": {
+          "median": 17.379832,
+          "min": 12.477653,
+          "max": 17.522071
+        },
+        "p95_ms": {
+          "median": 17.522217004,
+          "min": 12.4928736011,
+          "max": 17.522217004
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.029565833,
+          "min": 0.023258669,
+          "max": 0.033010407
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.017335137,
+          "min": 0.012682981,
+          "max": 0.017593778
+        },
+        "setup_s": {
+          "median": 0.012133823,
+          "min": 0.011382162,
+          "max": 0.015572785
+        },
+        "mean_ms": {
+          "median": 17.335137,
+          "min": 12.682981,
+          "max": 17.593778
+        },
+        "p95_ms": {
+          "median": 17.348729707,
+          "min": 12.7439803605,
+          "max": 17.6974391741
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.029468960000000002,
+          "min": 0.024065142999999997,
+          "max": 0.033166563
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.024974792,
+          "min": 0.019143478,
+          "max": 0.026713451
+        },
+        "setup_s": {
+          "median": 0.015399728,
+          "min": 0.013055275,
+          "max": 0.016063864
+        },
+        "mean_ms": {
+          "median": 24.974792,
+          "min": 19.143478,
+          "max": 26.713451
+        },
+        "p95_ms": {
+          "median": 25.0702411087,
+          "min": 19.1637906821,
+          "max": 26.8786917785
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.038030067,
+          "min": 0.035207342,
+          "max": 0.042113179
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 10,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.139226009,
+          "min": 0.132896866,
+          "max": 0.141343851
+        },
+        "setup_s": {
+          "median": 0.016080676,
+          "min": 0.01363949,
+          "max": 0.017748851
+        },
+        "mean_ms": {
+          "median": 139.226009,
+          "min": 132.896866,
+          "max": 141.343851
+        },
+        "p95_ms": {
+          "median": 140.202634739,
+          "min": 133.397996266,
+          "max": 141.604661086
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.15286549900000002,
+          "min": 0.150645717,
+          "max": 0.15742452699999998
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "aggregate",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.234024788,
+          "min": 0.230594399,
+          "max": 0.234673407
+        },
+        "setup_s": {
+          "median": 0.019228758,
+          "min": 0.014828029,
+          "max": 0.020235972
+        },
+        "mean_ms": {
+          "median": 234.024788,
+          "min": 230.594399,
+          "max": 234.673407
+        },
+        "p95_ms": {
+          "median": 235.216407061,
+          "min": 230.581714598,
+          "max": 235.216407061
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.253902165,
+          "min": 0.245422428,
+          "max": 0.25426076000000003
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "join",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.00141914,
+          "min": 0.001394111,
+          "max": 0.001730226
+        },
+        "setup_s": {
+          "median": 0.012456646,
+          "min": 0.012190811,
+          "max": 0.013957646
+        },
+        "mean_ms": {
+          "median": 1.41914,
+          "min": 1.394111,
+          "max": 1.730226
+        },
+        "p95_ms": {
+          "median": 1.41345337623,
+          "min": 1.38560276073,
+          "max": 1.7246817316
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.013850757,
+          "min": 0.013609950999999999,
+          "max": 0.015687872000000002
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "point",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.009743153,
+          "min": 0.009214299,
+          "max": 0.009833908
+        },
+        "setup_s": {
+          "median": 0.55983248,
+          "min": 0.554523701,
+          "max": 0.653241084
+        },
+        "mean_ms": {
+          "median": 0.09743153,
+          "min": 0.09214299,
+          "max": 0.09833908
+        },
+        "p95_ms": {
+          "median": 0.110664875353,
+          "min": 0.105293831722,
+          "max": 0.114018131741
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.569046779,
+          "min": 0.564357609,
+          "max": 0.662984237
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.120140033,
+          "min": 0.120111997,
+          "max": 0.120683694
+        },
+        "setup_s": {
+          "median": 0.015107539,
+          "min": 0.01454915,
+          "max": 0.015253538
+        },
+        "mean_ms": {
+          "median": 120.140033,
+          "min": 120.111997,
+          "max": 120.683694
+        },
+        "p95_ms": {
+          "median": 120.763465802,
+          "min": 120.763465802,
+          "max": 120.763465802
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.13524757199999998,
+          "min": 0.135232844,
+          "max": 0.135365535
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.122623476,
+          "min": 0.12102021,
+          "max": 0.123096855
+        },
+        "setup_s": {
+          "median": 0.014578755,
+          "min": 0.011818937,
+          "max": 0.014602031
+        },
+        "mean_ms": {
+          "median": 122.623476,
+          "min": 121.02021,
+          "max": 123.096855
+        },
+        "p95_ms": {
+          "median": 123.190811465,
+          "min": 121.97110046,
+          "max": 123.190811465
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.137225507,
+          "min": 0.132839147,
+          "max": 0.13767561
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "search_count",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.128129594,
+          "min": 0.126060893,
+          "max": 0.128677497
+        },
+        "setup_s": {
+          "median": 0.014635332,
+          "min": 0.011559615,
+          "max": 0.015284828
+        },
+        "mean_ms": {
+          "median": 128.129594,
+          "min": 126.060893,
+          "max": 128.677497
+        },
+        "p95_ms": {
+          "median": 128.192852405,
+          "min": 126.923616243,
+          "max": 129.474780929
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.143312829,
+          "min": 0.137620508,
+          "max": 0.143414422
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "Love",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.125679066,
+          "min": 0.124603532,
+          "max": 0.125846938
+        },
+        "setup_s": {
+          "median": 0.015201249,
+          "min": 0.015020633,
+          "max": 0.016113453
+        },
+        "mean_ms": {
+          "median": 125.679066,
+          "min": 124.603532,
+          "max": 125.846938
+        },
+        "p95_ms": {
+          "median": 125.666946775,
+          "min": 125.666946775,
+          "max": 126.923616243
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.141048187,
+          "min": 0.139624165,
+          "max": 0.141792519
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "Star",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.12515292,
+          "min": 0.122648096,
+          "max": 0.12627761
+        },
+        "setup_s": {
+          "median": 0.014743779,
+          "min": 0.014490137,
+          "max": 0.014981399
+        },
+        "mean_ms": {
+          "median": 125.15292,
+          "min": 122.648096,
+          "max": 126.27761
+        },
+        "p95_ms": {
+          "median": 125.666946775,
+          "min": 123.190811465,
+          "max": 126.923616243
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.139896699,
+          "min": 0.137629495,
+          "max": 0.140767747
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "search_rows",
+      "keyword": "The",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 0.209603083,
+          "min": 0.204727793,
+          "max": 0.23413023
+        },
+        "setup_s": {
+          "median": 0.014912521,
+          "min": 0.014843278,
+          "max": 0.017097186
+        },
+        "mean_ms": {
+          "median": 209.603083,
+          "min": 204.727793,
+          "max": 234.13023
+        },
+        "p95_ms": {
+          "median": 210.830044398,
+          "min": 206.67585962,
+          "max": 235.216407061
+        },
+        "setup_plus_elapsed_s": {
+          "median": 0.22444636099999998,
+          "min": 0.219640314,
+          "max": 0.251227416
+        }
+      }
+    },
+    {
+      "backend": "postgres",
+      "scale": 100,
+      "op": "update",
+      "keyword": "",
+      "indexed": 0,
+      "clients": 0,
+      "n": 3,
+      "metrics": {
+        "elapsed_s": {
+          "median": 1.472208928,
+          "min": 1.471987125,
+          "max": 1.481630592
+        },
+        "setup_s": {
+          "median": 0.01697916,
+          "min": 0.016910411,
+          "max": 0.017183397
+        },
+        "mean_ms": {
+          "median": 1472.208928,
+          "min": 1471.987125,
+          "max": 1481.630592
+        },
+        "p95_ms": {
+          "median": 1482.25103276,
+          "min": 1482.25103276,
+          "max": 1482.25103276
+        },
+        "setup_plus_elapsed_s": {
+          "median": 1.489119339,
+          "min": 1.488966285,
+          "max": 1.4988139889999998
+        }
+      }
+    }
+  ]
+}

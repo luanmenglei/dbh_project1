@@ -1,0 +1,1 @@
+{"backend":"postgres","op":"search_count","requests":1,"setup_s":0.017006696,"elapsed_s":0.027487123,"mean_ms":27.487123,"rows":1,"checksum":"13649072400743298208","affected":0,"p50_ms":27.6931430181,"p95_ms":27.6931430181}

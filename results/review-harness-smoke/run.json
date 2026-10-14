@@ -1,0 +1,108 @@
+{
+  "args": {
+    "config": "deploy/state/targets.json",
+    "out": "results/review-harness-smoke",
+    "profile": "compact",
+    "dry_run": false,
+    "data": "/srv/benchmark/filmbench/review-20261013-v4/data/generated",
+    "backends": [
+      "file",
+      "postgres",
+      "opengauss"
+    ],
+    "scales": [
+      1
+    ],
+    "repeats": 2,
+    "point_requests": 10,
+    "clients": [
+      1,
+      2
+    ],
+    "concurrency_scales": [
+      1
+    ],
+    "load_repeats": 1,
+    "warmup": 0,
+    "duration": 1,
+    "timeout": 1800,
+    "manage_containers": false,
+    "manage_user_services": true
+  },
+  "targets": {
+    "postgres": {
+      "binary": "/srv/benchmark/filmbench/review-20261013-v4/build/postgres-client.sh",
+      "dsn_env": "POSTGRES_DSN",
+      "service": "filmbench-postgres.service",
+      "start_command": [
+        "systemd-run",
+        "--user",
+        "--quiet",
+        "--collect",
+        "--unit=filmbench-postgres.service",
+        "--property=MemoryMax=8G",
+        "--property=MemorySwapMax=0",
+        "--property=TasksMax=256",
+        "--property=Nice=10",
+        "--property=KillMode=control-group",
+        "--property=TimeoutStopSec=60",
+        "--property=KillSignal=SIGINT",
+        "taskset",
+        "-c",
+        "8,9",
+        "/srv/benchmark/filmbench/deploy/state/postgres-server.sh"
+      ],
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    },
+    "opengauss": {
+      "binary": "/srv/benchmark/filmbench/review-20261013-v4/build/opengauss-client.sh",
+      "dsn_env": "OPENGAUSS_DSN",
+      "service": "filmbench-opengauss.service",
+      "start_command": [
+        "systemd-run",
+        "--user",
+        "--quiet",
+        "--collect",
+        "--unit=filmbench-opengauss.service",
+        "--property=MemoryMax=8G",
+        "--property=MemorySwapMax=0",
+        "--property=TasksMax=256",
+        "--property=Nice=10",
+        "--property=KillMode=control-group",
+        "--property=TimeoutStopSec=60",
+        "--property=KillSignal=SIGINT",
+        "taskset",
+        "-c",
+        "8,9",
+        "/srv/benchmark/filmbench/deploy/state/opengauss-server.sh"
+      ],
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    },
+    "file": {
+      "binary": "/srv/benchmark/filmbench/review-20261013-v4/build/postgres-client.sh",
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    }
+  },
+  "started": "2026-10-13T13:09:16.993176+00:00"
+}

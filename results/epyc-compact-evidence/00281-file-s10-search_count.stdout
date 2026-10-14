@@ -1,0 +1,1 @@
+{"backend":"file","op":"search_count","requests":1,"setup_s":6.182e-06,"elapsed_s":0.059581451,"mean_ms":59.581451,"rows":1,"checksum":"7380040943099145118","affected":0,"p50_ms":59.5824050836,"p95_ms":59.5824050836}

@@ -28,7 +28,7 @@
 | `experiments/baseline-20261012/` | 原性能实验源码快照 |
 | `results/*/source-snapshot/` | 每次实验实际源码；不与后续修改混淆 |
 
-生成数据、数据库状态、结果、PDF 和临时文件不纳入 Git。完整实验结果需由已有证据副本提供，或在 Ubuntu 上运行生成；只克隆源码不能凭空得到历史实验数字。
+仓库包含 `results/` 下的原始实验记录、统计结果和源码快照，以及 `output/submission/` 中的最终 PDF、C++ 源码和 `output/submission-manifest.json` 哈希清单。克隆后可直接查看报告，或用已有记录重新构建报告。重复的结果压缩包、旧版报告、生成的大规模数据、数据库状态和临时文件不纳入 Git。
 
 ## Ubuntu 编译与数据准备
 

@@ -1,0 +1,43 @@
+{
+  "format": 1,
+  "scale": 10,
+  "source_sha256": "1c18c555b8e0dcd3206b40f75aaeda3e62a0437e3d3188e148c84fde12070fa8",
+  "counts": {
+    "countries": 185,
+    "movies": 92040,
+    "people": 164890,
+    "credits": 468500
+  },
+  "id_strides": {
+    "movies": 9205,
+    "people": 16490
+  },
+  "expansion": "Exact relational replicas; original text preserved; unique constraints scoped by replica.",
+  "files": {
+    "countries": {
+      "sha256": "f22c10c1b425d2a0936b06d09a9efa235a6eda14ca577c5b258dddb388665ee4",
+      "bytes": 3483
+    },
+    "movies": {
+      "sha256": "695c96904678c2811ba9a8ff9991871268543988e83ba31b92314a7fa4ba1177",
+      "bytes": 3336735
+    },
+    "people": {
+      "sha256": "8639a75cf027f4a9391fe4aebf0a33d2a5c651ba75f3797f9af9f69225772701",
+      "bytes": 5472421
+    },
+    "credits": {
+      "sha256": "913fb79b73451ce27a69d17a5ab9421ed8021dd95a67d65022510fc9fa650668",
+      "bytes": 6654586
+    }
+  },
+  "expected": {
+    "search_count": {
+      "The": 15630,
+      "Love": 880,
+      "Star": 500
+    },
+    "updated_people": 12870,
+    "join_peopleid": 3442
+  }
+}

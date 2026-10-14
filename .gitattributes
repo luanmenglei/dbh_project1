@@ -10,3 +10,7 @@ report/figures/*.svg text eol=lf
 Makefile text eol=lf
 # Historical source hashes include original line endings.
 experiments/baseline-20261012/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+# Preserve raw evidence and submission bytes for recorded SHA-256 checks.
+results/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+output/submission/** -text
+*.pdf binary

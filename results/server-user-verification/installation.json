@@ -1,0 +1,26 @@
+{
+  "uid": 1002,
+  "root": "/srv/benchmark/filmbench",
+  "db_cpus": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
+  "client_cpus": [
+    16,
+    17
+  ],
+  "memory_limit": "8G per database",
+  "packages": {
+    "libpq-dev_14.24-0ubuntu0.22.04.1_amd64.deb": "2c6f2f7f63b2c3c667146457b26090bfd719bcaf51da4e84e31798601186dd94",
+    "libpq5_14.24-0ubuntu0.22.04.1_amd64.deb": "79f9af127350c5bbf4c1722ebc4aa7d31ae4fd71b0404e501f7a76ed65709e0d",
+    "opengauss-verified.deb": "954f1d790b0479fccfe60b64418cb4fb385830e729670ba1949e69a359ac90ed",
+    "postgresql-14_14.24-0ubuntu0.22.04.1_amd64.deb": "d3f5c254fac89a46d9c92c3f098a1c8635b3445f5d9fd609a05041cda6ed4aef",
+    "postgresql-client-14_14.24-0ubuntu0.22.04.1_amd64.deb": "d63f6b9020c137fe6c47f9f68cababdd2f09f57ff26df79768daa0f3d3a35e8a"
+  }
+}

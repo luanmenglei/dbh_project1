@@ -1,0 +1,67 @@
+{
+  "plan": [
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 0
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 1
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "postgres",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    },
+    {
+      "layout": "db8_client8",
+      "backend": "opengauss",
+      "op": "concurrent_read",
+      "clients": 32,
+      "repeat": 2
+    }
+  ],
+  "warmup": 5,
+  "duration": 20,
+  "layouts": {
+    "db8_client2": [
+      "8-15",
+      "24,25"
+    ],
+    "db8_client4": [
+      "8-15",
+      "24-27"
+    ],
+    "db12_client4": [
+      "8-15,20-23",
+      "24-27"
+    ],
+    "db8_client8": [
+      "8-15",
+      "24-31"
+    ]
+  },
+  "purpose": "adaptive extra client headroom"
+}
