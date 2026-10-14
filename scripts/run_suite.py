@@ -10,8 +10,18 @@ import shutil
 import subprocess
 import threading
 import time
+import hashlib
 
 ROOT = Path(__file__).resolve().parents[1]
+
+PROFILES = {
+    'compact': dict(scales=[1, 10, 100], repeats=3, point_requests=100,
+                    clients=[1, 4, 8], concurrency_scales=[10],
+                    load_repeats=3, warmup=5, duration=20),
+    'full': dict(scales=[1, 10, 100], repeats=5, point_requests=100,
+                 clients=[1, 2, 4, 8, 16, 32], concurrency_scales=[1, 100],
+                 load_repeats=3, warmup=30, duration=120),
+}
 
 
 def utc():
@@ -64,9 +74,41 @@ class Runner:
         config = {'args': {k:str(v) if isinstance(v, Path) else v for k,v in vars(args).items()},
                   'targets': self.config, 'started': utc()}
         (self.out/'run.json').write_text(json.dumps(config, indent=2))
+        hashes = {}
+        for pattern in ['src/*.cpp', 'scripts/*.py', 'sql/*.sql', 'tests/*.py']:
+            for source in sorted(ROOT.glob(pattern)):
+                name = source.relative_to(ROOT).as_posix()
+                target = self.out/'source-snapshot'/name
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(source, target)
+                hashes[name] = hashlib.sha256(target.read_bytes()).hexdigest()
+        (self.out/'source-sha256.json').write_text(json.dumps(hashes, indent=2))
 
     def activate(self, backend):
-        if not self.args.manage_containers or self.active == backend:
+        if not (self.args.manage_containers or self.args.manage_user_services) or self.active == backend:
+            return
+        if self.args.manage_user_services:
+            for target in ['postgres', 'opengauss']:
+                service = self.config.get(target, {}).get('service')
+                if not service:
+                    raise ValueError('--manage-user-services needs both service names in config')
+                if target != backend:
+                    self.stop_user_service(service)
+            if backend != 'file':
+                target = self.config[backend]
+                subprocess.run(target['start_command'], check=True, capture_output=True)
+                deadline = time.monotonic()+60
+                while True:
+                    p = subprocess.run(self.command(backend, 1, 'snapshot'), cwd=ROOT, capture_output=True)
+                    if p.returncode == 0:
+                        break
+                    if time.monotonic() > deadline:
+                        raise RuntimeError(f'{backend} did not become ready: '+p.stderr.decode(errors='replace'))
+                    time.sleep(1)
+                group = subprocess.check_output(['systemctl', '--user', 'show', target['service'],
+                                                 '-p', 'ControlGroup', '--value'], text=True).strip()
+                target['cgroup'] = str(Path('/sys/fs/cgroup')/group.lstrip('/')) if group else None
+            self.active = backend
             return
         for target in ['postgres', 'opengauss']:
             container = self.config.get(target, {}).get('container')
@@ -140,6 +182,47 @@ class Runner:
 
     def load(self, backend, scale, **labels):
         return self.call(backend,scale,'load',['--reset','--ddl',str(ROOT/'sql/schema.sql')],**labels)
+
+    @staticmethod
+    def stop_user_service(service):
+        result = subprocess.run(['systemctl', '--user', 'stop', service], capture_output=True, text=True)
+        if result.returncode:
+            # --collect removes successfully stopped transient units. Absence is already stopped.
+            state = subprocess.run(['systemctl', '--user', 'show', service, '-p', 'LoadState', '--value'],
+                                   capture_output=True, text=True)
+            if state.stdout.strip() != 'not-found':
+                raise RuntimeError(f'Cannot stop {service}: '+result.stderr)
+
+    def stop_user_services(self):
+        if self.args.manage_user_services:
+            errors = []
+            for backend in ['postgres', 'opengauss']:
+                service = self.config.get(backend, {}).get('service')
+                if service:
+                    try:
+                        self.stop_user_service(service)
+                    except Exception as error:
+                        errors.append(str(error))
+            if errors:
+                raise RuntimeError('; '.join(errors))
+
+    def cleanup(self):
+        """Release every managed backend on both success and failure."""
+        if self.args.manage_user_services:
+            self.stop_user_services()
+        elif self.args.manage_containers:
+            errors = []
+            for backend in ['postgres', 'opengauss']:
+                container = self.config.get(backend, {}).get('container')
+                if container:
+                    try:
+                        subprocess.run(['docker', 'stop', container], check=True,
+                                       capture_output=True, text=True, timeout=90)
+                    except Exception as error:
+                        errors.append(str(error))
+            if errors:
+                raise RuntimeError('; '.join(errors))
+        self.active = None
 
     @staticmethod
     def equal(a, b, context):
@@ -256,29 +339,52 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--config',type=Path)
     p.add_argument('--out',type=Path,required=True,help='Must not already exist')
+    p.add_argument('--profile',choices=PROFILES,default='compact',
+                   help='Parameter preset; explicit options override it (default: compact)')
+    p.add_argument('--dry-run',action='store_true',help='Print resolved parameters without creating output or starting services')
     p.add_argument('--data',type=Path,default=ROOT/'data/generated')
     p.add_argument('--backends',nargs='+',choices=['file','postgres','opengauss'],default=['file','postgres','opengauss'])
-    p.add_argument('--scales',type=int,nargs='+',default=[1,10,100])
-    p.add_argument('--repeats',type=int,default=5)
-    p.add_argument('--point-requests',type=int,default=100)
-    p.add_argument('--clients',type=int,nargs='+',default=[1,2,4,8,16,32])
-    p.add_argument('--concurrency-scales',type=int,nargs='*',default=[1,100])
-    p.add_argument('--load-repeats',type=int,default=3)
-    p.add_argument('--warmup',type=int,default=30)
-    p.add_argument('--duration',type=int,default=120)
+    p.add_argument('--scales',type=int,nargs='+')
+    p.add_argument('--repeats',type=int)
+    p.add_argument('--point-requests',type=int)
+    p.add_argument('--clients',type=int,nargs='+')
+    p.add_argument('--concurrency-scales',type=int,nargs='*')
+    p.add_argument('--load-repeats',type=int)
+    p.add_argument('--warmup',type=int)
+    p.add_argument('--duration',type=int)
     p.add_argument('--timeout',type=int,default=1800)
-    p.add_argument('--manage-containers',action='store_true')
+    management=p.add_mutually_exclusive_group()
+    management.add_argument('--manage-containers',action='store_true')
+    management.add_argument('--manage-user-services',action='store_true')
     a=p.parse_args()
-    if a.repeats<1 or a.load_repeats<1 or a.point_requests<1 or a.duration<1 or a.warmup<0 or any(x<1 for x in a.scales+a.clients):
+    for name, value in PROFILES[a.profile].items():
+        if getattr(a, name) is None:
+            setattr(a, name, value)
+    if a.repeats<1 or a.load_repeats<1 or a.point_requests<1 or a.duration<1 or a.warmup<0 or any(x<1 for x in a.scales+a.clients+a.concurrency_scales):
         p.error('Counts/durations must be positive; warmup can be zero')
+    if a.dry_run:
+        parameters = {k: str(v) if isinstance(v, Path) else v for k, v in vars(a).items()}
+        trials = (sum(b != 'file' for b in a.backends)
+                  * sum(s in a.concurrency_scales for s in a.scales)
+                  * len(a.clients) * 2 * a.load_repeats)
+        print(json.dumps({'parameters': parameters, 'concurrency_trials': trials,
+                          'concurrency_window_s': trials*(a.warmup+a.duration),
+                          'note': 'Window excludes import, restore, serial operations, startup and drain time.'}, indent=2))
+        return
     runner=Runner(a)
     try:
         for scale in a.scales:
             print(f'Running scale {scale}',flush=True)
             runner.run_scale(scale)
-    except Exception:
+    except BaseException:
         (runner.out/'FAILED').write_text(utc()+'\n')
         raise
+    finally:
+        try:
+            runner.cleanup()
+        except BaseException:
+            (runner.out/'FAILED').write_text(utc()+'\nCleanup failed; inspect managed backends.\n')
+            raise
     (runner.out/'COMPLETE').write_text(utc()+'\n')
     print('Complete:',runner.out)
 

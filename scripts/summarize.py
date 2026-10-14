@@ -27,7 +27,7 @@ def main():
         groups[key].append(r)
     rows=[]
     for key, values in sorted(groups.items()):
-        for metric in ['elapsed_s','setup_s','mean_ms','throughput_ops_s','p50_ms','p95_ms','p99_ms','read_p95_ms','write_p95_ms','bytes']:
+        for metric in ['elapsed_s','setup_s','request_prepare_s','backend_setup_s','mean_ms','throughput_ops_s','p50_ms','p95_ms','p99_ms','read_p95_ms','write_p95_ms','bytes']:
             vals=[v[metric] for v in values if metric in v]
             if vals:
                 rows.append(dict(zip(['backend','scale','op','keyword','indexed','clients'],key),metric=metric,

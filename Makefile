@@ -13,6 +13,7 @@ $(TARGET): src/filmbench.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $< $(LDFLAGS) $(LDLIBS) -o $@
 
 test: all
+	python3 tests/test_harness.py
 	python3 tests/test_project.py
 
 .PHONY: all test

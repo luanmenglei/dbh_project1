@@ -1,0 +1,12 @@
+*.cpp text eol=lf
+*.py text eol=lf
+*.sql text eol=lf
+*.sh text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.typ text eol=lf
+report/*.json text eol=lf
+report/figures/*.svg text eol=lf
+Makefile text eol=lf
+# Historical source hashes include original line endings.
+experiments/baseline-20261012/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
