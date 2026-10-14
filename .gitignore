@@ -1,4 +1,6 @@
 build/
+runtime/
+packages/
 data/generated/
 results/
 deploy/.env
@@ -7,6 +9,8 @@ __pycache__/
 *.pyc
 .DS_Store
 .venv/
+tmp/
+output/
 .env
 .env.*
 !.env.example

@@ -82,6 +82,19 @@ def test_fixture(root,backend='file',env=None):
             plan=run(data,'explain',backend,['--query',op],env)
             assert plan['plan']
     same(actual,{k:reference[k] for k in ['rows','checksum']})
+    request_file=data/'requests.txt'
+    request_ids=[1,7,1,8,3]
+    request_file.write_text(''.join(str(i)+'\n' for i in request_ids))
+    actual=run(data,'point',backend,['--requests','5','--request-file',str(request_file)],env)
+    same(actual,digest([next(r[:5] for r in movies if r[0]==i) for i in request_ids]))
+    assert actual['timing_version']==2 and actual['request_prepare_s']>=0 and actual['backend_setup_s']>=0
+    assert abs(actual['setup_s']-actual['request_prepare_s']-actual['backend_setup_s'])<0.001
+    run(data,'point',backend,['--requests','6','--request-file',str(request_file)],env,ok=False)
+    if backend!='file':
+        functionality=run(data,'functional',backend,env=env)
+        assert functionality['foreign_key_rejected'] and functionality['transaction_rollback_restored']
+        for table,rows in tables.items():
+            same(run(data,'fingerprint',backend,['--table',table],env),digest(rows))
     result=run(data,'update',backend,env=env)
     assert result['affected']==2
     updated=[[v.replace('T','Ttt') if i in [1,2] and v is not None else v for i,v in enumerate(r)] for r in people]
@@ -133,7 +146,8 @@ def main():
                     'duplicate movie roles','all-NULL aggregate group','sequential/indexed/SQL point parity',
                     'durable variable-length update','stale index rejection','read-only EXPLAIN plans',
                     'concurrent read and mixed write','restore after updates','s1/s2 course-data parity',
-                    'full harness and CSV summary','schema scope guard']}
+                    'full harness and CSV summary','schema scope guard','external request stream and split setup timing',
+                    'foreign-key rejection and failed transaction rollback']}
     with tempfile.TemporaryDirectory(prefix='fbtest-',dir='/tmp') as tmp:
         root=Path(tmp)
         test_fixture(root);test_course(root);report['file']='passed'
@@ -153,7 +167,7 @@ def main():
                 suite=root/'suite'
                 subprocess.run(['python3',str(ROOT/'scripts/run_suite.py'),'--out',str(suite),'--data',str(root/'course'),
                                 '--backends','file','postgres','--scales','1','--repeats','2','--point-requests','5',
-                                '--clients','1','2','--warmup','0','--duration','1','--load-repeats','1'],
+                                '--clients','1','2','--concurrency-scales','1','--warmup','0','--duration','1','--load-repeats','1'],
                                check=True,cwd=ROOT,env=env,capture_output=True,text=True)
                 subprocess.run(['python3',str(ROOT/'scripts/summarize.py'),str(suite)],check=True,capture_output=True)
                 assert (suite/'COMPLETE').exists() and (suite/'summary.csv').stat().st_size>0
