@@ -11,6 +11,7 @@ import subprocess
 import threading
 import time
 import hashlib
+from contextlib import nullcontext
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -150,25 +151,26 @@ class Runner:
                '--dsn-env', target.get('dsn_env', backend.upper()+'_DSN')]
         return cmd + (extra or [])
 
-    def call(self, backend, scale, op, extra=None, data=None, measured=False, **labels):
+    def call(self, backend, scale, op, extra=None, data=None, measured=False, health_check=None, **labels):
         self.counter += 1
         stem = f'{self.counter:05d}-{backend}-s{scale}-{op}'
         cmd = self.command(backend, scale, op, extra, data)
         started = utc()
-        process = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-        stop = threading.Event()
-        thread = threading.Thread(target=monitor, args=(stop,process.pid,self.out/(stem+'-resources.jsonl'),
-                                                        self.config.get(backend,{}).get('cgroup')), daemon=True)
-        thread.start()
-        try:
-            stdout, stderr = process.communicate(timeout=self.args.timeout)
-        except subprocess.TimeoutExpired:
-            process.kill()
-            stdout, stderr = process.communicate()
-            stderr += '\nHarness timeout: command killed; do not reuse partial update state.\n'
-        finally:
-            stop.set()
-            thread.join()
+        with health_check if health_check is not None else nullcontext():
+            process = subprocess.Popen(cmd, cwd=ROOT, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            stop = threading.Event()
+            thread = threading.Thread(target=monitor, args=(stop,process.pid,self.out/(stem+'-resources.jsonl'),
+                                                            self.config.get(backend,{}).get('cgroup')), daemon=True)
+            thread.start()
+            try:
+                stdout, stderr = process.communicate(timeout=self.args.timeout)
+            except subprocess.TimeoutExpired:
+                process.kill()
+                stdout, stderr = process.communicate()
+                stderr += '\nHarness timeout: command killed; do not reuse partial update state.\n'
+            finally:
+                stop.set()
+                thread.join()
         (self.out/(stem+'.stdout')).write_text(stdout)
         (self.out/(stem+'.stderr')).write_text(stderr)
         if process.returncode != 0:
@@ -176,6 +178,9 @@ class Runner:
         result = json.loads(stdout)
         record = {'backend': backend, 'scale': scale, 'op': op, 'started': started, 'finished':utc(),
                   'measured': measured, 'command':cmd, 'log':stem, **labels, 'result':result}
+        if health_check is not None:
+            record['health'] = health_check.report()
+            record['measured'] = measured and record['health']['performance_eligible']
         with (self.out/'records.jsonl').open('a') as f:
             f.write(json.dumps(record)+'\n')
         return result

@@ -1,198 +1,134 @@
-# FilmDB 数据库性能实验
+<div align="center">
 
-对比 C++ 文件程序、PostgreSQL 14.24 和 openGauss 6.0.1。课程数据来自 `data/source/filmdb.sql`。
+# FilmDB
 
-## 当前提交入口
+**文件、索引与数据库：用同一份电影数据比较三种实现**
 
-- **最终报告与源码**：`output/submission/report.pdf`、`output/submission/filmbench.cpp`，分别提交，不压缩。姓名与学号按用户要求留空。
-- **可编辑 Typst 报告**：[report/report.typ](report/report.typ)，搭配同目录的 `data.json` 和 `figures/`。简约排版，矢量图表；修改文稿后可以直接用 Typst 编译。
-- **修改与验证记录**：[审查处理记录](docs/审查处理记录.md)。
-- `output/pdf/report-final.pdf`、`report-teacher*`、`experiment-guide*` 是历史版本；当前最终稿是 `output/pdf/report-typst.pdf`，同步至提交目录。
+<p>
+  <img alt="C++17" src="https://img.shields.io/badge/C%2B%2B-17-00599C?style=flat-square">
+  <img alt="PostgreSQL 14.24" src="https://img.shields.io/badge/PostgreSQL-14.24-4169E1?style=flat-square">
+  <img alt="openGauss 6.0.1" src="https://img.shields.io/badge/openGauss-6.0.1-007DFF?style=flat-square">
+  <img alt="Typst report" src="https://img.shields.io/badge/Report-Typst-239DAD?style=flat-square">
+</p>
 
-正式 compact 实验已于北京时间 2026-10-12 23:31:06 完成，873 条命令记录中有 318 条计时记录；后续 CPU 干预实验共 66＋6＋4 轮。性能结论来自这些已完成的原始数据。
-2026-10-13 新版增加计时拆分、约束与回滚验证、不同关联数量和热点请求覆盖。该轮服务器负载较高，新增覆盖只作为正确性证据，不加入正式性能排名。
+[**阅读报告 · 7 页 PDF**](output/submission/report.pdf) · [提交源码](output/submission/filmbench.cpp) · [快速开始](#快速开始) · [复现指南](docs/复现指南.md)
 
-## 目录与版本
+</div>
 
-| 路径 | 用途 |
-|---|---|
-| `src/filmbench.cpp` | 当前 Linux C++17 实现；内置建表 SQL |
-| `scripts/prepare.py` | 白名单解析课程 INSERT，生成四个 TSV 与 SHA-256 清单 |
-| `scripts/run_suite.py` | 主实验、数据恢复、结果校验与资源采样 |
-| `scripts/run_coverage.py` | 共享请求文件、均匀/热点点查、分层人物连接与事务验证 |
-| `scripts/analyze_*.py` | 结果审查，含原始 stdout、矩阵、统计和源码身份 |
-| `report/` | Typst 文稿、已审查数据摘要与矢量图表；可独立编译 |
-| `scripts/build_typst_report.py` | 审查原始证据、重建图表和数据、编译并更新提交文件 |
-| `tests/test_project.py` | 独立 Python oracle 与临时 PostgreSQL 集成测试 |
-| `tests/test_harness.py` | 本地清理与证据审查回归测试 |
-| `experiments/baseline-20261012/` | 原性能实验源码快照 |
-| `results/*/source-snapshot/` | 每次实验实际源码；不与后续修改混淆 |
+直接操作文件，什么时候足够快？数据库提供的索引、约束和事务又解决了什么问题？本项目用 C++ 文件程序、PostgreSQL 和 openGauss 完成相同的电影查询与姓名更新，再通过执行计划、索引对照和 CPU 资源干预解释测量结果。
 
-仓库包含 `results/` 下的原始实验记录、统计结果和源码快照，以及 `output/submission/` 中的最终 PDF、C++ 源码和 `output/submission-manifest.json` 哈希清单。克隆后可直接查看报告，或用已有记录重新构建报告。重复的结果压缩包、旧版报告、生成的大规模数据、数据库状态和临时文件不纳入 Git。
+## 先看结果
 
-## Ubuntu 编译与数据准备
+| 问题 | 实验观察 |
+| :--- | :--- |
+| 文件查询一定慢吗？ | 装载偏移索引后，长批次均匀点查平均每次 **3.29 μs**；但索引装载与校验约需 **0.380 s**，适合准备后反复读取静态记录。 |
+| 人物索引有多大作用？ | 对固定返回 54 行的连接，五轮配对加速比中位数为 **PG 243.3 倍、OG 566.9 倍**。两库均从数百毫秒降到约 1 ms。 |
+| 吞吐平台意味着数据库到极限了吗？ | 32 客户端时，将客户端绑定范围从 2 核增至 4 核，PG 吞吐从 **9.21 万次/s 增至 18.69 万次/s**；原配置的发压端限制了吞吐。 |
+| 数据库提供了哪些一致性能力？ | 两库均拒绝非法外键引用；事务失败后，先前已执行的修改被回滚，四表摘要恢复一致。 |
 
-需要 Python 3.9+、C++17、libpq 开发库；完整临时数据库测试还需 PostgreSQL 服务端工具。
+前两项来自 2026-10-15 的共享服务器补测，点查为五轮平均单次耗时的中位数；CPU 干预来自独立实验。不同批次的源码计时边界、CPU 绑定及运行条件有差异，分别统计。补测观察到 SMT 兄弟核活动，完整范围与限制见报告第 07 节。
 
-```bash
-sudo apt-get install build-essential libpq-dev postgresql python3 python3-venv numactl sysstat
-make
-python3 scripts/prepare.py --scales 1 10 100
-```
+<p align="center">
+  <img src="report/figures/interventions.svg" alt="改变客户端与数据库绑定的 CPU 数后，两个数据库的吞吐变化" width="900">
+</p>
 
-已有数据目录不能覆盖；只生成缺少的规模即可。四表为 countries、movies、people、credits；后三张按关系复制并平移 ID，国家表保持 185 行。该扩容保持原字段分布，不代表独立新增真实数据。
+<p align="center"><sub>10 倍数据的并发只读实验。DB / C 分别表示数据库与客户端绑定的 CPU 数；每个点展示三轮中位数及最小值至最大值。</sub></p>
 
-单独编译提交的源码：
+## 项目内容
 
-```bash
-c++ -O3 -std=c++17 filmbench.cpp -I"$(pg_config --includedir)" \
-  -L"$(pg_config --libdir)" -Wl,-rpath,"$(pg_config --libdir)" -lpq -pthread -o filmbench
-```
+同一个客户端统一执行标题子串搜索、姓名 `T → Ttt` 更新、按编号点查、人物连接、国家/年份聚合，以及并发只读与混合读写负载。文件端包含顺序扫描和偏移索引；数据库端保存执行计划，并校验返回内容、更新行数、外键和回滚。
 
-默认 DDL 已内置，`--ddl sql/schema.sql` 可显式覆盖。数据仍需四个 COPY-text TSV；其来源、转义规则和生成脚本均保留在项目中。
+课程数据为四张关联表。扩容保持关系并平移编号，国家表始终为 185 行：
 
-### 从提交文件开始复现
+| 规模 | 电影 | 人物 | 演职关系 |
+| :--- | ---: | ---: | ---: |
+| 1× | 9,204 | 16,489 | 46,850 |
+| 10× | 92,040 | 164,890 | 468,500 |
+| 100× | 920,400 | 1,648,900 | 4,685,000 |
 
-仅有 `report.pdf` 与 `filmbench.cpp` 时，先获取配套课程数据和转换脚本。以下固定版本中的 `src/filmbench.cpp` 与当前提交源码 SHA-256 相同；该版本用于复现程序，最新报告以提交 PDF 为准。
+复制扩容保持原字段分布，100× TSV 合计约 161 MiB，可以驻留内存；本项目没有测量超内存数据或长期持续写入。
+
+## 快速开始
+
+以下步骤适用于 Ubuntu/Linux，先运行文件端示例，无需启动数据库。
 
 ```bash
 git clone https://github.com/luanmenglei/dbh_project1.git
 cd dbh_project1
-git checkout 668d1c787030c21b61bc062c55fca962ef4571d7
+
+sudo apt-get update
+sudo apt-get install -y build-essential libpq-dev python3
+make
 python3 scripts/prepare.py --scales 1
-c++ -O3 -std=c++17 src/filmbench.cpp -I"$(pg_config --includedir)" \
-  -L"$(pg_config --libdir)" -Wl,-rpath,"$(pg_config --libdir)" -lpq -pthread -o filmbench
-./filmbench --backend file --op search_rows --data data/generated/s1 --keyword The
-```
 
-预期 `rows=1563`，表示匹配 1,563 部电影。若使用 `--op search_count`，程序返回一条计数结果的摘要，此时 `rows=1` 不表示只匹配一部电影。若编译单独下载的提交文件，将编译命令的 `src/filmbench.cpp` 替换为该文件的路径即可。
+# 查找标题包含 The 的电影，预期 rows=1563
+./build/filmbench --backend file --op search_rows \
+  --data data/generated/s1 --keyword The
 
-准备一个专用实验数据库后，将真实连接参数放入 `FILMBENCH_DSN`（不要提交密码）。默认 schema 为 `filmbench_s1`，第一次导入不加 `--reset`，遇到已有 schema 时程序拒绝覆盖：
-
-```bash
-./filmbench --backend postgres --op load --data data/generated/s1
-./filmbench --backend postgres --op search_rows --data data/generated/s1 --keyword The
-```
-
-openGauss 需用其配套 libpq 重新编译，在相应连接环境下将后端改为 `opengauss`。上述小规模查询用于核对功能，不应拿本机测量与报告中的服务器数字拼成新的比较。
-
-### 性能实验与提交源码的对应关系
-
-- 原主实验实际源码为 `experiments/baseline-20261012/src/filmbench.cpp`，同时保存在 `results/epyc-compact-evidence/source-snapshot/`。对应结果来自该快照，不能标为当前版本重新测得。
-- 历史点查在准备阶段扫描 TSV 收集候选 ID，在执行阶段随机选 ID 并转成字符串；当前版本先生成完整请求序列，再开始查询计时。两版 `elapsed_s` 的边界存在差异，不能只按字段同名直接合并。
-- 原始并发记录已分别保存 `read_p95_ms` 和 `write_p95_ms`。报告取“各轮 P95 的中位数”，不是把三轮请求合并后重新计算 P95。
-- 120 秒 CPU 干预确认每个条件只有一轮；原三轮矩阵与单轮确认分别解释。文件索引构建耗时同样只有一次测量。
-
-### 尚待服务器完成的补测
-
-长批次点查可使用现有补测器：均匀、热点两种分布，每轮共享同一请求文件，轮间使用不同种子；三种后端核对内容摘要。以下为待执行命令，不代表已经取得性能结果。服务启动参数需恢复正式实验的 CPU 与内存配置，不能直接复用先前正确性检查的两核配置。
-
-```bash
-python3 scripts/run_coverage.py --config deploy/state/targets.json --manage-user-services \
-  --out results/new-point-performance --scale 100 --requests 100000 --repeats 5
-python3 scripts/analyze_coverage.py results/new-point-performance
-```
-
-运行前需确认服务器满足负载和磁盘阈值；运行期间也应观察共享负载，异常轮次不用于排名。报告保留原 100 次点查的结果及其短窗口局限；此前 `performance_eligible=false` 的正确性记录不改标为性能记录。
-
-索引作用的单独验证应在专用实验 schema 中进行：保持数据库、数据、人物编号和结果列不变，仅改变 `credits_person_idx` 是否存在，检查实际执行计划，分别预热、交替测量至少五轮，并核对结果摘要。原始源码允许用 `--ddl` 传入只删除这一条 `CREATE INDEX` 的建表文件，可通过重新导入建立两种状态；导入和索引建立不计入查询时间。当前正式记录尚未包含此对照，不据此给出索引加速倍数。
-
-```bash
-./build/filmbench --backend file --op search_count --data data/generated/s1 --keyword The
+# 建立文件偏移索引，再按编号点查
 ./build/filmbench --backend file --op build_index --data data/generated/s1
-./build/filmbench --backend file --op point --data data/generated/s1 --indexed 1 --requests 1000
+./build/filmbench --backend file --op point \
+  --data data/generated/s1 --indexed 1 --requests 1000
 ```
 
-## 数据库部署与连接
+数据生成器拒绝覆盖已有目录。数据库部署、匹配 openGauss 的 libpq、连接变量及完整实验命令见 [复现指南](docs/复现指南.md) 和 [用户目录部署](docs/用户目录部署.md)。
 
-共享服务器使用普通用户私有实例，版本、资源边界与已完成的历史运行见 [用户目录部署](docs/用户目录部署.md)。连接从 `POSTGRES_DSN`、`OPENGAUSS_DSN` 等命名环境变量读取，密码不写入报告或记录。
+## 阅读与复现
 
-已经有用户目录 SDK 时，可只编译当前客户端，不重建数据库；输出必须为新目录：
+| 你想做什么 | 从这里开始 |
+| :--- | :--- |
+| 阅读结论和实验设计 | [最终报告](output/submission/report.pdf) |
+| 查看或提交 C++ 源码 | [开发源码](src/filmbench.cpp) · [提交副本](output/submission/filmbench.cpp) |
+| 修改报告文字或署名 | [Typst 源文件](report/report.typ) · [导出的数据](report/data.json) |
+| 核对某个实验数字 | [实验记录索引](results/README.md) |
+| 编译、部署、重跑实验 | [复现指南](docs/复现指南.md) |
+| 查看设计与修订过程 | [文档索引](docs/README.md) |
+| 核对交付文件 | [SHA-256 清单](output/submission-manifest.json) |
 
-```bash
-python3 scripts/build_user_clients.py --runtime /path/to/runtime --out /path/to/new-build
-```
-
-openGauss 客户端需要匹配其认证协议的 libpq。将目标配置中 `binary` 指向对应 wrapper。
-
-独立服务器也可使用原 Docker 路线：
-
-```bash
-python3 scripts/deploy_ubuntu.py --cpus 0-7 --mems 0 --memory 8g
-python3 scripts/build_opengauss_client.py
-source deploy/state/connections.sh
-```
-
-CPU 编号只是示例，按真实 NUMA/SMT 拓扑选择，并为客户端预留核心。部署脚本记录镜像摘要，拒绝覆盖既有部署；版本以实际 `version()` 为准。Docker 使用 `--manage-containers`，用户服务使用 `--manage-user-services`，二者互斥。运行器在成功、异常或中断退出时尝试停止两套受管后端，清理失败会标记 FAILED。
-
-## 测试与正式运行
+仅编译文稿可直接使用仓库中的数据与 SVG，无需运行数据库：
 
 ```bash
-python3 tests/test_harness.py
-make test
-# 没有 PostgreSQL 服务端时，只验证文件端：
-python3 tests/test_project.py --skip-postgres
-```
+# 需要 Typst 0.14.2 或兼容版本；Linux 示例使用已安装的 Noto Sans CJK SC
+typst compile --input 'font=Noto Sans CJK SC' report/report.typ report.pdf
 
-`make test` 使用独立临时 PostgreSQL 集群，不连接已有数据库。两套私有实例的检查另用：
-
-```bash
-source deploy/state/connections.sh
-python3 scripts/verify_user_instances.py --out results/new-correctness
-```
-
-先跑新目录中的小规模冒烟，再运行正式矩阵；共享服务器沿用用户 scope 的内存与 CPU 限制：
-
-```bash
-python3 scripts/run_suite.py --config deploy/state/targets.json --manage-user-services \
-  --out results/new-smoke --scales 1 --repeats 1 --point-requests 10 \
-  --clients 1 2 --concurrency-scales 1 --warmup 0 --duration 1 --load-repeats 1
-python3 scripts/run_suite.py --profile compact --out results/new-formal --dry-run
-python3 scripts/run_suite.py --profile compact --config deploy/state/targets.json \
-  --manage-user-services --out results/new-formal
-python3 scripts/summarize.py results/new-formal
-python3 scripts/analyze_results.py results/new-formal
-```
-
-compact：串行 s1/s10/s100，每配置 3 轮、点查 100 次；并发 s10、1/4/8 客户端、预热 5 s、测量 20 s、3 轮。full 保留更长矩阵。参数可显式覆盖。`--out` 必须为新目录；只有实验及清理均成功才写 COMPLETE，失败保留日志并写 FAILED。
-
-原始表和输入哈希、查询摘要、受影响行数会校验。每轮更新和混合负载前恢复数据；`load --reset` 只用于明确允许重建的 `filmbench_sN` schema。
-
-## 新版计时与扩展查询
-
-`timing_version=2` 区分 `request_prepare_s`、`backend_setup_s`、`elapsed_s`；`setup_s` 为准备总量，索引构建独立记录。旧数据的 setup 含全表候选 ID 扫描，不能视为数据库本身初始化耗时，也不能从旧数字反推新分项。
-
-```bash
-python3 scripts/prepare_requests.py --data data/generated/s10 --out results/new-requests \
-  --requests 10000 --repeats 5
-python3 scripts/run_coverage.py --config deploy/state/targets.json --manage-user-services \
-  --out results/new-coverage --requests 10000 --repeats 5
-python3 scripts/analyze_coverage.py results/new-coverage
-```
-
-共享请求序列包含均匀分布与 90% 请求落在前 1% ID 的热点分布。连接选择不存在、低、正关联数量的中间档和高关联人物；中间档按不同关联数量取中位，避免人数中位与低档都只返回一行。
-
-正式补测要求启动时 load1≤32、磁盘空闲>40 GiB；负载不满足时停止。显式增加 `--correctness-only` 可做功能验证，记录标记为非性能测量，不产生新的性能排名。
-
-`--op functional` 验证非法外键被拒绝，以及“先更新、再失败、再回滚”恢复原值。补充运行还核对回滚后的四表指纹；这些证据不等同于隔离级别或崩溃恢复测试。
-
-## 报告重建与证据审查
-
-```bash
+# 从完整证据重新审查数字、绘图并生成提交文件
 python3 -m pip install -r requirements-plots.txt
-python3 scripts/build_typst_report.py
+python3 scripts/build_typst_report.py --font 'Noto Sans CJK SC'
 ```
 
-安装 Typst 0.14.2 或兼容版本并加入 PATH（也可传 `--typst /path/to/typst`）。上面的完整重建会审查历史及新版证据，生成 `report/data.json`、三个 SVG 图表、`output/pdf/report-typst.pdf`，并更新 `output/submission/report.pdf`、`filmbench.cpp` 和提交哈希清单。需要完整 `results/` 证据及 `results/review-correctness/verification.json`；不会用伪造数字补缺。
+Windows 默认字体为 Microsoft YaHei。署名可通过 `--input name=姓名 --input student-id=学号` 传给 Typst；当前提交稿姓名与学号留空。完整构建会同时更新 PDF、提交源码副本与哈希清单。
 
-仅修改文稿时，无需 Python、数据库或原始实验目录，可直接使用已导出的数据和矢量图：
+## 仓库导航
+
+```text
+src/                    C++17 主程序
+sql/                    数据库表结构
+data/source/            课程原始 SQL
+scripts/                数据准备、运行器、证据审查与报告构建
+tests/                  功能与实验流程回归测试
+report/                 Typst 文稿、数据摘要和 SVG 图表
+output/submission/      最终 report.pdf 与 filmbench.cpp
+results/                已完成实验的原始记录和源码快照
+experiments/            原主实验源码基线
+docs/                   复现、部署、设计与修订记录
+project1.pdf            课程要求
+```
+
+仓库保留原始 stdout、资源采样、请求文件与源码快照，便于从报告数字追溯到实际运行。数据库状态、连接凭据、编译产物、临时文件、旧版 PDF 和新实验临时目录由 `.gitignore` 排除。原主实验的重复摘要目录已从上传内容中移除，完整记录统一保存在 `results/epyc-compact-evidence/`。
+
+## 验证与实验记录
+
+- 原主实验：**318 条计时记录**，覆盖三个数据规模。
+- CPU 资源实验：**76 轮**，含资源干预、平衡配置和 120 秒确认。
+- 新补测：**110 项测量**，包含 **300 万次正式点查**、60 次分层人物连接与 20 次人物索引对照。
+- 功能验证：独立 Python oracle、索引损坏拒绝、失败重建保留原索引、外键拒绝与事务回滚。
+
+本地运行器及证据审查测试不需要启动数据库：
 
 ```bash
-typst compile report/report.typ report.pdf
-# 填写署名（默认留空）：
-typst compile --input name=姓名 --input student-id=学号 report/report.typ report.pdf
+python3 -m unittest discover -s tests -p 'test_*.py'
 ```
 
-使用 Windows 微软雅黑；其他系统安装静态版 `Noto Sans CJK SC`，通过 Typst 的 `--input 'font=Noto Sans CJK SC'` 或完整构建脚本的 `--font 'Noto Sans CJK SC'` 指定。等宽字体使用 Consolas（其他系统可替换为 DejaVu Sans Mono）。避免使用当前 Typst 尚未完整支持的可变字体。完整构建脚本也支持 `--name` 和 `--student-id`。历史 ReportLab 构建器 `build_final_report.py` 保留供追溯，不再作为当前报告入口。
+Linux 完整集成检查使用 `make test`，另需安装 PostgreSQL 服务端工具；测试创建独立临时集群。完整验证说明见 [复现指南](docs/复现指南.md)。
 
-审查使用显式异常，`python -O` 不会关闭检查；同时校验统计完整性和原始 stdout。历史哈希对应 `source-snapshot`，允许当前实现继续修正而不破坏旧证据。
+报告正文由 DeepSeek Harness 协助主笔，实验执行、证据核对与逐页排版检查另行完成；[写作与验证记录](docs/DeepSeek审查记录.md) 保留了来源和修订过程。

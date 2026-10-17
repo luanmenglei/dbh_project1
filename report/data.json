@@ -1,5 +1,5 @@
 {
-  "source_hash": "e135f6ebe040fb8400f396fe61a050b2e589404ba84b2e2fa0a3cb96f3c430ae",
+  "source_hash": "2c8ab06dcd792aceab2b57f6baf8c81e6226bc0927d5949dc7457004dad129c3",
   "measured_count": 318,
   "summary_count": 555,
   "serial": [
@@ -178,5 +178,56 @@
     "1.42"
   ],
   "index_build": "0.946",
-  "point_batch_ms": "0.48"
+  "point_batch_ms": "0.48",
+  "supplement": {
+    "point": [
+      [
+        "文件偏移索引",
+        "3.29\n[3.26, 3.47]",
+        "2.77\n[2.74, 2.80]",
+        "0.380"
+      ],
+      [
+        "PostgreSQL",
+        "63.38\n[53.56, 88.19]",
+        "58.69\n[49.37, 65.26]",
+        "0.012"
+      ],
+      [
+        "openGauss",
+        "115.59\n[112.79, 137.10]",
+        "115.25\n[111.05, 158.92]",
+        "0.026"
+      ]
+    ],
+    "index": [
+      [
+        "PostgreSQL",
+        "1.43\n[1.42, 1.60]",
+        "345.48\n[344.34, 357.09]",
+        "243.3\n[215.4, 243.9]"
+      ],
+      [
+        "openGauss",
+        "1.24\n[0.88, 1.30]",
+        "703.52\n[626.05, 745.01]",
+        "566.9\n[479.8, 845.8]"
+      ]
+    ],
+    "load_range": [
+      "29.9",
+      "121.0"
+    ],
+    "index_build_s": "1.026",
+    "busiest_sibling": "80",
+    "client_sibling_cpus": [
+      88,
+      89
+    ],
+    "client_sibling_busy": [
+      "19.4",
+      "17.3"
+    ],
+    "sibling_busy_max": "46.0"
+  }
 }

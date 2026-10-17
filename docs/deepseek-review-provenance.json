@@ -1,0 +1,40 @@
+{
+  "date": "2026-10-14",
+  "author": "DeepSeek via local DeepSeek Harness headless",
+  "supervisor": "Codex: evidence review, correction requests, script repair, build and visual verification",
+  "session_id": "session-7a8412a5-0161-485e-ad80-a69c77540ae5",
+  "harness": "E:/DeepSeek Harness/resources/runtime/cli/bin/dsh.cmd",
+  "author_candidate": "tmp/deepseek-supervised-review/revised.typ",
+  "accepted_source": "report/report.typ",
+  "author_candidate_sha256": "47544f326b80be9d3b93919cd0671b66cab2fd7850f49b9f24af9de1d5332f80",
+  "accepted_source_sha256": "47544f326b80be9d3b93919cd0671b66cab2fd7850f49b9f24af9de1d5332f80",
+  "report_sha256": "21f779a8502cdeb7b50bdbc3f90c30de3974da3b8418c4ba1b0a47a59e88bf74",
+  "cpp_sha256": "e135f6ebe040fb8400f396fe61a050b2e589404ba84b2e2fa0a3cb96f3c430ae",
+  "author_candidate_copied_without_prose_edits": true,
+  "evidence": {
+    "main_timing_records": 318,
+    "summary_values": 555,
+    "cpu_trials": 76,
+    "coverage_cases": 54,
+    "new_performance_experiments": false
+  },
+  "validation": {
+    "pdf_pages": 6,
+    "all_pages_visually_reviewed": true,
+    "numeric_tables_checked": true,
+    "pg_search_narrative_column_checked": true,
+    "submission_hashes_checked": true,
+    "cpp_unchanged": true,
+    "existing_harness_tests_passed": 3,
+    "scaling_cleanup_scenarios_passed": 9,
+    "scaling_cleanup_also_passed_under_python_O": true
+  },
+  "round_logs": [
+    "events.jsonl",
+    "revision-events.jsonl",
+    "layout-events.jsonl",
+    "final-events.jsonl",
+    "value-events.jsonl"
+  ],
+  "round_logs_directory": "tmp/deepseek-supervised-review"
+}

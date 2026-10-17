@@ -1,0 +1,1 @@
+{"backend":"opengauss","op":"join","requests":1,"timing_version":2,"request_prepare_s":0,"backend_setup_s":0.027994689,"setup_s":0.02799511,"elapsed_s":0.626052471,"mean_ms":626.052471,"rows":54,"checksum":"16695065490967928608","affected":0,"p50_ms":629.917416561,"p95_ms":629.917416561}

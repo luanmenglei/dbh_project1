@@ -49,10 +49,15 @@ def main():
             settings={x[0]:x[1] for x in snapshot['settings']};require(settings['fsync']=='on' and settings['synchronous_commit']=='on', 'run_scaling_confirmation.py:48: validation failed')
             r=runner.call(t['backend'],10,t['op'],['--clients','32','--warmup',str(warm),'--duration',str(duration),'--seed',str(20261013+t['repeat'])],measured=True,layout=t['layout'],clients=32,repeat=t['repeat'],db_cpus=dbcpus,client_cpus=clientcpus)
             require(r['valid'] and r['errors']==0, 'run_scaling_confirmation.py:50: validation failed');print('Result '+json.dumps(r),flush=True)
-        (runner.out/'COMPLETE').write_text(suite.utc()+'\n')
     except BaseException:
         (runner.out/'FAILED').write_text(suite.utc()+'\n');raise
-    finally:runner.stop_user_services()
+    finally:
+        try:
+            runner.stop_user_services()
+        except BaseException:
+            (runner.out/'FAILED').write_text(suite.utc()+'\nCleanup failed; inspect managed backends.\n')
+            raise
+    (runner.out/'COMPLETE').write_text(suite.utc()+'\n')
 
 
 if __name__=='__main__':main()

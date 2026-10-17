@@ -14,6 +14,9 @@ $(TARGET): src/filmbench.cpp
 
 test: all
 	python3 tests/test_harness.py
+	python3 tests/test_scaling_cleanup.py
+	python3 tests/test_trial_health.py
+	python3 tests/test_index_ablation.py
 	python3 tests/test_project.py
 
 .PHONY: all test

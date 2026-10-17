@@ -1,0 +1,1 @@
+{"op":"functional","foreign_key_rejected":true,"sqlstate":"23503","intermediate_update_observed":true,"transaction_rollback_restored":true}

@@ -1,0 +1,1 @@
+{"backend":"file","op":"join","requests":1,"timing_version":2,"request_prepare_s":0,"backend_setup_s":3.677e-06,"setup_s":3.997e-06,"elapsed_s":1.806941138,"mean_ms":1806.941138,"rows":1,"checksum":"14339608297504290847","affected":0,"p50_ms":1808.62794688,"p95_ms":1808.62794688}

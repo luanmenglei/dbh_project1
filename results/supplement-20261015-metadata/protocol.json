@@ -1,0 +1,51 @@
+{
+  "created": "2026-10-14T17:02:31Z",
+  "reason": "User authorized shared-host supplemental measurements on 2026-10-15; global load is recorded, not an admission gate; CPU 9-16 DB and 24-25 client, with SMT siblings monitored.",
+  "db_cpus": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "client_cpus": [
+    24,
+    25
+  ],
+  "monitored_cpus": [
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    24,
+    25,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    88,
+    89
+  ],
+  "initial_load": [
+    76.92919921875,
+    77.52978515625,
+    73.72216796875
+  ],
+  "requests": 100000,
+  "repeats": 5,
+  "scale": 100,
+  "source": "verified 2026-10-14 C++",
+  "scope": "new shared-host supplement, not replacement of original controlled-load records",
+  "index_method": "Load once per backend; alter only credits_person_idx; validate full data fingerprints before and after all pairs; alternate variants and backends."
+}

@@ -46,6 +46,39 @@ def run(data,op,backend='file',extra=(),env=None,ok=True):
     return json.loads(p.stdout)
 
 
+def test_index_integrity(data):
+    index = data/'movies.idx'
+    original = index.read_bytes()
+    lines = original.splitlines(keepends=True)
+    damaged = [
+        b''.join(lines[:-1]),                       # Missing completion footer.
+        b''.join(lines[:-2] + lines[-1:]),           # Whole entry lost, footer intact.
+        original[:-3],                             # Truncated footer.
+        b''.join(lines[:2] + lines[1:]),             # Duplicate entry.
+        original + b'garbage\n',                    # Trailing payload.
+        original.replace(b'FILMBENCH2', b'FILMBENCH1', 1),
+        b''.join(lines[:1] + [b'1 -1\n'] + lines[2:]),
+    ]
+    try:
+        for payload in damaged:
+            index.write_bytes(payload)
+            run(data, 'point', extra=['--requests', '1', '--indexed', '1'], ok=False)
+        index.write_bytes(original)
+        source = data/'movies.tsv'
+        movies = source.read_bytes()
+        try:
+            # A failed rebuild must leave the previously published index untouched.
+            source.write_bytes(b'\\N\tbroken\n')
+            run(data, 'build_index', ok=False)
+            if index.read_bytes() != original or list(data.glob('movies.idx.tmp.*')):
+                raise AssertionError('Failed rebuild replaced the index or left temporary files')
+        finally:
+            source.write_bytes(movies)
+    finally:
+        # Restoring the source changes mtime; regenerate a valid index.
+        run(data, 'build_index')
+
+
 def test_fixture(root,backend='file',env=None):
     data=root/('fixture-'+backend);data.mkdir()
     movies=[[1,"The O'Brien\tLove\n\\N",'gb',2001,100,0],
@@ -75,6 +108,7 @@ def test_fixture(root,backend='file',env=None):
     reference=run(data,'point','file',['--requests','37','--seed','7'])
     if backend=='file':
         run(data,'build_index')
+        test_index_integrity(data)
         actual=run(data,'point',extra=['--requests','37','--seed','7','--indexed','1'])
     else:
         actual=run(data,'point',backend,['--requests','37','--seed','7'],env)

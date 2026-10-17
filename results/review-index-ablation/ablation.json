@@ -1,0 +1,114 @@
+{
+  "kind": "index ablation",
+  "health_policy": {
+    "version": 1,
+    "max_load1": 32,
+    "min_disk_free": 42949672960,
+    "sample_interval_s": 1
+  },
+  "trials": [
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "variant": "with_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.011076176,
+        "setup_s": 0.011076476,
+        "elapsed_s": 0.003418927,
+        "mean_ms": 3.418927,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 3.42676051596,
+        "p95_ms": 3.42676051596
+      },
+      "performance_eligible": false
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "variant": "without_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.012633345,
+        "setup_s": 0.012633595,
+        "elapsed_s": 0.009699967,
+        "mean_ms": 9.699967,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 9.74154859645,
+        "p95_ms": 9.74154859645
+      },
+      "performance_eligible": false
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "variant": "with_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.025824239,
+        "setup_s": 0.025824489,
+        "elapsed_s": 0.001363956,
+        "mean_ms": 1.363956,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.3583009124,
+        "p95_ms": 1.3583009124
+      },
+      "performance_eligible": false
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "variant": "without_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.10661024,
+        "setup_s": 0.10661049,
+        "elapsed_s": 0.043760303,
+        "mean_ms": 43.760303,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 43.7678730974,
+        "p95_ms": 43.7678730974
+      },
+      "performance_eligible": false
+    }
+  ],
+  "pairs": [
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "performance_eligible": false,
+      "speedup": null
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "performance_eligible": false,
+      "speedup": null
+    }
+  ],
+  "performance_eligible": false
+}
