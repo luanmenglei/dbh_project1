@@ -1,14 +1,14 @@
 {
-  "date": "2026-10-15",
+  "date": "2026-10-17",
   "author": "DeepSeek via local DeepSeek Harness headless",
   "supervisor": "Codex: experiments, evidence audit, editorial feedback, compilation and visual verification",
   "session_id": "session-7deca10f-dbbc-4f0a-8209-2e6ce05e6fc3",
   "harness": "E:/DeepSeek Harness/resources/runtime/cli/bin/dsh.cmd",
-  "author_candidate": "tmp/deepseek-supplement/revised.typ",
+  "author_candidate": "tmp/deepseek-supplement/repositioned.typ",
   "accepted_source": "report/report.typ",
-  "author_candidate_sha256": "b2a2ef412195b82b06c95971c352f4ba5d00cfa4640e39a1ac79cad29eca51b0",
-  "accepted_source_sha256": "b2a2ef412195b82b06c95971c352f4ba5d00cfa4640e39a1ac79cad29eca51b0",
-  "report_sha256": "34620851f111076cfdbbbfbbddc77dc97b12ed9eaf5d20218c79d5f5d0929504",
+  "author_candidate_sha256": "165d6707912b7f6fd490f53caf478c470aaace9588606ebf15b1165d3e6121d7",
+  "accepted_source_sha256": "165d6707912b7f6fd490f53caf478c470aaace9588606ebf15b1165d3e6121d7",
+  "report_sha256": "df0667157711187d52d1d62c465fb4a68e4a22c7893fa4b173d5a9c5e4927842",
   "cpp_sha256": "2c8ab06dcd792aceab2b57f6baf8c81e6226bc0927d5949dc7457004dad129c3",
   "author_candidate_copied_without_prose_edits": true,
   "evidence": {
@@ -28,7 +28,10 @@
     "cpp_unchanged_this_supplement": true,
     "supplement_audit_tests_passed": 5,
     "supplement_audit_tests_also_passed_under_python_O": true,
-    "project_database_services_stopped": true
+    "project_database_services_stopped": true,
+    "topic_revision_numeric_data_unchanged": true,
+    "topic_revision_pdf_pages": 7,
+    "topic_revision_visual_check": "Pages 1 and 5 reviewed after rendering; body pixels on pages 2, 3, 4, 6 and 7 unchanged from the reviewed version."
   },
   "round_logs_directory": "tmp/deepseek-supplement",
   "round_logs": [
@@ -37,6 +40,17 @@
     "final-events.jsonl",
     "last-events.jsonl",
     "overflow-events.jsonl",
-    "wording-events.jsonl"
-  ]
+    "wording-events.jsonl",
+    "topic-events.jsonl"
+  ],
+  "previous_revisions": [
+    {
+      "date": "2026-10-15",
+      "author_candidate": "tmp/deepseek-supplement/revised.typ",
+      "author_candidate_sha256": "b2a2ef412195b82b06c95971c352f4ba5d00cfa4640e39a1ac79cad29eca51b0",
+      "accepted_source_sha256": "b2a2ef412195b82b06c95971c352f4ba5d00cfa4640e39a1ac79cad29eca51b0",
+      "report_sha256": "34620851f111076cfdbbbfbbddc77dc97b12ed9eaf5d20218c79d5f5d0929504"
+    }
+  ],
+  "revision_reason": "Refocus project on DBMS advantages and comparative evaluation; filmdb.sql is only the test dataset."
 }

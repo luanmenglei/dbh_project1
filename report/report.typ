@@ -1,12 +1,12 @@
-// FilmDB 数据库性能实验：修订稿。数据来自同目录 data.json，图为 figures/ 下的矢量图。
+// DBMS 的优势与性能比较：数据来自同目录 data.json，图为 figures/ 下的矢量图。
 #let d = json("data.json")
 #let ink = rgb("252525")
 #let muted = rgb("656565")
 #let body-font = sys.inputs.at("font", default: "Microsoft YaHei")
-#set document(title: "FilmDB 数据库性能实验", author: sys.inputs.at("name", default: ""))
+#set document(title: "DBMS 的优势与性能比较", author: sys.inputs.at("name", default: ""))
 #set page(
   paper: "a4", margin: (x: 21mm, top: 21mm, bottom: 20mm),
-  header: text(size: 8pt, fill: muted)[数据库系统实验 #h(1fr) FILMDB / 2026],
+  header: text(size: 8pt, fill: muted)[数据库系统实验 #h(1fr) DBMS / 2026],
   footer: context [#line(length: 100%, stroke: .4pt + rgb("cccccc"))
     #v(2mm)
     #text(size: 8pt, fill: muted)[文件 · 查询 · 事务 #h(1fr) #counter(page).display("1")]
@@ -43,23 +43,23 @@
   )
 ]
 
-#text(size: 24pt, weight: "bold")[FilmDB 数据库性能实验]
+#text(size: 24pt, weight: "bold")[DBMS 的优势与性能比较]
 #v(2mm)
-#text(size: 13pt, fill: muted)[文件访问与关系数据库的性能及一致性比较]
+#text(size: 13pt, fill: muted)[直接文件操作、PostgreSQL 与 openGauss 的实验评估]
 #v(3mm)
 #text(size: 9pt)[姓名：#sys.inputs.at("name", default: "") #h(30mm) 学号：#sys.inputs.at("student-id", default: "")]
 
 = 01　主要结论
+
+文件与数据库的选择取决于访问方式与一致性要求。按编号读取单条静态记录时，
+本文件程序在偏移索引已装载的短批次中平均耗时最低；若需要维护多表引用、
+在操作失败后撤销已执行的修改，则应使用数据库，这两项能力本文件程序没有实现。
 
 *两库比较以端到端耗时、并发吞吐量与 P95 延迟为标准，条件为可全部放入内存且已预热的数据、
 两库各限 8 GiB 并使用本实验设置的数据库参数（见第 05 节）。* 100 倍串行操作中，PostgreSQL 的主键点查、全表子串搜索、
 分组聚合与批量姓名替换耗时更低，固定返回 54 行的人物连接则由 openGauss 略快；
 10 倍规模、8 客户端并发下，PostgreSQL 的只读与混合负载吞吐量均较高，加入少量同步写以后两库的读延迟都上升。
 据此，在本实验所测条件下优先选择 PostgreSQL。
-
-文件与数据库的选择取决于访问方式与一致性要求。按编号读取单条静态记录时，
-本文件程序在偏移索引已装载的短批次中平均耗时最低；若需要维护多表引用、
-在操作失败后撤销已执行的修改，则应使用数据库，这两项能力本文件程序没有实现。
 
 #tab(("比较条件", "主要结果"), (
   ("静态记录，按编号单条读取（索引已装载）", "文件偏移索引 " + d.point.at(1).at(1).split("\n").first() + " μs；PG " + d.point.at(2).at(1).split("\n").first() + " μs；OG " + d.point.at(3).at(1).split("\n").first() + " μs。"),
@@ -183,7 +183,7 @@ PG 的客户端扩展比为 #d.long_ratio.at(0) 倍、OG 的数据库扩展比�
 
 == 数据与资源
 
-课程 `filmdb.sql` 包含国家、电影、人物和演职关系四张表。扩容时复制后三表并平移编号，保持关联关系；
+实验采用课程提供的 `filmdb.sql` 测试数据，包含国家、电影、人物和演职关系四张表。扩容时复制后三表并平移编号，保持关联关系；
 国家表始终为 185 行。副本保留原字段分布，用 `replica` 区分重复标题和姓名。
 100 倍数据的 TSV 合计约 161.1 MiB，可以全部放入内存。
 
