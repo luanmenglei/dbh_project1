@@ -1,0 +1,119 @@
+{
+  "args": {
+    "config": "deploy/targets.json",
+    "out": "results/index-shared",
+    "data": "data",
+    "scale": 100,
+    "repeats": 5,
+    "timeout": 1800,
+    "correctness_only": false,
+    "reuse_loaded_data": true,
+    "shared_host_reason": "User authorized shared-host supplemental measurements on 2026-10-15; global load is recorded, not an admission gate; CPU 9-16 DB and 24-25 client, with SMT siblings monitored.",
+    "monitor_cpus": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      24,
+      25,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      88,
+      89
+    ],
+    "manage_user_services": true,
+    "manage_containers": false
+  },
+  "targets": {
+    "postgres": {
+      "binary": "/srv/benchmark/filmbench/review-20261014-index-health/build/postgres-client.sh",
+      "dsn_env": "POSTGRES_DSN",
+      "service": "filmbench-postgres.service",
+      "start_command": [
+        "systemd-run",
+        "--user",
+        "--quiet",
+        "--collect",
+        "--unit=filmbench-postgres.service",
+        "--property=MemoryMax=8G",
+        "--property=MemorySwapMax=0",
+        "--property=TasksMax=256",
+        "--property=Nice=10",
+        "--property=KillMode=control-group",
+        "--property=TimeoutStopSec=60",
+        "--property=KillSignal=SIGINT",
+        "taskset",
+        "-c",
+        "9-16",
+        "/srv/benchmark/filmbench/deploy/state/postgres-server.sh"
+      ],
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ],
+      "index_control": [
+        "/srv/benchmark/filmbench/supplement-20261015/build/postgres-index-control.sh"
+      ]
+    },
+    "opengauss": {
+      "binary": "/srv/benchmark/filmbench/review-20261014-index-health/build/opengauss-client.sh",
+      "dsn_env": "OPENGAUSS_DSN",
+      "service": "filmbench-opengauss.service",
+      "start_command": [
+        "systemd-run",
+        "--user",
+        "--quiet",
+        "--collect",
+        "--unit=filmbench-opengauss.service",
+        "--property=MemoryMax=8G",
+        "--property=MemorySwapMax=0",
+        "--property=TasksMax=256",
+        "--property=Nice=10",
+        "--property=KillMode=control-group",
+        "--property=TimeoutStopSec=60",
+        "--property=KillSignal=SIGINT",
+        "taskset",
+        "-c",
+        "9-16",
+        "/srv/benchmark/filmbench/deploy/state/opengauss-server.sh"
+      ],
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ],
+      "index_control": [
+        "/srv/benchmark/filmbench/supplement-20261015/build/opengauss-index-control.sh"
+      ]
+    },
+    "file": {
+      "binary": "/srv/benchmark/filmbench/review-20261014-index-health/build/postgres-client.sh",
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    }
+  },
+  "started": "2026-10-14T17:38:26.286497+00:00"
+}

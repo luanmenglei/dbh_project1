@@ -11,6 +11,7 @@ import subprocess
 from analyze_results import audit
 from analyze_scaling_probe import analyze
 from analyze_coverage import analyze as audit_coverage
+from analyze_supplement import analyze as audit_supplement
 from evidence import require
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -23,13 +24,16 @@ def main():
     parser.add_argument('--student-id', default='')
     parser.add_argument('--typst', default='typst')
     parser.add_argument('--font', default='Microsoft YaHei')
+    parser.add_argument('--verification', type=Path, default=ROOT/'results/review-index-health/verification.json')
     args = parser.parse_args()
     original = audit(ROOT / 'results/epyc-compact-evidence')
     scaling = analyze(ROOT / 'results/scaling-probe')
     balance = analyze(ROOT / 'results/scaling-balance')
     long = analyze(ROOT / 'results/scaling-confirmation')
     coverage = audit_coverage(ROOT / 'results/review-coverage-diverse')
-    verification = json.loads((ROOT / 'results/review-correctness/verification.json').read_text())
+    require((args.verification.parent/'COMPLETE').is_file() and
+            not (args.verification.parent/'FAILED').exists(), 'Incomplete source verification')
+    verification = json.loads(args.verification.read_text())
     source_hash = hashlib.sha256((ROOT / 'src/filmbench.cpp').read_bytes()).hexdigest()
     require(verification['source_sha256'] == source_hash, 'Source differs from verified C++')
     require(all(verification['backends'][b] == 'passed' for b in ('file', 'postgres', 'opengauss')),
@@ -103,6 +107,34 @@ def main():
             f'{g(b, 10, op, clients=8)[metric]["median"] * factor:.{digits}f}'
             for b in backends[1:]])
     data['point_batch_ms'] = f'{g("file", 100, "point", indexed=1)["elapsed_s"]["median"] * 1000:.2f}'
+    point_path = ROOT/'results/supplement-20261015-point'
+    index_path = ROOT/'results/supplement-20261015-index'
+    if point_path.exists() or index_path.exists():
+        supplement = audit_supplement(point_path, index_path)
+        require(supplement['source_sha256'] == source_hash, 'Supplement used a different C++ source')
+
+        def formatted(value, digits=2):
+            return f'{value["median"]:.{digits}f}\n[{value["min"]:.{digits}f}, {value["max"]:.{digits}f}]'
+
+        points = {(r['backend'], r['distribution']): r for r in supplement['point']}
+        sibling_cpus = [str(c) for c in list(range(73, 81))+[88, 89]]
+        busiest_sibling = max(sibling_cpus, key=lambda c: supplement['cpu_busy_percent'][c])
+        data['supplement'] = dict(point=[], index=[],
+                                  load_range=[f'{v:.1f}' for v in supplement['load_range']],
+                                  index_build_s=f'{supplement["index_build_s"]:.3f}',
+                                  busiest_sibling=busiest_sibling,
+                                  client_sibling_cpus=[88, 89],
+                                  client_sibling_busy=[f'{supplement["cpu_busy_percent"][str(c)]:.1f}' for c in [88, 89]],
+                                  sibling_busy_max=f'{supplement["cpu_busy_percent"][busiest_sibling]:.1f}')
+        for backend, label in [('file', '文件偏移索引'), ('postgres', 'PostgreSQL'), ('opengauss', 'openGauss')]:
+            data['supplement']['point'].append([
+                label, formatted(points[backend, 'uniform']['mean_us']),
+                formatted(points[backend, 'hot90']['mean_us']),
+                f'{points[backend, "uniform"]["setup_s"]["median"]:.3f}'])
+        for row in supplement['index']:
+            data['supplement']['index'].append([
+                names[row['backend']], formatted(row['with_index_ms']),
+                formatted(row['without_index_ms']), formatted(row['speedup'], 1)])
     REPORT.mkdir(exist_ok=True)
     (REPORT / 'data.json').write_text(json.dumps(data, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
 

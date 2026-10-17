@@ -1,0 +1,451 @@
+{
+  "kind": "correctness only",
+  "eligibility_version": 2,
+  "health_policy": {
+    "version": 1,
+    "max_load1": 32,
+    "min_disk_free": 42949672960,
+    "sample_interval_s": 1
+  },
+  "eligible_cases": 0,
+  "performance_eligible": false,
+  "cases": 18,
+  "repeats": 1,
+  "requests": 1000,
+  "joins": [
+    {
+      "label": "absent",
+      "id": 16490,
+      "expected_rows": 0
+    },
+    {
+      "label": "low",
+      "id": 1,
+      "expected_rows": 1
+    },
+    {
+      "label": "medium",
+      "id": 1438,
+      "expected_rows": 22
+    },
+    {
+      "label": "high",
+      "id": 3442,
+      "expected_rows": 54
+    }
+  ],
+  "functional": {
+    "postgres": {
+      "op": "functional",
+      "foreign_key_rejected": true,
+      "sqlstate": "23503",
+      "intermediate_update_observed": true,
+      "transaction_rollback_restored": true
+    },
+    "opengauss": {
+      "op": "functional",
+      "foreign_key_rejected": true,
+      "sqlstate": "23503",
+      "intermediate_update_observed": true,
+      "transaction_rollback_restored": true
+    }
+  },
+  "trials": [
+    {
+      "backend": "file",
+      "repeat": 0,
+      "op": "join",
+      "case": "absent",
+      "result": {
+        "backend": "file",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 2.464e-06,
+        "setup_s": 2.845e-06,
+        "elapsed_s": 0.017993257,
+        "mean_ms": 17.993257,
+        "rows": 0,
+        "checksum": "0",
+        "affected": 0,
+        "p50_ms": 18.0531577015,
+        "p95_ms": 18.0531577015
+      }
+    },
+    {
+      "backend": "file",
+      "repeat": 0,
+      "op": "join",
+      "case": "low",
+      "result": {
+        "backend": "file",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 2.995e-06,
+        "setup_s": 3.266e-06,
+        "elapsed_s": 0.017483642,
+        "mean_ms": 17.483642,
+        "rows": 1,
+        "checksum": "14339608297504290847",
+        "affected": 0,
+        "p50_ms": 17.522217004,
+        "p95_ms": 17.522217004
+      }
+    },
+    {
+      "backend": "file",
+      "repeat": 0,
+      "op": "join",
+      "case": "medium",
+      "result": {
+        "backend": "file",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 3.055e-06,
+        "setup_s": 3.416e-06,
+        "elapsed_s": 0.017988207,
+        "mean_ms": 17.988207,
+        "rows": 22,
+        "checksum": "208785230339435644",
+        "affected": 0,
+        "p50_ms": 18.0531577015,
+        "p95_ms": 18.0531577015
+      }
+    },
+    {
+      "backend": "file",
+      "repeat": 0,
+      "op": "join",
+      "case": "high",
+      "result": {
+        "backend": "file",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 2.625e-06,
+        "setup_s": 2.885e-06,
+        "elapsed_s": 0.018527728,
+        "mean_ms": 18.527728,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 18.600186433,
+        "p95_ms": 18.600186433
+      }
+    },
+    {
+      "backend": "file",
+      "repeat": 0,
+      "op": "point",
+      "case": "uniform",
+      "result": {
+        "backend": "file",
+        "op": "point",
+        "requests": 1000,
+        "timing_version": 2,
+        "request_prepare_s": 0.000159719,
+        "backend_setup_s": 0.003435165,
+        "setup_s": 0.003594924,
+        "elapsed_s": 0.002630157,
+        "mean_ms": 0.002630157,
+        "rows": 1000,
+        "checksum": "6735142633359228956",
+        "affected": 0,
+        "p50_ms": 0.00247311900139,
+        "p95_ms": 0.00289992652739
+      }
+    },
+    {
+      "backend": "file",
+      "repeat": 0,
+      "op": "point",
+      "case": "hot90",
+      "result": {
+        "backend": "file",
+        "op": "point",
+        "requests": 1000,
+        "timing_version": 2,
+        "request_prepare_s": 0.00015472,
+        "backend_setup_s": 0.00345406,
+        "setup_s": 0.00360882,
+        "elapsed_s": 0.002455129,
+        "mean_ms": 0.002455129,
+        "rows": 1000,
+        "checksum": "10764959189342365735",
+        "affected": 0,
+        "p50_ms": 0.00232978997148,
+        "p95_ms": 0.00267803349448
+      }
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "op": "join",
+      "case": "absent",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.013009564,
+        "setup_s": 0.013010075,
+        "elapsed_s": 0.001298803,
+        "mean_ms": 1.298803,
+        "rows": 0,
+        "checksum": "0",
+        "affected": 0,
+        "p50_ms": 1.29237671159,
+        "p95_ms": 1.29237671159
+      }
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "op": "join",
+      "case": "low",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.012977473,
+        "setup_s": 0.012977904,
+        "elapsed_s": 0.001406225,
+        "mean_ms": 1.406225,
+        "rows": 1,
+        "checksum": "14339608297504290847",
+        "affected": 0,
+        "p50_ms": 1.39945878834,
+        "p95_ms": 1.39945878834
+      }
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "op": "join",
+      "case": "medium",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.012792688,
+        "setup_s": 0.012792978,
+        "elapsed_s": 0.00174035,
+        "mean_ms": 1.74035,
+        "rows": 22,
+        "checksum": "208785230339435644",
+        "affected": 0,
+        "p50_ms": 1.7246817316,
+        "p95_ms": 1.7246817316
+      }
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "op": "join",
+      "case": "high",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.012785444,
+        "setup_s": 0.012785785,
+        "elapsed_s": 0.002003894,
+        "mean_ms": 2.003894,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 2.00230194828,
+        "p95_ms": 2.00230194828
+      }
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "op": "point",
+      "case": "uniform",
+      "result": {
+        "backend": "postgres",
+        "op": "point",
+        "requests": 1000,
+        "timing_version": 2,
+        "request_prepare_s": 0.000169638,
+        "backend_setup_s": 0.013170866,
+        "setup_s": 0.013340554,
+        "elapsed_s": 0.044433727,
+        "mean_ms": 0.044433727,
+        "rows": 1000,
+        "checksum": "6735142633359228956",
+        "affected": 0,
+        "p50_ms": 0.043001072726,
+        "p95_ms": 0.047974935713
+      }
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "op": "point",
+      "case": "hot90",
+      "result": {
+        "backend": "postgres",
+        "op": "point",
+        "requests": 1000,
+        "timing_version": 2,
+        "request_prepare_s": 0.000164849,
+        "backend_setup_s": 0.01153967,
+        "setup_s": 0.011704549,
+        "elapsed_s": 0.043562906,
+        "mean_ms": 0.043562906,
+        "rows": 1000,
+        "checksum": "10764959189342365735",
+        "affected": 0,
+        "p50_ms": 0.0421537817135,
+        "p95_ms": 0.046102970248
+      }
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "op": "join",
+      "case": "absent",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.025388873,
+        "setup_s": 0.025389123,
+        "elapsed_s": 0.000954288,
+        "mean_ms": 0.954288,
+        "rows": 0,
+        "checksum": "0",
+        "affected": 0,
+        "p50_ms": 0.939950887896,
+        "p95_ms": 0.939950887896
+      }
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "op": "join",
+      "case": "low",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.025429679,
+        "setup_s": 0.025429939,
+        "elapsed_s": 0.000924272,
+        "mean_ms": 0.924272,
+        "rows": 1,
+        "checksum": "14339608297504290847",
+        "affected": 0,
+        "p50_ms": 0.912307071327,
+        "p95_ms": 0.912307071327
+      }
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "op": "join",
+      "case": "medium",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.024864079,
+        "setup_s": 0.02486433,
+        "elapsed_s": 0.001119668,
+        "mean_ms": 1.119668,
+        "rows": 22,
+        "checksum": "208785230339435644",
+        "affected": 0,
+        "p50_ms": 1.11318800181,
+        "p95_ms": 1.11318800181
+      }
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "op": "join",
+      "case": "high",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.023948454,
+        "setup_s": 0.023948724,
+        "elapsed_s": 0.001341684,
+        "mean_ms": 1.341684,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.33153701833,
+        "p95_ms": 1.33153701833
+      }
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "op": "point",
+      "case": "uniform",
+      "result": {
+        "backend": "opengauss",
+        "op": "point",
+        "requests": 1000,
+        "timing_version": 2,
+        "request_prepare_s": 0.000159098,
+        "backend_setup_s": 0.025373664,
+        "setup_s": 0.025532802,
+        "elapsed_s": 0.143172602,
+        "mean_ms": 0.143172602,
+        "rows": 1000,
+        "checksum": "6735142633359228956",
+        "affected": 0,
+        "p50_ms": 0.139123788724,
+        "p95_ms": 0.169757461321
+      }
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "op": "point",
+      "case": "hot90",
+      "result": {
+        "backend": "opengauss",
+        "op": "point",
+        "requests": 1000,
+        "timing_version": 2,
+        "request_prepare_s": 0.000155992,
+        "backend_setup_s": 0.022092698,
+        "setup_s": 0.02224873,
+        "elapsed_s": 0.142269875,
+        "mean_ms": 0.142269875,
+        "rows": 1000,
+        "checksum": "10764959189342365735",
+        "affected": 0,
+        "p50_ms": 0.139123788724,
+        "p95_ms": 0.161518399662
+      }
+    }
+  ]
+}

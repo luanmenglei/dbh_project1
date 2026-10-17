@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-15",
+  "author": "DeepSeek via local DeepSeek Harness headless",
+  "supervisor": "Codex: experiments, evidence audit, editorial feedback, compilation and visual verification",
+  "session_id": "session-7deca10f-dbbc-4f0a-8209-2e6ce05e6fc3",
+  "harness": "E:/DeepSeek Harness/resources/runtime/cli/bin/dsh.cmd",
+  "author_candidate": "tmp/deepseek-supplement/revised.typ",
+  "accepted_source": "report/report.typ",
+  "author_candidate_sha256": "b2a2ef412195b82b06c95971c352f4ba5d00cfa4640e39a1ac79cad29eca51b0",
+  "accepted_source_sha256": "b2a2ef412195b82b06c95971c352f4ba5d00cfa4640e39a1ac79cad29eca51b0",
+  "report_sha256": "34620851f111076cfdbbbfbbddc77dc97b12ed9eaf5d20218c79d5f5d0929504",
+  "cpp_sha256": "2c8ab06dcd792aceab2b57f6baf8c81e6226bc0927d5949dc7457004dad129c3",
+  "author_candidate_copied_without_prose_edits": true,
+  "evidence": {
+    "coverage_cases": 90,
+    "index_ablation_cases": 20,
+    "point_queries": 3000000,
+    "repeats": 5,
+    "excluded_trials": 0,
+    "shared_host": true,
+    "analysis": "results/supplement-20261015-metadata/analysis.json"
+  },
+  "validation": {
+    "pdf_pages": 7,
+    "all_pages_visually_reviewed": true,
+    "supplement_numeric_values_checked": 43,
+    "submission_hashes_checked": true,
+    "cpp_unchanged_this_supplement": true,
+    "supplement_audit_tests_passed": 5,
+    "supplement_audit_tests_also_passed_under_python_O": true,
+    "project_database_services_stopped": true
+  },
+  "round_logs_directory": "tmp/deepseek-supplement",
+  "round_logs": [
+    "events.jsonl",
+    "layout-events.jsonl",
+    "final-events.jsonl",
+    "last-events.jsonl",
+    "overflow-events.jsonl",
+    "wording-events.jsonl"
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "kind": "correctness only; not formal performance results",
+  "started": "2026-10-14T14:17:22.513486+00:00",
+  "backends": {
+    "file": "passed",
+    "postgres": "passed",
+    "opengauss": "passed"
+  },
+  "postgres_version": "PostgreSQL 14.24 (Ubuntu 14.24-0ubuntu0.22.04.1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0, 64-bit",
+  "functional": {
+    "postgres": {
+      "op": "functional",
+      "foreign_key_rejected": true,
+      "sqlstate": "23503",
+      "intermediate_update_observed": true,
+      "transaction_rollback_restored": true
+    },
+    "opengauss": {
+      "op": "functional",
+      "foreign_key_rejected": true,
+      "sqlstate": "23503",
+      "intermediate_update_observed": true,
+      "transaction_rollback_restored": true
+    }
+  },
+  "opengauss_version": "openGauss 6.0.1 (openGauss 6.0.1 build e27495c8) compiled at 2025-03-26 10:53:40 commit 0 last mr  release",
+  "completed": "2026-10-14T14:18:04.369354+00:00",
+  "coverage": [
+    "independent Python result fingerprints",
+    "NULL and empty substring",
+    "apostrophe, tab, newline, backslash and Unicode",
+    "multiple credit roles",
+    "all-NULL aggregation",
+    "sequential/indexed/SQL point parity",
+    "durable update",
+    "stale index rejection",
+    "read-only execution plans",
+    "concurrent read and mixed write",
+    "restore after updates",
+    "s1/s2 course data",
+    "schema scope guard",
+    "external requests and split setup timing",
+    "foreign-key SQLSTATE 23503",
+    "failed transaction restores earlier update"
+  ],
+  "source_sha256": "2c8ab06dcd792aceab2b57f6baf8c81e6226bc0927d5949dc7457004dad129c3"
+}

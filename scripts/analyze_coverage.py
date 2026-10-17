@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 from evidence import require, verify_source
 from prepare import checksum
+from trial_health import qualify, POLICY
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -26,7 +27,14 @@ def analyze(path):
     for r in selected:
         value = r['result']
         require(json.loads((path/(r['log']+'.stdout')).read_text()) == value, 'Raw coverage output changed')
-        require(r['measured'] == report['performance_eligible'], 'Incorrect measured label')
+        if report.get('eligibility_version') == 2:
+            health = r['health']
+            require(health['policy'] == report['health_policy'], 'Inconsistent health policy')
+            verdict = qualify(health['samples'], health['correctness_only'], health['policy'])
+            require(all(health[k] == v for k, v in verdict.items()), 'Health verdict differs from samples')
+            require(r['measured'] == verdict['performance_eligible'], 'Incorrect per-trial measured label')
+        else:
+            require(r['measured'] == report['performance_eligible'], 'Incorrect measured label')
         require(value['timing_version'] == 2, 'Expected split timing')
         require(min(value[k] for k in ['request_prepare_s', 'backend_setup_s', 'elapsed_s']) >= 0, 'Negative timing')
         rows = plan['requests'] if r['op'] == 'point' else next(j['expected_rows'] for j in plan['joins'] if j['label'] == r['case'])
@@ -36,6 +44,9 @@ def analyze(path):
         require(parity.setdefault(key, digest) == digest, 'Cross-backend coverage mismatch')
     logged = [dict(backend=r['backend'], repeat=r['repeat'], op=r['op'], case=r['case'], result=r['result']) for r in selected]
     require(logged == report['trials'] and report['cases'] == len(selected), 'Coverage summary differs from records')
+    if report.get('eligibility_version') == 2:
+        require(report['eligible_cases'] == sum(r['measured'] for r in selected), 'Eligible count mismatch')
+        require(report['performance_eligible'] == all(r['measured'] for r in selected), 'Overall eligibility mismatch')
     for backend in ['postgres', 'opengauss']:
         f = report['functional'][backend]
         require(f['foreign_key_rejected'] and f['transaction_rollback_restored'] and f['intermediate_update_observed'] and f['sqlstate'] == '23503', 'Functional checks failed')

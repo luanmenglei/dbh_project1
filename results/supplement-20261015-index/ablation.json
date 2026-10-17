@@ -1,0 +1,538 @@
+{
+  "kind": "index ablation",
+  "health_policy": {
+    "version": 2,
+    "max_load1": null,
+    "min_disk_free": 42949672960,
+    "sample_interval_s": 1,
+    "shared_host_reason": "User authorized shared-host supplemental measurements on 2026-10-15; global load is recorded, not an admission gate; CPU 9-16 DB and 24-25 client, with SMT siblings monitored.",
+    "monitored_cpus": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      24,
+      25,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      88,
+      89
+    ],
+    "min_available_memory": 17179869184
+  },
+  "trials": [
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "variant": "with_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.017759345,
+        "setup_s": 0.017759756,
+        "elapsed_s": 0.001603882,
+        "mean_ms": 1.603882,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.59271464326,
+        "p95_ms": 1.59271464326
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "variant": "without_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.015667066,
+        "setup_s": 0.015667597,
+        "elapsed_s": 0.345483448,
+        "mean_ms": 345.483448,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 346.737800019,
+        "p95_ms": 346.737800019
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "variant": "with_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.025430755,
+        "setup_s": 0.025431176,
+        "elapsed_s": 0.001237192,
+        "mean_ms": 1.237192,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.21747732331,
+        "p95_ms": 1.21747732331
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "variant": "without_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.027994689,
+        "setup_s": 0.02799511,
+        "elapsed_s": 0.626052471,
+        "mean_ms": 626.052471,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 629.917416561,
+        "p95_ms": 629.917416561
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 1,
+      "variant": "without_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.021506617,
+        "setup_s": 0.021507128,
+        "elapsed_s": 0.626116768,
+        "mean_ms": 626.116768,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 629.917416561,
+        "p95_ms": 629.917416561
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 1,
+      "variant": "with_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.023574262,
+        "setup_s": 0.023574753,
+        "elapsed_s": 0.00130499,
+        "mean_ms": 1.30499,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.29237671159,
+        "p95_ms": 1.29237671159
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 1,
+      "variant": "without_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.014708878,
+        "setup_s": 0.014709769,
+        "elapsed_s": 0.347618128,
+        "mean_ms": 347.618128,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 350.205178019,
+        "p95_ms": 350.205178019
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 1,
+      "variant": "with_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.015147097,
+        "setup_s": 0.015147508,
+        "elapsed_s": 0.001426571,
+        "mean_ms": 1.426571,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.39945878834,
+        "p95_ms": 1.39945878834
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 2,
+      "variant": "with_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.016307935,
+        "setup_s": 0.016308797,
+        "elapsed_s": 0.001418756,
+        "mean_ms": 1.418756,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.39945878834,
+        "p95_ms": 1.39945878834
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 2,
+      "variant": "without_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.014683169,
+        "setup_s": 0.01468397,
+        "elapsed_s": 0.34521748,
+        "mean_ms": 345.21748,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 346.737800019,
+        "p95_ms": 346.737800019
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 2,
+      "variant": "with_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.024214585,
+        "setup_s": 0.024215187,
+        "elapsed_s": 0.001098119,
+        "mean_ms": 1.098119,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.08044930735,
+        "p95_ms": 1.08044930735
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 2,
+      "variant": "without_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.021780807,
+        "setup_s": 0.021781408,
+        "elapsed_s": 0.73251358,
+        "mean_ms": 732.51358,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 738.627710725,
+        "p95_ms": 738.627710725
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 3,
+      "variant": "without_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.021729811,
+        "setup_s": 0.021730412,
+        "elapsed_s": 0.703524893,
+        "mean_ms": 703.524893,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 709.806711897,
+        "p95_ms": 709.806711897
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 3,
+      "variant": "with_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.025697714,
+        "setup_s": 0.025698436,
+        "elapsed_s": 0.00124104,
+        "mean_ms": 1.24104,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.21747732331,
+        "p95_ms": 1.21747732331
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 3,
+      "variant": "without_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.016071098,
+        "setup_s": 0.016071579,
+        "elapsed_s": 0.357089241,
+        "mean_ms": 357.089241,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 357.244302097,
+        "p95_ms": 357.244302097
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 3,
+      "variant": "with_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.013290213,
+        "setup_s": 0.013290524,
+        "elapsed_s": 0.001463832,
+        "mean_ms": 1.463832,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.45628242698,
+        "p95_ms": 1.45628242698
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 4,
+      "variant": "with_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.013359294,
+        "setup_s": 0.013359765,
+        "elapsed_s": 0.001419007,
+        "mean_ms": 1.419007,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 1.39945878834,
+        "p95_ms": 1.39945878834
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "postgres",
+      "repeat": 4,
+      "variant": "without_index",
+      "result": {
+        "backend": "postgres",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.013117987,
+        "setup_s": 0.013118318,
+        "elapsed_s": 0.344344638,
+        "mean_ms": 344.344638,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 346.737800019,
+        "p95_ms": 346.737800019
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 4,
+      "variant": "with_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.021318774,
+        "setup_s": 0.021319275,
+        "elapsed_s": 0.000880858,
+        "mean_ms": 0.880858,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 0.850925276864,
+        "p95_ms": 0.850925276864
+      },
+      "performance_eligible": true
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 4,
+      "variant": "without_index",
+      "result": {
+        "backend": "opengauss",
+        "op": "join",
+        "requests": 1,
+        "timing_version": 2,
+        "request_prepare_s": 0,
+        "backend_setup_s": 0.028051132,
+        "setup_s": 0.028051653,
+        "elapsed_s": 0.745011735,
+        "mean_ms": 745.011735,
+        "rows": 54,
+        "checksum": "16695065490967928608",
+        "affected": 0,
+        "p50_ms": 746.013987832,
+        "p95_ms": 746.013987832
+      },
+      "performance_eligible": true
+    }
+  ],
+  "pairs": [
+    {
+      "backend": "postgres",
+      "repeat": 0,
+      "performance_eligible": true,
+      "speedup": 215.4045297596706
+    },
+    {
+      "backend": "postgres",
+      "repeat": 1,
+      "performance_eligible": true,
+      "speedup": 243.67390617081102
+    },
+    {
+      "backend": "postgres",
+      "repeat": 2,
+      "performance_eligible": true,
+      "speedup": 243.32406699954046
+    },
+    {
+      "backend": "postgres",
+      "repeat": 3,
+      "performance_eligible": true,
+      "speedup": 243.94140926007904
+    },
+    {
+      "backend": "postgres",
+      "repeat": 4,
+      "performance_eligible": true,
+      "speedup": 242.6659191956065
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 0,
+      "performance_eligible": true,
+      "speedup": 506.02693114730783
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 1,
+      "performance_eligible": true,
+      "speedup": 479.7866405106553
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 2,
+      "performance_eligible": true,
+      "speedup": 667.0621125761415
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 3,
+      "performance_eligible": true,
+      "speedup": 566.8833341391091
+    },
+    {
+      "backend": "opengauss",
+      "repeat": 4,
+      "performance_eligible": true,
+      "speedup": 845.7796091992126
+    }
+  ],
+  "performance_eligible": true
+}

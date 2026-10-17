@@ -101,11 +101,15 @@ def main():
                                db_cpus=dbcpus,client_cpus=clientcpus)
             require(result['valid'] and result['errors']==0, 'run_scaling_probe.py:101: validation failed')
             print('Result '+json.dumps(result),flush=True)
-        (runner.out/'COMPLETE').write_text(suite.utc()+'\n')
     except BaseException:
         (runner.out/'FAILED').write_text(suite.utc()+'\n');raise
     finally:
-        runner.stop_user_services()
+        try:
+            runner.stop_user_services()
+        except BaseException:
+            (runner.out/'FAILED').write_text(suite.utc()+'\nCleanup failed; inspect managed backends.\n')
+            raise
+    (runner.out/'COMPLETE').write_text(suite.utc()+'\n')
 
 
 if __name__=='__main__':main()

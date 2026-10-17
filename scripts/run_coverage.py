@@ -8,6 +8,7 @@ from evidence import require
 from prepare import checksum
 from prepare_requests import generate
 from run_suite import ROOT, Runner, utc
+from trial_health import TrialHealth, add_policy_args, policy_for, cpu_sample
 
 
 def main():
@@ -20,21 +21,27 @@ def main():
     p.add_argument('--repeats', type=int, default=5)
     p.add_argument('--timeout', type=int, default=1800)
     p.add_argument('--correctness-only', action='store_true', help='No performance claims; tolerates busy host')
+    add_policy_args(p)
     management = p.add_mutually_exclusive_group(required=True)
     management.add_argument('--manage-user-services', action='store_true')
     management.add_argument('--manage-containers', action='store_true')
     a = p.parse_args()
+    policy = policy_for(a)
     if min(a.scale, a.requests, a.repeats) < 1:
         p.error('scale, requests and repeats must be positive')
     runner = Runner(a)
     results = []
     functionality = {}
+    eligibility = []
     try:
         health = {'time': utc(), 'load1': float(Path('/proc/loadavg').read_text().split()[0]),
                   'disk_free': shutil.disk_usage(ROOT).free}
         (runner.out/'health.json').write_text(json.dumps(health, indent=2))
+        (runner.out/'health-policy.json').write_text(json.dumps(policy, indent=2))
         require(health['disk_free'] > 40*2**30, 'Insufficient free disk space')
-        require(a.correctness_only or health['load1'] <= 32, 'Busy host; defer performance experiment')
+        require(a.correctness_only or policy['max_load1'] is None or health['load1'] <= policy['max_load1'], 'Busy host; defer performance experiment')
+        if policy['version'] == 2:
+            require(cpu_sample(policy['monitored_cpus'])['available_memory'] >= policy['min_available_memory'], 'Insufficient available memory')
         data = a.data/f's{a.scale}'
         manifest = json.loads((data/'manifest.json').read_text())
         for table, info in manifest['files'].items():
@@ -66,8 +73,10 @@ def main():
                                       str(runner.out/'requests'/stream['file']), '--indexed', '1' if backend == 'file' else '0'], a.requests))
                 for op, label, extra, rows in cases:
                     runner.call(backend, a.scale, op, extra, phase='warmup', case=label)
+                    health_check = TrialHealth(a.correctness_only, policy)
                     value = runner.call(backend, a.scale, op, extra, measured=not a.correctness_only,
-                                        phase='coverage', repeat=repeat, case=label)
+                                        health_check=health_check, phase='coverage', repeat=repeat, case=label)
+                    eligibility.append(health_check.report()['performance_eligible'])
                     require(value['rows'] == rows, 'Unexpected row count: '+label)
                     key = (repeat, op, label)
                     if backend == 'file':
@@ -77,7 +86,8 @@ def main():
                     results.append(dict(backend=backend, repeat=repeat, op=op, case=label, result=value))
                     print(backend, repeat, op, label, 'verified', flush=True)
         report = dict(kind='correctness only' if a.correctness_only else 'supplementary serial performance',
-                      performance_eligible=not a.correctness_only, cases=len(results), repeats=a.repeats,
+                      eligibility_version=2, health_policy=policy, eligible_cases=sum(eligibility),
+                      performance_eligible=all(eligibility), cases=len(results), repeats=a.repeats,
                       requests=a.requests, joins=workload['joins'], functional=functionality, trials=results)
         (runner.out/'coverage.json').write_text(json.dumps(report, indent=2))
     except BaseException:

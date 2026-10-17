@@ -1,0 +1,89 @@
+{
+  "args": {
+    "config": "deploy/state/targets.json",
+    "out": "results/review-index-ablation",
+    "data": "results/review-index-health/course",
+    "scale": 1,
+    "repeats": 1,
+    "timeout": 1800,
+    "correctness_only": true,
+    "manage_user_services": true,
+    "manage_containers": false
+  },
+  "targets": {
+    "postgres": {
+      "binary": "/srv/benchmark/filmbench/review-20261014-index-health/build/postgres-client.sh",
+      "dsn_env": "POSTGRES_DSN",
+      "service": "filmbench-postgres.service",
+      "start_command": [
+        "systemd-run",
+        "--user",
+        "--quiet",
+        "--collect",
+        "--unit=filmbench-postgres.service",
+        "--property=MemoryMax=8G",
+        "--property=MemorySwapMax=0",
+        "--property=TasksMax=256",
+        "--property=Nice=10",
+        "--property=KillMode=control-group",
+        "--property=TimeoutStopSec=60",
+        "--property=KillSignal=SIGINT",
+        "taskset",
+        "-c",
+        "8,9",
+        "/srv/benchmark/filmbench/deploy/state/postgres-server.sh"
+      ],
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    },
+    "opengauss": {
+      "binary": "/srv/benchmark/filmbench/review-20261014-index-health/build/opengauss-client.sh",
+      "dsn_env": "OPENGAUSS_DSN",
+      "service": "filmbench-opengauss.service",
+      "start_command": [
+        "systemd-run",
+        "--user",
+        "--quiet",
+        "--collect",
+        "--unit=filmbench-opengauss.service",
+        "--property=MemoryMax=8G",
+        "--property=MemorySwapMax=0",
+        "--property=TasksMax=256",
+        "--property=Nice=10",
+        "--property=KillMode=control-group",
+        "--property=TimeoutStopSec=60",
+        "--property=KillSignal=SIGINT",
+        "taskset",
+        "-c",
+        "8,9",
+        "/srv/benchmark/filmbench/deploy/state/opengauss-server.sh"
+      ],
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    },
+    "file": {
+      "binary": "/srv/benchmark/filmbench/review-20261014-index-health/build/postgres-client.sh",
+      "client_prefix": [
+        "taskset",
+        "-c",
+        "24,25",
+        "nice",
+        "-n",
+        "10"
+      ]
+    }
+  },
+  "started": "2026-10-14T14:19:36.321061+00:00"
+}
