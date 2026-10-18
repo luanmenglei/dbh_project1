@@ -97,8 +97,8 @@ def main():
     for op, label in [('concurrent_read', '只读'), ('mixed', '90% 读 + 10% 同步写')]:
         data['compact'].append([label] + [f'{g(b, 10, op, clients=8)["throughput_ops_s"]["median"] / 1e4:.2f}' for b in backends[1:]])
     for op, metric, label, factor, digits in [
-        ('concurrent_read', 'throughput_ops_s', '只读吞吐 / 万次·s⁻¹', .0001, 2),
-        ('mixed', 'throughput_ops_s', '混合吞吐 / 万次·s⁻¹', .0001, 2),
+        ('concurrent_read', 'throughput_ops_s', '只读吞吐（万次/秒）', .0001, 2),
+        ('mixed', 'throughput_ops_s', '混合吞吐（万次/秒）', .0001, 2),
         ('concurrent_read', 'read_p95_ms', '只读负载：读 P95 / ms', 1, 3),
         ('mixed', 'read_p95_ms', '混合负载：读 P95 / ms', 1, 3),
         ('mixed', 'write_p95_ms', '混合负载：写 P95 / ms', 1, 3),
@@ -141,7 +141,11 @@ def main():
     import matplotlib
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
-    plt.rcParams.update({'font.family': 'DejaVu Sans', 'font.size': 9, 'axes.spines.top': False,
+    from matplotlib import font_manager
+    font_manager.findfont(args.font, fallback_to_default=False)
+    plt.rcParams.update({'font.family': args.font, 'font.size': 9, 'axes.titlesize': 10,
+                         'axes.labelsize': 9, 'xtick.labelsize': 8.5, 'ytick.labelsize': 8.5,
+                         'axes.unicode_minus': False, 'axes.spines.top': False,
                          'axes.spines.right': False, 'axes.edgecolor': '#999999', 'axes.linewidth': .6,
                          'text.color': '#242424', 'axes.labelcolor': '#444444', 'xtick.color': '#555555',
                          'ytick.color': '#555555', 'legend.frameon': False, 'svg.hashsalt': 'filmbench-report'})
@@ -161,38 +165,59 @@ def main():
         ax.set_axisbelow(True)
 
     def save(fig, name):
-        fig.tight_layout(pad=1.3)
-        fig.savefig(figures / name, metadata={'Date': None}, bbox_inches='tight')
+        fig.savefig(figures / name, metadata={'Date': None}, bbox_inches='tight', pad_inches=.04)
         plt.close(fig)
         svg = figures / name
         svg.write_bytes(('\n'.join(line.rstrip() for line in svg.read_text(encoding='utf-8').splitlines()) + '\n').encode('utf-8'))
 
-    fig, axes = plt.subplots(2, 2, figsize=(7.6, 5.1))
+    def shared_legend(fig, ax, columns):
+        handles, labels = ax.get_legend_handles_labels()
+        fig.legend(handles, labels, loc='outside upper center', ncol=columns,
+                   fontsize=9, handlelength=2.5, columnspacing=2.0)
+
+    names['file'] = '文件扫描'
+    fig, axes = plt.subplots(2, 2, figsize=(6.6, 3.9), layout='constrained')
     for ax, (op, _, kw), title in zip(axes.flat, ops,
-                                    ['Substring count: The', 'Durable name update',
-                                     'Join: 54 output rows', 'Country/year aggregate']):
+                                    ['(a) 标题子串计数：The', '(b) 姓名同步更新',
+                                     '(c) 人物连接：固定返回 54 行', '(d) 国家 / 年份聚合']):
         for b in backends:
             error(ax, [1, 10, 100], [g(b, s, op, kw)['elapsed_s'] for s in (1, 10, 100)], b, 1000)
-        ax.set(xscale='log', yscale='log', xlabel='Dataset scale', ylabel='Elapsed time (ms)', title=title)
-        ax.set_xticks([1, 10, 100], ['1x', '10x', '100x'])
-    axes[0, 0].legend(fontsize=8)
+        ax.set(xscale='log', yscale='log', xlabel='数据规模', ylabel='耗时 / ms', title=title)
+        ax.set_xticks([1, 10, 100], ['1×', '10×', '100×'])
+        ax.minorticks_off()
+    shared_legend(fig, axes[0, 0], 3)
     save(fig, 'serial.svg')
-    fig, axes = plt.subplots(1, 2, figsize=(7.6, 2.65))
-    for ax, metric, factor, ylabel in zip(axes, ['qps', 'p95_ms'], [.001, 1],
-                                        ['Throughput (k ops/s)', 'P95 latency (ms)']):
+    fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.25), layout='constrained')
+    for ax, metric, factor, ylabel, title in zip(axes, ['qps', 'p95_ms'], [.0001, 1],
+                                        ['吞吐量（万次/秒）', 'P95 延迟 / ms'],
+                                        ['(a) 吞吐量', '(b) 尾延迟']):
         for b in backends[1:]:
             error(ax, [1, 4, 8, 16, 32], [sg(scaling, 'db8_client2', b, c)[metric] for c in [1, 4, 8, 16, 32]], b, factor)
-        ax.set(xlabel='Concurrent clients', ylabel=ylabel, ylim=(0, None))
-        ax.set_xticks([1, 8, 16, 32])
-    axes[0].legend(fontsize=8)
+        ax.set(xlabel='并发客户端数', ylabel=ylabel, title=title, ylim=(0, None))
+        ax.set_xticks([1, 4, 8, 16, 32])
+    shared_legend(fig, axes[0], 2)
     save(fig, 'concurrency.svg')
-    fig, axes = plt.subplots(1, 2, figsize=(7.6, 2.65))
+    fig, axes = plt.subplots(1, 2, figsize=(6.6, 2.4), sharey=True, layout='constrained')
     for ax, c in zip(axes, [8, 32]):
         for b in backends[1:]:
-            error(ax, [0, 1, 2], [sg(scaling, layout, b, c)['qps'] for layout in layouts], b, .001)
-        ax.set(ylabel='Throughput (k ops/s)', title=f'{c} concurrent clients', ylim=(0, None))
-        ax.set_xticks([0, 1, 2], ['DB8 / C2', 'DB8 / C4', 'DB12 / C4'])
-    axes[0].legend(fontsize=8)
+            error(ax, [0, 1, 2], [sg(scaling, layout, b, c)['qps'] for layout in layouts], b, .0001)
+        ax.set(title=f'({"a" if c == 8 else "b"}) {c} 个客户端', ylim=(0, 22),
+               xlabel='绑定核数：数据库 / 客户端', xlim=(-.18, 2.18))
+        ax.set_xticks([0, 1, 2], ['8 / 2', '8 / 4', '12 / 4'])
+        ax.set_yticks([0, 5, 10, 15, 20])
+        ax.tick_params(labelleft=True)
+    axes[0].set_ylabel('吞吐量（万次/秒）')
+    for x, y, target_y, text, color in [
+        (.50, 21, (q(scaling, 'db8_client2', 'postgres') + q(scaling, 'db8_client4', 'postgres')) / 2e4,
+         f'客户端扩展 {data["pg_ratio"]}×', styles['postgres'][0]),
+        (1.47, 4.7, (q(scaling, 'db8_client4', 'opengauss') + q(scaling, 'db12_client4', 'opengauss')) / 2e4,
+         f'数据库扩展 {data["og_ratio"]}×', styles['opengauss'][0]),
+    ]:
+        axes[1].annotate(text, xy=(x, target_y), xytext=(x, y),
+                         ha='center', va='center', fontsize=8.5, color=color,
+                         arrowprops=dict(arrowstyle='->', color=color, linewidth=.65),
+                         bbox=dict(facecolor='white', edgecolor='none', pad=1.5))
+    shared_legend(fig, axes[0], 2)
     save(fig, 'interventions.svg')
 
     output = ROOT / 'output'
