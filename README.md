@@ -7,7 +7,7 @@
 [![C++17](https://img.shields.io/badge/C%2B%2B-17-355d78?style=flat-square)](src/filmbench.cpp)
 [![PostgreSQL 14.24](https://img.shields.io/badge/PostgreSQL-14.24-4169E1?style=flat-square)](docs/复现指南.md)
 [![openGauss 6.0.1](https://img.shields.io/badge/openGauss-6.0.1-526b70?style=flat-square)](docs/用户目录部署.md)
-[![Report PDF](https://img.shields.io/badge/报告-7_页_PDF-375b63?style=flat-square)](output/submission/report.pdf)
+[![Report PDF](https://img.shields.io/badge/报告-5_页_PDF-375b63?style=flat-square)](output/submission/report.pdf)
 
 [**阅读报告**](output/submission/report.pdf) · [**快速开始**](#快速开始) · [**复现实验**](docs/复现指南.md) · [**原始证据**](results/README.md)
 
@@ -17,7 +17,7 @@
 
 | 阅读目的 | 入口 |
 | :--- | :--- |
-| 看实验设计与结论 | [7 页报告](output/submission/report.pdf)，含 4 幅图、9 张表 |
+| 看实验设计与结论 | [5 页报告](output/submission/report.pdf)，含 3 幅图、7 张表 |
 | 跑通一个完整示例 | [快速开始](#快速开始)，附预期查询结果 |
 | 复核某个数字 | [逐批记录索引](results/README.md) → 原始输出、资源采样与源码快照 |
 
@@ -32,7 +32,7 @@
 | 吞吐平台意味着数据库到极限了吗？ | 32 客户端时，将客户端绑定范围从 2 核增至 4 核，PG 吞吐从 **9.21 万次/s 增至 18.69 万次/s**；原配置的发压端限制了吞吐。 |
 | 数据库提供了哪些一致性能力？ | 两库均拒绝非法外键引用；事务失败后，先前已执行的修改被回滚，四表摘要恢复一致。 |
 
-点查与索引对照来自 [2026-10-15 补测](results/supplement-20261015-metadata/analysis.json)，CPU 干预来自 [独立实验](results/scaling-probe/)。点查为五轮平均单次耗时的中位数；不同批次的计时边界与 CPU 绑定不同，分别统计。完整范围见报告第 04、07 节。
+点查与索引对照来自 [2026-10-15 补测](results/supplement-20261015-metadata/analysis.json)，CPU 干预来自 [独立实验](results/scaling-probe/)。点查为五轮平均单次耗时的中位数；不同批次的计时边界与 CPU 绑定不同，分别统计。报告第 2.2 节展示历史短批次点查，长批次补测的完整范围见上述审查统计；索引对照与 CPU 干预见报告第 2.1、2.4 节。
 
 <p align="center">
   <img src="report/figures/interventions.svg" alt="改变客户端与数据库绑定的 CPU 数后，两个数据库的吞吐变化" width="900">
@@ -109,7 +109,7 @@ python3 scripts/prepare.py --scales 1
 - **适用范围：** 100× TSV 约 161 MiB，可驻留内存；数据已预热，复制扩容保留原字段分布。未覆盖超内存数据、长期持续写入或所有隔离级别与崩溃恢复场景。
 - **共享资源：** CPU 绑定并非独占，补测观测到 SMT 兄弟核活动；不同批次与计时版本不合并，也不据跨批差值推算优化收益。
 
-完整参数、计时边界及限制见 [报告第 05、07 节](output/submission/report.pdf) 与 [复现指南](docs/复现指南.md)。
+实验条件与计时边界见 [报告第 2 节](output/submission/report.pdf)，完整参数及实验限制见 [复现指南](docs/复现指南.md)。
 
 ## 复现与验证
 
@@ -140,7 +140,7 @@ python3 -m pip install -r requirements-plots.txt
 python3 scripts/build_typst_report.py --font 'Noto Sans CJK SC'
 ```
 
-Windows 默认字体为 Microsoft YaHei。署名可通过 `--input name=姓名 --input student-id=学号` 传给 Typst；当前提交稿留空。Linux 完整集成检查使用 `make test`，另需 PostgreSQL 服务端工具；三后端验证的范围见 [复现指南](docs/复现指南.md)。
+Windows 默认字体为 Microsoft YaHei。署名默认使用源稿中的姓名与学号，可通过 `--input name=姓名 --input student-id=学号` 传给 Typst，或用构建脚本的 `--name`、`--student-id` 参数覆盖。Linux 完整集成检查使用 `make test`，另需 PostgreSQL 服务端工具；三后端验证的范围见 [复现指南](docs/复现指南.md)。
 
 <details>
 <summary>已保存的实验与验证规模</summary>

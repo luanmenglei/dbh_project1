@@ -20,8 +20,8 @@ REPORT = ROOT / 'report'
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--name', default='')
-    parser.add_argument('--student-id', default='')
+    parser.add_argument('--name', default=None)
+    parser.add_argument('--student-id', default=None)
     parser.add_argument('--typst', default='typst')
     parser.add_argument('--font', default='Microsoft YaHei')
     parser.add_argument('--verification', type=Path, default=ROOT/'results/review-index-health/verification.json')
@@ -179,7 +179,7 @@ def main():
     fig, axes = plt.subplots(2, 2, figsize=(6.6, 3.9), layout='constrained')
     for ax, (op, _, kw), title in zip(axes.flat, ops,
                                     ['(a) 标题子串计数：The', '(b) 姓名同步更新',
-                                     '(c) 人物连接：固定返回 54 行', '(d) 国家 / 年份聚合']):
+                                     '(c) 人物关系查询', '(d) 按国家和年份分组统计']):
         for b in backends:
             error(ax, [1, 10, 100], [g(b, s, op, kw)['elapsed_s'] for s in (1, 10, 100)], b, 1000)
         ax.set(xscale='log', yscale='log', xlabel='数据规模', ylabel='耗时 / ms', title=title)
@@ -222,9 +222,12 @@ def main():
 
     output = ROOT / 'output'
     (output / 'pdf').mkdir(parents=True, exist_ok=True)
-    subprocess.run([args.typst, 'compile', '--input', f'name={args.name}', '--input',
-                    f'student-id={args.student_id}', '--input', f'font={args.font}', str(REPORT / 'report.typ'),
-                    str(output / 'pdf/report-typst.pdf')], check=True)
+    command = [args.typst, 'compile', '--input', f'font={args.font}']
+    for key, value in [('name', args.name), ('student-id', args.student_id)]:
+        if value is not None:
+            command.extend(['--input', f'{key}={value}'])
+    subprocess.run(command + [str(REPORT / 'report.typ'),
+                              str(output / 'pdf/report-typst.pdf')], check=True)
     submission = output / 'submission'
     submission.mkdir(exist_ok=True)
     shutil.copyfile(output / 'pdf/report-typst.pdf', submission / 'report.pdf')
