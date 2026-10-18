@@ -12,7 +12,7 @@ from analyze_results import audit
 from analyze_scaling_probe import analyze
 from analyze_coverage import analyze as audit_coverage
 from analyze_supplement import analyze as audit_supplement
-from evidence import require
+from evidence import require, verify_readable_source
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / 'report'
@@ -35,7 +35,7 @@ def main():
             not (args.verification.parent/'FAILED').exists(), 'Incomplete source verification')
     verification = json.loads(args.verification.read_text())
     source_hash = hashlib.sha256((ROOT / 'src/filmbench.cpp').read_bytes()).hexdigest()
-    require(verification['source_sha256'] == source_hash, 'Source differs from verified C++')
+    verify_readable_source(ROOT, verification['source_sha256'])
     require(all(verification['backends'][b] == 'passed' for b in ('file', 'postgres', 'opengauss')),
             'Correctness checks failed')
 
@@ -111,7 +111,8 @@ def main():
     index_path = ROOT/'results/supplement-20261015-index'
     if point_path.exists() or index_path.exists():
         supplement = audit_supplement(point_path, index_path)
-        require(supplement['source_sha256'] == source_hash, 'Supplement used a different C++ source')
+        require(supplement['source_sha256'] == verification['source_sha256'],
+                'Supplement used a different verified C++ source')
 
         def formatted(value, digits=2):
             return f'{value["median"]:.{digits}f}\n[{value["min"]:.{digits}f}, {value["max"]:.{digits}f}]'

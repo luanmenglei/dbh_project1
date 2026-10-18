@@ -1,0 +1,7 @@
+{
+  "kind": "comments-and-guarded-folding-only",
+  "source_sha256": "eb12d61a9a2312267b9f38a99edc544de03e03d32f7564ca1267638b8b352569",
+  "verified_source_sha256": "2c8ab06dcd792aceab2b57f6baf8c81e6226bc0927d5949dc7457004dad129c3",
+  "baseline": "results/review-index-health/source-snapshot/src/filmbench.cpp",
+  "note": "Only standalone line comments and _MSC_VER-guarded region markers were inserted. Existing lines remain byte-for-byte unchanged. Historical experiments were not rerun."
+}
