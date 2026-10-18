@@ -17,6 +17,7 @@ results/*.tar.gz
 !/results/review-harness-smoke/
 !/results/review-index-ablation/
 !/results/review-index-health/
+!/results/review-namespace-20261018/
 !/results/server-user-verification/
 !/results/supplement-20261015-point/
 !/results/supplement-20261015-index/

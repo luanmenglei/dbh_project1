@@ -1,4 +1,4 @@
-"""Keep annotation-only source identity checks from accepting code or SQL changes."""
+"""Bind the namespace refactor to its separate three-backend correctness evidence."""
 import hashlib
 import json
 from pathlib import Path
@@ -18,7 +18,9 @@ class SourceReadabilityTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.record = json.loads((ROOT / 'docs/source-readability.json').read_text())
-        for name in ('src/filmbench.cpp', 'docs/source-readability.json', self.record['baseline']):
+        for name in ('src/filmbench.cpp', 'docs/source-readability.json', self.record['baseline'],
+                     self.record['verification'], 'results/review-namespace-20261018/COMPLETE',
+                     'results/review-namespace-20261018/source-snapshot/src/filmbench.cpp'):
             target = self.root / name
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(ROOT / name, target)
@@ -35,39 +37,36 @@ class SourceReadabilityTests(unittest.TestCase):
             self.record['source_sha256'] = hashlib.sha256(path.read_bytes()).hexdigest()
             (self.root / 'docs/source-readability.json').write_text(json.dumps(self.record))
 
-    def test_current_source_and_nested_regions(self):
+    def test_current_source(self):
         self.verify()
-        depth = regions = 0
-        for line in (self.root / 'src/filmbench.cpp').read_text(encoding='utf-8').splitlines():
-            line = line.strip()
-            if line.startswith('#pragma region '):
-                depth += 1
-                regions += 1
-            elif line == '#pragma endregion':
-                depth -= 1
-                self.assertGreaterEqual(depth, 0)
-        self.assertEqual(depth, 0)
-        self.assertEqual(regions, 16)
 
     def test_stale_manifest_rejected(self):
         self.alter(b'20261012', b'20261013')
-        with self.assertRaisesRegex(ValueError, 'Annotated source hash mismatch'):
+        with self.assertRaisesRegex(ValueError, 'Reorganized source hash mismatch'):
             self.verify()
 
     def test_updated_manifest_cannot_hide_changed_code(self):
         self.alter(b'20261012', b'20261013', update_manifest=True)
-        with self.assertRaisesRegex(ValueError, 'changed existing code'):
+        with self.assertRaisesRegex(ValueError, 'verified namespace source'):
             self.verify()
 
-    def test_updated_manifest_cannot_hide_inserted_code(self):
-        self.alter(b'int main(', b'int unexpected = 1;\nint main(', update_manifest=True)
-        with self.assertRaisesRegex(ValueError, 'executable changes'):
+    def test_failed_run_is_not_accepted(self):
+        (self.root / 'results/review-namespace-20261018/FAILED').write_text('cleanup failed')
+        with self.assertRaisesRegex(ValueError, 'Incomplete namespace verification'):
             self.verify()
 
-    def test_comment_in_raw_sql_is_not_an_annotation(self):
-        self.alter(b'CREATE TABLE countries', b'// changes the SQL\nCREATE TABLE countries',
-                   update_manifest=True)
-        with self.assertRaisesRegex(ValueError, 'raw literal'):
+    def test_each_backend_must_have_passed(self):
+        path = self.root / self.record['verification']
+        report = json.loads(path.read_text())
+        report['backends']['opengauss'] = 'not run'
+        path.write_text(json.dumps(report))
+        with self.assertRaisesRegex(ValueError, 'backend verification failed'):
+            self.verify()
+
+    def test_changed_verification_snapshot_is_rejected(self):
+        path = self.root / 'results/review-namespace-20261018/source-snapshot/src/filmbench.cpp'
+        path.write_bytes(path.read_bytes() + b'// changed snapshot\n')
+        with self.assertRaisesRegex(ValueError, 'Experiment source hash mismatch'):
             self.verify()
 
 

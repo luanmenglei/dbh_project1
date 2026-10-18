@@ -171,9 +171,9 @@ data/source/            课程原始数据
 
 [提交源码](output/submission/filmbench.cpp) · [SHA-256 清单](output/submission-manifest.json) · [文档索引](docs/README.md) · [课程要求](project1.pdf)
 
-源码保留单文件，分为 11 个带中文说明的折叠区域，`main` 内再分为 5 个步骤。建议先读 04（SQL）、05（文件更新）、09（文件查询），再读 11（实验执行）和 10（并发）。VS Code 中可依次按 `Ctrl+K`、`Ctrl+8` 折叠全部区域，`Ctrl+K`、`Ctrl+9` 展开区域，也可点击区域旁的折叠箭头。折叠标记用 `_MSC_VER` 保护，Linux 编译时跳过。
+源码保留单文件，按职责分为六个命名空间：`common`（公共工具）、`database`（数据库）、`file_backend`（文件）、`requests`（请求准备）、`benchmark`（并发测量）、`application`（命令执行）。建议先读数据库 SQL 和文件端对应实现，再看命令执行与并发部分。命名空间、函数和类均可按花括号折叠；全局 `main` 仅调用 `application::run`。
 
-注释版只添加阅读说明与折叠标记，已有代码行保持原样。[版本对应记录](docs/source-readability.json) 保存交付源码与已验证实验源码的各自哈希；报告构建检查两者差异仅为允许的插入，不将注释版标为重新运行过的实验。
+重组版保留查询和测量流程，使用显式 `using` 声明说明模块依赖，并另做三后端正确性回归。[版本对应记录](docs/source-readability.json) 分别关联交付源码、新验证记录与历史实验源码；历史性能数字仍来自原始快照，不将功能回归当作新性能实验。
 
 数据库状态、连接凭据、生成数据与临时产物由 `.gitignore` 排除。新增实验使用独立目录，既有原始记录保留用于追溯。
 

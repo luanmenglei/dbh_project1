@@ -1,0 +1,3 @@
+[2026-10-18 22:25:30.762][1877530][][gs_ctl]: gs_ctl stopped ,datadir is /srv/benchmark/filmbench/review-20261018-namespaces-v2/private-clusters/opengauss-data 
+waiting for server to shut down..... done
+server stopped

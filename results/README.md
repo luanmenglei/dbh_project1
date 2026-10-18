@@ -22,7 +22,8 @@
 
 | 目录 | 用途 |
 | :--- | :--- |
-| [review-index-health](review-index-health/) | 当前提交 C++ 的三后端正确性验证、索引损坏拒绝与失败重建检查；完整报告构建使用此源码身份。 |
+| [review-index-health](review-index-health/) | 命名空间重组前 C++ 的三后端正确性验证、索引损坏拒绝与失败重建检查；保留为历史基线。 |
+| [review-namespace-20261018](review-namespace-20261018/) | 当前命名空间版的两套 SDK 编译与文件、PostgreSQL、openGauss 正确性回归；使用独立临时实例，不属于性能数据。 |
 | [review-coverage-health](review-coverage-health/) | 逐轮健康记录流程的 18 个小规模覆盖案例，仅功能验证。 |
 | [review-index-ablation](review-index-ablation/) | 索引对照运行器的 4 个小规模案例，仅功能验证。 |
 | [review-coverage-diverse](review-coverage-diverse/) | 54 个多样查询覆盖案例；报告第 05 节引用的历史功能证据。 |
