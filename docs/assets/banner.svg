@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">FilmBench：DBMS 的优势与性能比较</title>
+  <desc id="desc">比较直接文件操作、PostgreSQL 与 openGauss，研究访问路径、CPU 瓶颈和事务保证。</desc>
+  <rect width="1200" height="360" rx="16" fill="#edf3f7"/>
+  <path d="M0 16Q0 0 16 0H24V360H16Q0 360 0 344Z" fill="#416578"/>
+  <g font-family="Segoe UI, Microsoft YaHei, Noto Sans CJK SC, sans-serif">
+    <text x="64" y="63" font-size="15" letter-spacing="2.2" fill="#466274">DATABASE SYSTEMS / EXPERIMENT STUDY</text>
+    <text x="59" y="150" font-size="76" font-weight="700" letter-spacing="-2" fill="#173245">FilmBench</text>
+    <text x="64" y="205" font-size="31" font-weight="600" fill="#173245">DBMS 的优势与性能比较</text>
+    <text x="64" y="251" font-size="18" fill="#48616e">从访问路径、CPU 瓶颈到跨表事务保证。</text>
+    <text x="64" y="315" font-size="14" letter-spacing="1.4" fill="#527080">REPORT + CODE + RAW EVIDENCE</text>
+    <path d="M714 64V297" stroke="#bdced8" stroke-width="1"/>
+    <text x="760" y="77" font-size="15" fill="#527080">相同输入 · 统一客户端 · 独立批次</text>
+    <g fill="#ffffff" stroke="#c8d6de">
+      <rect x="758" y="101" width="377" height="56" rx="7"/>
+      <rect x="758" y="174" width="377" height="56" rx="7"/>
+      <rect x="758" y="247" width="377" height="56" rx="7"/>
+    </g>
+    <g font-size="22" fill="#203c4d" font-weight="600">
+      <text x="782" y="137">TSV File</text>
+      <text x="782" y="210">PostgreSQL</text>
+      <text x="782" y="283">openGauss</text>
+    </g>
+    <g font-size="14" fill="#5b7483" text-anchor="end">
+      <text x="1110" y="135">扫描 / 偏移索引</text>
+      <text x="1110" y="208">14.24</text>
+      <text x="1110" y="281">6.0.1</text>
+    </g>
+  </g>
+</svg>
