@@ -35,6 +35,10 @@ make test
 
 `results/` 默认忽略新目录。准备发布时先审查完整性和连接信息，再在 `.gitignore` 中明确允许该批目录。
 
+发布前运行 `python3 scripts/check_public_metadata.py`；推送分支前再运行 `python3 scripts/check_public_metadata.py --history`，检查已提交历史中的内网地址、私人部署路径和私钥标记。该检查不覆盖所有凭据或二进制内容，PDF、图片与压缩包仍需单独审查。请勿合并或重新推送脱敏前的旧历史，也不要提交私人备份。
+
+公开证据在 2026-10-20 做过连接标识和路径脱敏；受影响的源码摘要已按脱敏后的内容重新计算，详见 `results/README.md`。后续记录应在首次发布前完成脱敏和摘要计算。
+
 ## 更新报告与首页预览
 
 ```bash
